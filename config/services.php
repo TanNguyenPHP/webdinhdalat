@@ -27,7 +27,15 @@ $di->setShared('router', function () {
 
     $router->setDefaultModule('frontend');
     $router->setDefaultNamespace('Webdinhdalat\Frontend\Controllers');
-
+    $router->add(
+        '/quanly',
+        array(
+            'module' => 'backend',
+            'namespace' => 'Webdinhdalat\Backend\Controllers',
+            'controller' => 'login',
+            'action' => 'index'
+        )
+    );
     return $router;
 });
 
@@ -103,17 +111,17 @@ $di->setShared('session', function () {
  */
 $di->set('flash', function () {
     return new Flash(array(
-        'error'   => 'alert alert-danger',
+        'error' => 'alert alert-danger',
         'success' => 'alert alert-success',
-        'notice'  => 'alert alert-info',
+        'notice' => 'alert alert-info',
         'warning' => 'alert alert-warning'
     ));
 });
 
 /**
-* Set the default namespace for dispatcher
-*/
-$di->setShared('dispatcher', function() use ($di) {
+ * Set the default namespace for dispatcher
+ */
+$di->setShared('dispatcher', function () use ($di) {
     $dispatcher = new Phalcon\Mvc\Dispatcher();
     $dispatcher->setDefaultNamespace('Webdinhdalat\Frontend\Controllers');
     return $dispatcher;
