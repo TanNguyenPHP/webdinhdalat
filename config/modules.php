@@ -11,5 +11,9 @@ $application->registerModules(array(
     'backend' => array(
         'className'=>'Webdinhdalat\Backend\Module',
         'path'=> __DIR__ . '/../apps/backend/Module.php'
+    ),
+    'modeldb'=> array(
+        'className'=> 'Webdinhdalat\Modeldb\Module',
+        'path'=> __DIR__.'/../apps/modeldb/Module.php'
     )
 ));

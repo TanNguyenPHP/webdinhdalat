@@ -1,6 +1,6 @@
 <?php
 
-namespace Webdinhdalat\Backend;
+namespace Webdinhdalat\Modeldb;
 
 use Phalcon\DiInterface;
 use Phalcon\Loader;
@@ -21,8 +21,7 @@ class Module implements ModuleDefinitionInterface
         $loader = new Loader();
 
         $loader->registerNamespaces(array(
-            'Webdinhdalat\Backend\Controllers' =>   '../apps/backend/controllers/',
-            'Webdinhdalat\Backend\Models'      =>   '../apps/backend/models/'
+            'Webdinhdalat\Modeldb\Models'      => __DIR__ . '/models/'
         ));
 
         $loader->register();
@@ -38,7 +37,7 @@ class Module implements ModuleDefinitionInterface
         /**
          * Read common configuration
          */
-         $config = $di->has('config') ? $di->getShared('config') : null;
+        $config = $di->has('config') ? $di->getShared('config') : null;
 
         /**
          * Try to load local configuration
