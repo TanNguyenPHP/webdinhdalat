@@ -1,0 +1,174 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+img.product-intro { max-height: 32px; }
+a img.add-button-disable {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+
+a img.add-button-disable:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.quantity-box {
+    width: 50%;
+    line-height:25px; 
+    border: solid 1px #CCC;
+    text-align: center;
+}
+
+th { text-align: center; }
+
+table.account-info { width: 100%; }
+table.account-info td { padding: 5px; }
+
+/*Login =======================*/
+
+.login-wrapper {
+	text-align: center;
+	width: 30%;
+	margin: 120px auto;
+}
+.login-wrapper h1 {
+	font-size:2.5rem;
+	color: #3c8dbc;
+	font-weight: bold;
+}
+.login-wrapper h1 .txt-style{
+	color:#000;
+}
+.login-wrapper .login {
+	background-color: rgba(60,150,214,0.37);
+	margin: 40px auto;
+}
+.login-wrapper .login h2{
+	font-size:2rem;
+	color:#fff;
+	padding: 25px 0;
+}
+.login-wrapper .login .login-form label{
+	width: 80%;
+	position: relative;
+	margin-bottom: 20px;
+}
+.login-wrapper .login .login-form label input[type=text],
+.login-wrapper .login .login-form label input[type=password]{
+	width: 100%;
+    padding: 0.5rem 1rem 0.5em 3rem;
+    color: #858282;
+    font-size: 1.4rem;
+    font-weight: 400;
+    border: none;
+}
+.login-wrapper .login .login-form div input[type=submit]{
+	width: 80%;
+    padding: 0.5rem 1rem 0.5em 2rem;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.login-wrapper .login .login-form label span{
+	position: absolute;
+	top:0px;
+	left: 0px;
+	color:#858282;
+	height: 100%;
+	width: 40px;
+	line-height: 45px;
+	font-size: 1rem;
+}
+
+.login-wrapper .login .login-form h3{
+	padding: 20px 0;
+}
+.login-wrapper .login .login-form h3 input{
+	margin: 10px 10px;
+}
+.login-wrapper .login .login-form h3 a{
+	color:#fff;
+	text-transform: uppercase;
+	margin-left: 10px;
+}
+@media (max-width:1024px){ 
+	.login-wrapper {
+		margin: 50px auto;
+	}	
+	.login-wrapper h1 {
+	font-size:2rem;
+	}
+	.login-wrapper .login h2{
+	font-size:1.5rem;
+	}
+	.login-wrapper .login .login-form label input[type=text],
+	.login-wrapper .login .login-form label input[type=password]{
+    	font-size: 1rem;
+	}
+	.login-wrapper .login .login-form div input[type=submit]{
+    	font-size: 1rem;
+	}
+	.login-wrapper .login .login-form h3{
+		font-size: 1rem;
+	}
+}
+@media (max-width:768px){
+	.login-wrapper h1 {
+	font-size:1.5rem;
+	}
+	.login-wrapper .login h2{
+	font-size:1rem;
+	}
+	.login-wrapper .login .login-form label input[type=text],
+	.login-wrapper .login .login-form label input[type=password]{
+    	font-size: 0.5rem;
+	}
+	.login-wrapper .login .login-form div input[type=submit]{
+    	font-size: 0.5rem;
+	}
+	.login-wrapper .login .login-form h3{
+		font-size: 0.5rem;
+	}
+}
