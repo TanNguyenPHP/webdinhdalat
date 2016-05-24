@@ -7,17 +7,16 @@
     <title>Quản lý web</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href=<?php ?> "../content/css/AdminLTE.min.css" rel="stylesheet"/>
-    <link href="../content/css/alertify.css" rel="stylesheet"/>
-    <link href="../content/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../content/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href="../content/css/modalStyles.css" rel="stylesheet"/>
-    <link href="../content/css/semantic.min.css" rel="stylesheet"/>
-    <link href="../content/css/Site.css" rel="stylesheet"/>
-    <link href="../content/css/skin-blue.min.css" rel="stylesheet"/>
+    <link href="public/css/backend/bootstrap.min.css" rel="stylesheet"/>
+    <link href="public/css/backend/font-awesome.min.css" rel="stylesheet"/>
+    <link href="public/css/backend/modalStyles.css" rel="stylesheet"/>
+    <link href="public/css/backend/AdminLTE.min.css" rel="stylesheet"/>
+    <link href="public/css/backend/skin-blue.min.css" rel="stylesheet"/>
+    <link href="public/css/backend/alertify.css" rel="stylesheet"/>
+    <link href="public/css/backend/semantic.min.css" rel="stylesheet"/>
     <style>
         body {
-            background: url(../Images/imgs/bg.png) no-repeat center center fixed;
+            background: url(/webdinhdalat/public/img/backend/bg.png) no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -27,7 +26,7 @@
 </head>
 <body>
 <div class="login-wrapper">
-    <h1><span class="txt-style">VLXD</span> THÀNH ĐẠT</h1>
+    <h1><span class="txt-style">Quản lý hệ thống website</span></h1>
     <div class="login">
         <section id="loginForm">
             <h2>Tài Khoản Nội Bộ</h2>
@@ -56,9 +55,9 @@
                            value="<?php echo $this->security->getToken() ?>"/>
                 </form>
                 <h3>
-                    <input type="checkbox">Ghi Nhớ?
-                    <a href="#">Quên Mật Khẩu</a>
+
                 </h3>
+
             </div>
         </section>
     </div>
