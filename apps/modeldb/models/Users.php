@@ -1,6 +1,8 @@
 <?php
+namespace Webdinhdalat\Modeldb\Models;
+use Phalcon\Mvc\Model;
 
-class Users extends \Phalcon\Mvc\Model
+class Users extends Model
 {
 
     /**

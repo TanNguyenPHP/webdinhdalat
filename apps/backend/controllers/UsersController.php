@@ -3,7 +3,8 @@ namespace Webdinhdalat\Backend\Controllers;
 
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
-use Webdinhdalat\Backend\Models\Users;
+use Webdinhdalat\Modeldb\Models\Users;
+use Webdinhdalat\Commons\SecuritySystem;
 
 class UsersController extends ControllerBase
 {
@@ -22,7 +23,7 @@ class UsersController extends ControllerBase
     {
         $numberPage = 1;
         if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, 'Webdinhdalat\Backend\Models\Users', $_POST);
+            $query = Criteria::fromInput($this->di, 'Webdinhdalat\Modeldb\Models\Users', $_POST);
             $this->persistent->parameters = $query->getParams();
         } else {
             $numberPage = $this->request->getQuery("page", "int");
@@ -113,9 +114,9 @@ class UsersController extends ControllerBase
         }
 
         $user = new Users;
-        $user->id = $this->request->getPost("id");
-        $user->username = $this->request->getPost("username");
-        $user->password = $this->request->getPost("password");
+        //$user->id = $this->request->getPost("id");
+        $user->username =  $this->request->getPost("username");
+        $user->password = SecuritySystem::HashPassword($this->request->getPost("password"));
         $user->datecreate = $this->request->getPost("datecreate");
         $user->is_active = $this->request->getPost("is_active");
         $user->is_del = $this->request->getPost("is_del");

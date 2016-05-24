@@ -21,8 +21,9 @@ class Module implements ModuleDefinitionInterface
         $loader = new Loader();
 
         $loader->registerNamespaces(array(
-            'Webdinhdalat\Backend\Controllers' =>   '../apps/backend/controllers/',
-            'Webdinhdalat\Backend\Models'      =>   '../apps/backend/models/'
+            'Webdinhdalat\Backend\Controllers' => '../apps/backend/controllers/',
+            'Webdinhdalat\Modeldb\Models' => '../apps/modeldb/models/',
+            'Webdinhdalat\Commons' => '../apps/commons/'
         ));
 
         $loader->register();
@@ -38,7 +39,7 @@ class Module implements ModuleDefinitionInterface
         /**
          * Read common configuration
          */
-         $config = $di->has('config') ? $di->getShared('config') : null;
+        $config = $di->has('config') ? $di->getShared('config') : null;
 
         /**
          * Try to load local configuration
