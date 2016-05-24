@@ -40,6 +40,7 @@ class LoginController extends ControllerBase
         {
             if ($this->security->checkHash($password, $user->password))
             {
+                $this->session->set('userlogin',$user->id);
                 $this->dispatcher->forward(array(
                     'controller' => "users",
                     'action' => 'index'
