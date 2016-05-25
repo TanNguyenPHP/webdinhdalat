@@ -11,6 +11,7 @@ namespace Webdinhdalat\commons;
 use Phalcon\Security;
 use Phalcon\CryptInterface;
 use Phalcon\Crypt\Exception;
+use Phalcon\Crypt;
 
 class SecuritySystem
 {
@@ -23,9 +24,9 @@ class SecuritySystem
 
     public static function GenPassword($username, $password)
     {
-        $key = static ::GenKey($username);// GenKey($username);
+        $key = self::GenKey($username);// GenKey($username);
         $crypt = new Crypt();
-        return $crypt->encryptBase64($password, $key);
+        return $crypt->encrypt($password, $key);
     }
 
     private static function GenKey($username)

@@ -52,7 +52,7 @@ class Users extends Model
      * @var string
      */
     public $desc;
-
+    public $group;
     /**
      * Returns table name mapped in the model.
      *

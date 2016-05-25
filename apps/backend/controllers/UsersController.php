@@ -116,12 +116,11 @@ class UsersController extends ControllerBase
         $user = new Users;
         //$user->id = $this->request->getPost("id");
         $user->username =  $this->request->getPost("username");
-        $user->password = SecuritySystem::HashPassword($this->request->getPost("password"));
+        $user->password = SecuritySystem::GenPassword($user->username,$this->request->getPost("password"));
         $user->datecreate = $this->request->getPost("datecreate");
-        $user->is_active = $this->request->getPost("is_active");
-        $user->is_del = $this->request->getPost("is_del");
-        $user->room = $this->request->getPost("room");
-        $user->desc = $this->request->getPost("desc");
+        $user->is_active = '1';
+        $user->is_del = '0';
+
         
 
         if (!$user->save()) {

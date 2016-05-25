@@ -34,7 +34,7 @@ class LoginController extends ControllerBase
         //$response = new \Phalcon\Http\Response();
 
         $username = $this->request->getPost("UserName");
-        $password = SecuritySystem::HashPassword($this->request->getPost("Password"));
+        $password = SecuritySystem::GenPassword($username,$this->request->getPost("Password"));
 
         $_checklogin = $this->checklogin($username, $password);
 
@@ -45,7 +45,7 @@ class LoginController extends ControllerBase
                 'action' => 'index'
             ));
         }
-        $user = Users::findFirst("username = '$username'");
+
         if ($_checklogin == 3 || $_checklogin = 4 ||$_checklogin = 5) {
             $this->flashSession->error("$password");//$this->flash->error("Wrong username or password");
             return $this->response->redirect('quanly');
@@ -62,7 +62,7 @@ class LoginController extends ControllerBase
     private function checklogin($Username, $Password)
     {
         $user = Users::findFirst("username = '$Username'");
-        if ($user != null) {
+        if ($user) {
             if ($Password == $user->password) {
                 if ($user->is_active == '1' & $user->is_del == '0') {
                     registerSessionUser($user);
