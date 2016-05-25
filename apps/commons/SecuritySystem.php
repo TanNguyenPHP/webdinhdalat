@@ -9,13 +9,27 @@
 namespace Webdinhdalat\commons;
 
 use Phalcon\Security;
+use Phalcon\CryptInterface;
+use Phalcon\Crypt\Exception;
 
 class SecuritySystem
 {
-    public static function HashPassword($pass = '')
+//    public static function HashPassword($pass = '')
+//    {
+//        $key = '2016';
+//        $security = new Security();
+//        return $security->sha($pass);
+//    }
+
+    public static function GenPassword($username, $password)
     {
-        $key = '2016';
-        $security = new Security();
-        return $security->hash($pass . $key);
+        $key = static ::GenKey($username);// GenKey($username);
+        $crypt = new Crypt();
+        return $crypt->encryptBase64($password, $key);
+    }
+
+    private static function GenKey($username)
+    {
+        return md5($username);
     }
 }

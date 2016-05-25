@@ -23,47 +23,67 @@ class LoginController extends ControllerBase
     public function loginAction()
     {
         if (!$this->request->isPost()) {
-            $this->dispatcher->forward(array(
-                'controller' => "login",
-                'action' => 'index'
-            ));
-
-            return;
-        }
-
-        $username = $this->request->getPost("username");
-        $password = SecuritySystem::HashPassword($this->request->getPost("password"));
-
-        $user = Users::findFirstByLogin($username);
-
-        if($user)
-        {
-            if ($this->security->checkHash($password, $user->password))
-            {
-                $this->session->set('userlogin',$user->id);
-                $this->dispatcher->forward(array(
-                    'controller' => "users",
-                    'action' => 'index'
-                ));
-            }
-            else
-            {
-                $this->flash->error("Wrong password");
-                $this->dispatcher->forward(array(
+            if (!$this->security->checkToken()) {
+                return $this->dispatcher->forward(array(
                     'controller' => "login",
                     'action' => 'index'
                 ));
             }
+            //return;
         }
-        else
+        //$response = new \Phalcon\Http\Response();
+
+        $username = $this->request->getPost("UserName");
+        $password = SecuritySystem::HashPassword($this->request->getPost("Password"));
+
+        $_checklogin = $this->checklogin($username, $password);
+
+        if ($_checklogin == 0)//Success
         {
-            $this->flash->error("Wrong Username");
-            $this->dispatcher->forward(array(
-                'controller' => "login",
+            return $this->dispatcher->forward(array(
+                'controller' => "users",
                 'action' => 'index'
             ));
         }
+        $user = Users::findFirst("username = '$username'");
+        if ($_checklogin == 3 || $_checklogin = 4 ||$_checklogin = 5) {
+            $this->flashSession->error("$password");//$this->flash->error("Wrong username or password");
+            return $this->response->redirect('quanly');
+        }
+        if ($_checklogin == 2) {
+            $this->flashSession->error("Account not active");//$this->flash->error("Account not active");
+            return $this->response->redirect('quanly');
+        }
 
+        return $this->response->redirect('quanly');
+    }
+
+    ////////////////////function helper////////////////////////////////////////////////////////////////////
+    private function checklogin($Username, $Password)
+    {
+        $user = Users::findFirst("username = '$Username'");
+        if ($user != null) {
+            if ($Password == $user->password) {
+                if ($user->is_active == '1' & $user->is_del == '0') {
+                    registerSessionUser($user);
+                    return 0;
+                }// Success
+                else if ($user->is_del == '1')
+                    return 1;// account del
+                else if ($user->is_active == '0')
+                    return 2;// account not active
+            } else {
+                return 3;//Wrong password
+            }
+        } else {
+            return 4;// Wrong username
+        }
+        return 5;
+    }
+
+    private function registerSessionUser($user)
+    {
+        $this->session->set('sessionUser', $user->id);
     }
 
 }
