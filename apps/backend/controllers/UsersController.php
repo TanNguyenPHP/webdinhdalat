@@ -5,6 +5,7 @@ use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\Users;
 use Webdinhdalat\Commons\SecuritySystem;
+use Webdinhdalat\Commons\Authentication;
 
 class UsersController extends ControllerBase
 {
@@ -13,10 +14,8 @@ class UsersController extends ControllerBase
      */
     public function indexAction()
     {
-        if(empty($this->session->get('sessionUser')))
-        {
+        if (!Authentication::CheckAuth())
             return $this->response->redirect('quanly');
-        }
         $this->persistent->parameters = null;
     }
 
@@ -25,6 +24,8 @@ class UsersController extends ControllerBase
      */
     public function searchAction()
     {
+        if (!Authentication::CheckAuth())
+            return $this->response->redirect('quanly');
         $numberPage = 1;
         if ($this->request->isPost()) {
             $query = Criteria::fromInput($this->di, 'Webdinhdalat\Modeldb\Models\Users', $_POST);
@@ -53,7 +54,7 @@ class UsersController extends ControllerBase
 
         $paginator = new Paginator(array(
             'data' => $users,
-            'limit'=> 10,
+            'limit' => 10,
             'page' => $numberPage
         ));
 
@@ -65,7 +66,8 @@ class UsersController extends ControllerBase
      */
     public function newAction()
     {
-
+        if (!Authentication::CheckAuth())
+            return $this->response->redirect('quanly');
     }
 
     /**
@@ -75,6 +77,8 @@ class UsersController extends ControllerBase
      */
     public function editAction($id)
     {
+        if (!Authentication::CheckAuth())
+            return $this->response->redirect('quanly');
         if (!$this->request->isPost()) {
 
             $user = Users::findFirstByid($id);
@@ -99,7 +103,7 @@ class UsersController extends ControllerBase
             $this->tag->setDefault("is_del", $user->is_del);
             $this->tag->setDefault("room", $user->room);
             $this->tag->setDefault("desc", $user->desc);
-            
+
         }
     }
 
@@ -108,6 +112,8 @@ class UsersController extends ControllerBase
      */
     public function createAction()
     {
+        if (!Authentication::CheckAuth())
+            return $this->response->redirect('quanly');
         if (!$this->request->isPost()) {
             $this->dispatcher->forward(array(
                 'controller' => "users",
@@ -119,8 +125,8 @@ class UsersController extends ControllerBase
 
         $user = new Users;
         //$user->id = $this->request->getPost("id");
-        $user->username =  $this->request->getPost("username");
-        $user->password = SecuritySystem::HashPassword($this->request->getPost("password"),$user->username);
+        $user->username = $this->request->getPost("username");
+        $user->password = SecuritySystem::HashPassword($this->request->getPost("password"), $user->username);
         $user->datecreate = date('YdmHis');
         $user->is_active = '1';
         $user->is_del = '0';
@@ -152,7 +158,8 @@ class UsersController extends ControllerBase
      */
     public function saveAction()
     {
-
+        if (!Authentication::CheckAuth())
+            return $this->response->redirect('quanly');
         if (!$this->request->isPost()) {
             $this->dispatcher->forward(array(
                 'controller' => "users",
@@ -184,7 +191,7 @@ class UsersController extends ControllerBase
         $user->is_del = $this->request->getPost("is_del");
         $user->room = $this->request->getPost("room");
         $user->desc = $this->request->getPost("desc");
-        
+
 
         if (!$user->save()) {
 
@@ -216,6 +223,8 @@ class UsersController extends ControllerBase
      */
     public function deleteAction($id)
     {
+        if (!Authentication::CheckAuth())
+            return $this->response->redirect('quanly');
         $user = Users::findFirstByid($id);
         if (!$user) {
             $this->flash->error("user was not found");

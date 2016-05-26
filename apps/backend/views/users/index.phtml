@@ -3,89 +3,74 @@
  * @var \Phalcon\Mvc\View\Engine\Php $this
  */
 ?>
-
-<div class="page-header">
-    <h1>
-        Search users
-    </h1>
-    <p>
-        <?php echo $this->tag->linkTo(array("backend/users/new", "Create users")) ?>
-    </p>
-</div>
-
 <?php echo $this->getContent() ?>
-
 <?php
-    echo $this->tag->form(
-        array(
-            "backend/users/search",
-            "autocomplete" => "off",
-            "class" => "form-horizontal"
-        )
-    );
+echo $this->tag->form(
+    array(
+        "backend/users/search",
+        "autocomplete" => "off",
+        "class" => "form-horizontal",
+        "name" => "userform"
+    )
+);
 ?>
-
-<div class="form-group">
-    <label for="fieldId" class="col-sm-2 control-label">Id</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("id", "size" => 30, "class" => "form-control", "id" => "fieldId")) ?>
+<section class="content-header">
+    <h2>
+        Danh sách user
+    </h2>
+    <div class="arrange-button">
+        <a href="backend/users/new" class="btn btn-info" id="modaltrigger" rel="leanModal">Thêm mới</a>
     </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldUsername" class="col-sm-2 control-label">Username</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("username", "size" => 30, "class" => "form-control", "id" => "fieldUsername")) ?>
+</section>
+<section class="content">
+    <div class="sidebar-form">
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <div class="input-group">
+                    <input type="text" name="filter" id="filter" class="form-control" placeholder="Tìm sản phẩm..." value="cau cut">
+                        <span class="input-group-btn">
+                            <button type="submit" onclick="userformSubmit()" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr style="background-color: #3c8dbc; color:#fff">
+                <th>Tên Sản Phẩm</th>
+                <th>Mã Sản Phẩm</th>
+                <th>Mã Danh Mục</th>
+                <th>ĐVT</th>
+                <th>Giá</th>
+                <th>Đã Xoá</th>
+                <th>Thêm</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row" style="text-align:left">
 
-<div class="form-group">
-    <label for="fieldPassword" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("password", "size" => 30, "class" => "form-control", "id" => "fieldPassword")) ?>
+                </th>
+                <td>001670</td>
+                <td align="center">
+                    1
+                </td>
+                <td>Test</td>
+                <td style="text-align:right">200,000</td>
+                <td>
+                    <input class="check-box" disabled="disabled" type="checkbox" />
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav style="text-align:right">
+            <div class="pagination-container"><ul class="pagination"><li class="active"><a>1</a></li></ul></div>
+        </nav>
     </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldDatecreate" class="col-sm-2 control-label">Datecreate</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("datecreate", "size" => 30, "class" => "form-control", "id" => "fieldDatecreate")) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldIsActive" class="col-sm-2 control-label">Is Of Active</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("is_active", "size" => 30, "class" => "form-control", "id" => "fieldIsActive")) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldIsDel" class="col-sm-2 control-label">Is Of Del</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("is_del", "size" => 30, "class" => "form-control", "id" => "fieldIsDel")) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldRoom" class="col-sm-2 control-label">Room</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("room", "size" => 30, "class" => "form-control", "id" => "fieldRoom")) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldDesc" class="col-sm-2 control-label">Desc</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("desc", "size" => 30, "class" => "form-control", "id" => "fieldDesc")) ?>
-    </div>
-</div>
-
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <?php echo $this->tag->submitButton(array("Search", "class" => "btn btn-default")) ?>
-    </div>
-</div>
-
+</section><!-- /.content -->
 <?php echo $this->tag->endForm(); ?>

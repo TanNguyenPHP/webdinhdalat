@@ -1,0 +1,91 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+    <h1>
+        Search users
+    </h1>
+    <p>
+        <?php echo $this->tag->linkTo(array("backend/users/new", "Create users")) ?>
+    </p>
+</div>
+
+<?php echo $this->getContent() ?>
+
+<?php
+    echo $this->tag->form(
+array(
+"backend/users/search",
+"autocomplete" => "off",
+"class" => "form-horizontal"
+)
+);
+?>
+
+<div class="form-group">
+    <label for="fieldId" class="col-sm-2 control-label">Id</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(array("id", "size" => 30, "class" => "form-control", "id" => "fieldId")) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldUsername" class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(array("username", "size" => 30, "class" => "form-control", "id" => "fieldUsername")) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldPassword" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(array("password", "size" => 30, "class" => "form-control", "id" => "fieldPassword")) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldDatecreate" class="col-sm-2 control-label">Datecreate</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(array("datecreate", "size" => 30, "class" => "form-control", "id" => "fieldDatecreate")) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldIsActive" class="col-sm-2 control-label">Is Of Active</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(array("is_active", "size" => 30, "class" => "form-control", "id" => "fieldIsActive")) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldIsDel" class="col-sm-2 control-label">Is Of Del</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(array("is_del", "size" => 30, "class" => "form-control", "id" => "fieldIsDel")) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldRoom" class="col-sm-2 control-label">Room</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(array("room", "size" => 30, "class" => "form-control", "id" => "fieldRoom")) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldDesc" class="col-sm-2 control-label">Desc</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(array("desc", "size" => 30, "class" => "form-control", "id" => "fieldDesc")) ?>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <?php echo $this->tag->submitButton(array("Search", "class" => "btn btn-default")) ?>
+    </div>
+</div>
+
+<?php echo $this->tag->endForm(); ?>
