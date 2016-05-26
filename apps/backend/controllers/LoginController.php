@@ -11,8 +11,7 @@ class LoginController extends ControllerBase
 
     public function initialize()
     {
-        $this->view->setTemplateAfter('sharelogin');
-
+        //$this->view->setTemplateAfter('sharelogin');
     }
 
     public function indexAction()
@@ -34,20 +33,17 @@ class LoginController extends ControllerBase
         //$response = new \Phalcon\Http\Response();
 
         $username = $this->request->getPost("UserName");
-        $password = SecuritySystem::GenPassword($username,$this->request->getPost("Password"));
+        $password = $this->request->getPost("Password");
 
         $_checklogin = $this->checklogin($username, $password);
 
         if ($_checklogin == 0)//Success
         {
-            return $this->dispatcher->forward(array(
-                'controller' => "users",
-                'action' => 'index'
-            ));
+            return $this->response->redirect('backend/users/index');
         }
 
-        if ($_checklogin == 3 || $_checklogin = 4 ||$_checklogin = 5) {
-            $this->flashSession->error("$password");//$this->flash->error("Wrong username or password");
+        if ($_checklogin == 3 || $_checklogin = 4 || $_checklogin = 5) {
+            $this->flashSession->error('wrong pass');//$this->flash->error("Wrong username or password");
             return $this->response->redirect('quanly');
         }
         if ($_checklogin == 2) {
@@ -63,9 +59,9 @@ class LoginController extends ControllerBase
     {
         $user = Users::findFirst("username = '$Username'");
         if ($user) {
-            if ($Password == $user->password) {
+            if (strcmp(SecuritySystem::HashPassword($Password, $Username), $user->password)) {//dùng hàm strcmp so sánh chuỗi với binary
                 if ($user->is_active == '1' & $user->is_del == '0') {
-                    registerSessionUser($user);
+                    $this->registerSessionUser($user);
                     return 0;
                 }// Success
                 else if ($user->is_del == '1')

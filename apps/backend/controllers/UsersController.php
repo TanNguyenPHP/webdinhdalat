@@ -13,6 +13,10 @@ class UsersController extends ControllerBase
      */
     public function indexAction()
     {
+        if(empty($this->session->get('sessionUser')))
+        {
+            return $this->response->redirect('quanly');
+        }
         $this->persistent->parameters = null;
     }
 
@@ -116,12 +120,10 @@ class UsersController extends ControllerBase
         $user = new Users;
         //$user->id = $this->request->getPost("id");
         $user->username =  $this->request->getPost("username");
-        $user->password = SecuritySystem::GenPassword($user->username,$this->request->getPost("password"));
-        $user->datecreate = $this->request->getPost("datecreate");
+        $user->password = SecuritySystem::HashPassword($this->request->getPost("password"),$user->username);
+        $user->datecreate = date('YdmHis');
         $user->is_active = '1';
         $user->is_del = '0';
-
-        
 
         if (!$user->save()) {
             foreach ($user->getMessages() as $message) {
