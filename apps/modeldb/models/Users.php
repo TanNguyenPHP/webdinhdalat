@@ -1,5 +1,6 @@
 <?php
 namespace Webdinhdalat\Modeldb\Models;
+
 use Phalcon\Mvc\Model;
 
 class Users extends Model
@@ -53,6 +54,7 @@ class Users extends Model
      */
     public $desc;
     public $group;
+
     /**
      * Returns table name mapped in the model.
      *
@@ -83,6 +85,16 @@ class Users extends Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    public static function findparams($username, $name)
+    {
+        $querystring = '1=1 ';
+        if ($username != '')
+            $querystring += "and username like %$username% ";
+        if ($name != '')
+            $querystring += "and name like %$name%";
+        return parent::find($querystring);
     }
 
 }

@@ -1,16 +1,18 @@
+<?php echo $this->getContent() ?>
 <?php
 /**
  * @var \Phalcon\Mvc\View\Engine\Php $this
  */
 ?>
-<?php echo $this->getContent() ?>
+
 <?php
 echo $this->tag->form(
     array(
-        "backend/users/search",
+        "backend/users/index",
         "autocomplete" => "off",
         "class" => "form-horizontal",
-        "name" => "userform"
+        "name" => "userform",
+        "method" => "get"
     )
 );
 ?>
@@ -19,7 +21,7 @@ echo $this->tag->form(
         Danh sách user
     </h2>
     <div class="arrange-button">
-        <a href="backend/users/new" class="btn btn-info" id="modaltrigger" rel="leanModal">Thêm mới</a>
+        <a href="new" class="btn btn-info" id="modaltrigger" rel="leanModal">Thêm mới</a>
     </div>
 </section>
 <section class="content">
@@ -27,10 +29,18 @@ echo $this->tag->form(
         <div class="row">
             <div class="form-group col-sm-3">
                 <div class="input-group">
-                    <input type="text" name="filter" id="filter" class="form-control" placeholder="Tìm sản phẩm..." value="cau cut">
+                    <input type="text" name="filter" id="filter" class="form-control" placeholder="Tìm users...">
                         <span class="input-group-btn">
-                            <button type="submit" onclick="userformSubmit()" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
                         </span>
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Danh Mục</span>
+                    <select class="form-control" name="catid" id="catid" onchange="productViewForm.submit()">
+                        <option value="0">Chọn danh mục</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -39,37 +49,29 @@ echo $this->tag->form(
         <table class="table table-striped">
             <thead>
             <tr style="background-color: #3c8dbc; color:#fff">
-                <th>Tên Sản Phẩm</th>
-                <th>Mã Sản Phẩm</th>
-                <th>Mã Danh Mục</th>
-                <th>ĐVT</th>
-                <th>Giá</th>
-                <th>Đã Xoá</th>
-                <th>Thêm</th>
+                <th>Tên tài khoản</th>
+                <th>Tình trạng</th>
+                <th>Ngày tạoc</th>
+                <th>#</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <th scope="row" style="text-align:left">
-
+                Test
                 </th>
                 <td>001670</td>
                 <td align="center">
                     1
                 </td>
                 <td>Test</td>
-                <td style="text-align:right">200,000</td>
-                <td>
-                    <input class="check-box" disabled="disabled" type="checkbox" />
-                </td>
-                <td>
-
-                </td>
             </tr>
             </tbody>
         </table>
         <nav style="text-align:right">
-            <div class="pagination-container"><ul class="pagination"><li class="active"><a>1</a></li></ul></div>
+            <ul class="pagination">
+
+            </ul>
         </nav>
     </div>
 </section><!-- /.content -->

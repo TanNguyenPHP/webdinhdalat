@@ -16,7 +16,10 @@ class UsersController extends ControllerBase
     {
         if (!Authentication::CheckAuth())
             return $this->response->redirect('quanly');
-        $this->persistent->parameters = null;
+        //$this->persistent->parameters = null;
+        $data = Users::findparams($_GET['filter'], $_GET['filter']);
+        //$this->view->page = $paginator->getPaginate();
+        //https://docs.phalconphp.com/en/latest/reference/models.html
     }
 
     /**
