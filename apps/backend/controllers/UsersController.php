@@ -190,8 +190,8 @@ class UsersController extends ControllerBase
             return;
         }
 
-        $user->datecreate = $this->request->getPost("name");
-        $user->is_active = $this->request->getPost("is_active");
+        $user->name = $this->request->getPost("name");
+        $user->is_active = empty($this->request->getPost("is_active"))  ? '0' : '1';
 
         if (!$user->save()) {
 

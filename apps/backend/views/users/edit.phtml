@@ -36,8 +36,7 @@ echo $this->tag->form(
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="Show">Kích hoạt tài khoản</label>
             <div class="col-md-6">
-                <input class="check-box" id="is_active" name="is_active"
-                       type="checkbox" value="<?php echo $user->is_active ?>"/>
+                <?php echo $this->tag->checkField(array("is_active","class"=>"check-box","value" => "$user->is_active","checked"=>"unchecked")) ?>
             </div>
         </div>
         <div style="text-align:center" class="col-md-12">

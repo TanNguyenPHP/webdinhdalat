@@ -47,7 +47,7 @@ class LoginController extends ControllerBase
             return $this->response->redirect('backend/users/index');
         }
 
-        if ($_checklogin == 3 || $_checklogin = 4 || $_checklogin = 5) {
+        if ($_checklogin == 3 || $_checklogin == 4 || $_checklogin == 5) {
             $this->flashSession->error('wrong pass');//$this->flash->error("Wrong username or password");
             return $this->response->redirect('quanly');
         }
