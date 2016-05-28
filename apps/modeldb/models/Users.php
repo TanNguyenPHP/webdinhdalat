@@ -54,6 +54,9 @@ class Users extends Model
      */
     public $desc;
     public $group;
+    public $address;
+    public $name;
+    public $dob;
 
     /**
      * Returns table name mapped in the model.
@@ -89,12 +92,40 @@ class Users extends Model
 
     public static function findparams($username, $name)
     {
-        $querystring = '1=1 ';
+        $querystring = '1=1';
         if ($username != '')
-            $querystring += "and username like %$username% ";
+            $querystring = $querystring . " and username like '%$username%' ";
         if ($name != '')
-            $querystring += "and name like %$name%";
+            $querystring = $querystring . " and name like '%$name%'";
         return parent::find($querystring);
     }
 
+    public static function findUsersPaging($username, $name, $page, $limit)
+    {
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($username, $name, $page, $limit));
+
+        $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
+            "builder" => $queryBuilder,
+            "limit" => (int)$limit,
+            "page" => (int)$page
+        ));
+        return $paginator->getPaginate();
+    }
+
+    private static function buildparams($username, $name, $page, $limit)
+    {
+        $conditions = '1=1';
+        if ($username != '')
+            $conditions = $conditions . " and username like '%$username%' ";
+        if ($name != '')
+            $conditions = $conditions . " or name like '%$name%'";
+        return $params = array(
+            'models' => array('Webdinhdalat\Modeldb\Models\Users'),
+            'columns' => array('id', 'username', 'name', 'is_active','datecreate'),
+            'conditions' => $conditions,
+            // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
+            'order' => array('name')
+            // or 'limit' => array(20, 20),
+        );
+    }
 }

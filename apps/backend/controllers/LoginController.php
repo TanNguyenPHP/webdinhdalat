@@ -5,6 +5,7 @@ namespace Webdinhdalat\Backend\Controllers;
 use Phalcon\Mvc\View;
 use Webdinhdalat\Modeldb\Models\Users;
 use Webdinhdalat\Commons\SecuritySystem;
+use Webdinhdalat\Commons\Authentication;
 
 class LoginController extends ControllerBase
 {
@@ -16,7 +17,11 @@ class LoginController extends ControllerBase
 
     public function indexAction()
     {
-        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);//Render đến View tham khảo tại https://docs.phalconphp.com/en/latest/reference/views.html#control-rendering-levels
+
+        if (!Authentication::CheckAuth())
+            $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);//Render đến View tham khảo tại https://docs.phalconphp.com/en/latest/reference/views.html#control-rendering-levels
+        else
+            return $this->response->redirect('backend/users/index');
     }
 
     public function loginAction()
@@ -26,7 +31,7 @@ class LoginController extends ControllerBase
                 return $this->dispatcher->forward(array(
                     'controller' => "login",
                     'action' => 'index'
-                ));
+                ));//forward ko lam doi trang
             }
             //return;
         }

@@ -17,9 +17,18 @@ class UsersController extends ControllerBase
         if (!Authentication::CheckAuth())
             return $this->response->redirect('quanly');
         //$this->persistent->parameters = null;
-        $data = Users::findparams($_GET['filter'], $_GET['filter']);
-        //$this->view->page = $paginator->getPaginate();
+        $filter = '';
+        $page = 1;
+        $limit = 20;
+        if (isset($_GET['filter']))
+            $filter = $_GET['filter'];
+        if (isset($_GET['page']))
+            $page = $_GET['page'];
+        $data = Users::findUsersPaging($filter, $filter, $page, $limit);
+        $this->view->dataUsers = $data;
+
         //https://docs.phalconphp.com/en/latest/reference/models.html
+
     }
 
     /**
@@ -87,17 +96,12 @@ class UsersController extends ControllerBase
             $user = Users::findFirstByid($id);
             if (!$user) {
                 $this->flash->error("user was not found");
-
-                $this->dispatcher->forward(array(
-                    'controller' => "users",
-                    'action' => 'index'
-                ));
-
-                return;
+                return $this->response->redirect('backend/users/index');
             }
 
+            $this->view->user = $user;
+            /*
             $this->view->id = $user->id;
-
             $this->tag->setDefault("id", $user->id);
             $this->tag->setDefault("username", $user->username);
             $this->tag->setDefault("password", $user->password);
@@ -106,7 +110,7 @@ class UsersController extends ControllerBase
             $this->tag->setDefault("is_del", $user->is_del);
             $this->tag->setDefault("room", $user->room);
             $this->tag->setDefault("desc", $user->desc);
-
+            */
         }
     }
 
@@ -186,15 +190,8 @@ class UsersController extends ControllerBase
             return;
         }
 
-        $user->id = $this->request->getPost("id");
-        $user->username = $this->request->getPost("username");
-        $user->password = $this->request->getPost("password");
-        $user->datecreate = $this->request->getPost("datecreate");
+        $user->datecreate = $this->request->getPost("name");
         $user->is_active = $this->request->getPost("is_active");
-        $user->is_del = $this->request->getPost("is_del");
-        $user->room = $this->request->getPost("room");
-        $user->desc = $this->request->getPost("desc");
-
 
         if (!$user->save()) {
 

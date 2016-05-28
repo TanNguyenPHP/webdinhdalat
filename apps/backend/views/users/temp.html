@@ -4,21 +4,26 @@
  */
 ?>
 
-<div class="page-header">
-    <h1>
-        Search users
-    </h1>
-    <p>
-        <?php echo $this->tag->linkTo(array("backend/users/new", "Create users")) ?>
-    </p>
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous"><?php echo $this->tag->linkTo(array("users", "Back")) ?></li>
+        </ul>
+    </nav>
 </div>
 
-<?php echo $this->getContent() ?>
+<div class="page-header">
+    <h1>
+        Edit users
+    </h1>
+</div>
+
+<?php echo $this->getContent(); ?>
 
 <?php
     echo $this->tag->form(
 array(
-"backend/users/search",
+"users/save",
 "autocomplete" => "off",
 "class" => "form-horizontal"
 )
@@ -82,9 +87,11 @@ array(
 </div>
 
 
+<?php echo $this->tag->hiddenField("id") ?>
+
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-        <?php echo $this->tag->submitButton(array("Search", "class" => "btn btn-default")) ?>
+        <?php echo $this->tag->submitButton(array("Save", "class" => "btn btn-default")) ?>
     </div>
 </div>
 
