@@ -52,6 +52,7 @@ class Users extends Model
      *
      * @var string
      */
+    public $email;
     public $desc;
     public $group;
     public $address;

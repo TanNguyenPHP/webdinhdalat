@@ -131,9 +131,10 @@ class UsersController extends ControllerBase
         }
 
         $user = new Users;
-        //$user->id = $this->request->getPost("id");
         $user->username = $this->request->getPost("username");
         $user->password = SecuritySystem::HashPassword($this->request->getPost("password"), $user->username);
+        $user->email = $this->request->getPost("email");
+        $user->name = $this->request->getPost("name");
         $user->datecreate = date('YdmHis');
         $user->is_active = '1';
         $user->is_del = '0';
@@ -153,10 +154,11 @@ class UsersController extends ControllerBase
 
         $this->flash->success("user was created successfully");
 
-        $this->dispatcher->forward(array(
+        return $this->dispatcher->forward(array(
             'controller' => "users",
             'action' => 'index'
         ));
+        //return $this->response->redirect('backend/users/index');
     }
 
     /**
@@ -191,8 +193,8 @@ class UsersController extends ControllerBase
         }
 
         $user->name = $this->request->getPost("name");
-        $user->is_active = empty($this->request->getPost("is_active"))  ? '0' : '1';
-
+        $user->is_active = isset($_POST["is_active"]) ? '1' : '0';
+        $user->email = $this->request->getPost("email");
         if (!$user->save()) {
 
             foreach ($user->getMessages() as $message) {
@@ -209,11 +211,7 @@ class UsersController extends ControllerBase
         }
 
         $this->flash->success("user was updated successfully");
-
-        $this->dispatcher->forward(array(
-            'controller' => "users",
-            'action' => 'index'
-        ));
+        return $this->response->redirect('backend/users/index');
     }
 
     /**

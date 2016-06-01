@@ -1,96 +1,100 @@
 <?php
-/**
- * @var \Phalcon\Mvc\View\Engine\Php $this
- */
+echo $this->tag->form(
+    array(
+        "backend/users/create",
+        "autocomplete" => "off",
+        "class" => "form-horizontal",
+        "id" => "createUser"
+    )
+);
 ?>
-
-<div class="row">
-    <nav>
-        <ul class="pager">
-            <li class="previous"><?php echo $this->tag->linkTo(array("backend/users", "Go Back")) ?></li>
+<section class="content-header">
+    <h2>Tạo mới tài khoản.</h2>
+    <div class="validation-summary-valid" data-valmsg-summary="true">
+        <ul>
+            <li style="display:none"></li>
         </ul>
-    </nav>
-</div>
-
-<div class="page-header">
-    <h1>
-        Create users
-    </h1>
-</div>
-
-<?php echo $this->getContent(); ?>
-
-<?php
-    echo $this->tag->form(
-        array(
-            "backend/users/create",
-            "autocomplete" => "off",
-            "class" => "form-horizontal"
-        )
-    );
-?>
-
-<div class="form-group">
-    <label for="fieldId" class="col-sm-2 control-label">Id</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("id", "size" => 30, "class" => "form-control", "id" => "fieldId")) ?>
     </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldUsername" class="col-sm-2 control-label">Username</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("username", "size" => 30, "class" => "form-control", "id" => "fieldUsername")) ?>
+</section>
+<section class="content">
+    <div class="arrage-popup">
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="UserName">Tên đăng nhập</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->textField(array("username", "size" => 30, "class" => "form-control", "id" => "fieldUsername","minlength" => "5", "maxlength" => "64")) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="FullName">Tên người dùng</label>
+            <div class="col-md-6">
+                <input class="form-control valid" id="name" maxlength="32" name="name" type="text" value="">
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Password">Mật khẩu</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->passwordField(array("password", "size" => 30, "class" => "form-control", "id" => "fieldPassword","minlength" => "5" ,"maxlength" => "64")) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="ConfirmPassword">Nhập lại mật khẩu</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->passwordField(array("ComfirmPassword", "size" => 30, "class" => "form-control", "id" => "fieldComfirmPassword","minlength" => "5", "maxlength" => "64")) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Email">Email</label>
+            <div class="col-md-6">
+                <input class="form-control" id="email" maxlength="64" name="email" type="text" value=""/>
+            </div>
+        </div>
+        <div style="text-align:center" class="col-md-12">
+            <input type="submit" value="Đăng Ký" class="btn btn-info"/>
+            <a href="/webdinhdalat/backend/users/index" class="btn btn-info">Về danh sách</a>
+        </div>
+        <div class="clearfix"></div>
     </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldPassword" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("password", "size" => 30, "class" => "form-control", "id" => "fieldPassword")) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldDatecreate" class="col-sm-2 control-label">Datecreate</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("datecreate", "size" => 30, "class" => "form-control", "id" => "fieldDatecreate")) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldIsActive" class="col-sm-2 control-label">Is Of Active</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("is_active", "size" => 30, "class" => "form-control", "id" => "fieldIsActive")) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldIsDel" class="col-sm-2 control-label">Is Of Del</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("is_del", "size" => 30, "class" => "form-control", "id" => "fieldIsDel")) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldRoom" class="col-sm-2 control-label">Room</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("room", "size" => 30, "class" => "form-control", "id" => "fieldRoom")) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldDesc" class="col-sm-2 control-label">Desc</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(array("desc", "size" => 30, "class" => "form-control", "id" => "fieldDesc")) ?>
-    </div>
-</div>
-
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <?php echo $this->tag->submitButton(array("Save", "class" => "btn btn-default")) ?>
-    </div>
-</div>
-
+</section>
 <?php echo $this->tag->endForm(); ?>
+<script>
+    $().ready(function () {
+        // validate signup form on keyup and submit
+        $("#createUser").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 6
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                ComfirmPassword: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: "#fieldPassword"
+                },
+                email: {
+
+                    email: true
+                }
+            },
+            messages: {
+                username: {
+                    required: "Điền tên đăng nhập",
+                    minlength: "Tên đăng nhập lớn hơn 5 ký tự"
+                },
+                password: {
+                    required: "Nhập mật khẩu",
+                    minlength: "Mật khẩu phải lớn hơn 5 ký tự"
+                },
+                ComfirmPassword: {
+                    required: "Nhập lại mật khẩu",
+                    minlength: "Mật khẩu phải lớn hơn 5 ký tự",
+                    equalTo: "Mật khậu nhập lại không đúng"
+                },
+                email: "Không đúng định dạng email"
+            }
+        });
+    });
+</script>

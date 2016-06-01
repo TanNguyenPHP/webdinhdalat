@@ -37,7 +37,7 @@ class Module implements ModuleDefinitionInterface
         /**
          * Read common configuration
          */
-        $config = $di->has('config') ? $di->getShared('config') : null;
+        //$config = $di->has('config') ? $di->getShared('config') : null;
 
         /**
          * Try to load local configuration
