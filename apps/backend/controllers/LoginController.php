@@ -17,7 +17,6 @@ class LoginController extends ControllerBase
 
     public function indexAction()
     {
-
         if (!Authentication::CheckAuth())
             $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);//Render đến View tham khảo tại https://docs.phalconphp.com/en/latest/reference/views.html#control-rendering-levels
         else

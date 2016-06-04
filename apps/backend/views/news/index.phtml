@@ -1,0 +1,111 @@
+<?php echo $this->getContent() ?>
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+<?php
+echo $this->tag->form(
+    array(
+        "backend/news/index",
+        "autocomplete" => "off",
+        "class" => "form-horizontal",
+        "name" => "newsform",
+        "method" => "get"
+    )
+);
+?>
+<section class="content-header">
+    <h2>
+        Danh sách bài viết
+    </h2>
+    <div class="arrange-button">
+        <a href="new" class="btn btn-info" id="modaltrigger" rel="leanModal">Thêm mới</a>
+    </div>
+</section>
+<section class="content">
+    <div class="sidebar-form">
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <div class="input-group">
+                    <input type="text" name="filter" id="filter" class="form-control" placeholder="Tên bài viết..." value="<?php echo $data['filter']  ?>">
+                        <span class="input-group-btn">
+                            <button type="submit" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Từ ngày</span>
+                    <input class="form-control" type="text" name="DateFrom" id="DateFrom" />
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Đến ngày</span>
+                    <input class="form-control" type="text" name="DateTo" id="DateTo" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr style="background-color: #3c8dbc; color:#fff">
+                <th>Tên bài viết</th>
+                <th>Danh mục</th>
+                <th>Ngày tạo</th>
+                <th>Tình trạng</th>
+                <th>Vị trí</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php for ($i = 0; $i<= count($data['listnews']) && $data['listnews']->total_items != 0 ; $i++) {?>
+                <tr>
+                    <th scope="row" style="text-align:left">
+                        <a href="edit/<?php echo $data['listnews'][$i]->id ?>"><?php echo $data['listnews'][$i]->title ?></a>
+                    </th>
+                    <td style="text-align:left">
+                        <?php for ($j = 0; $i<= count($data['cats']); $j++) {?>
+                            <?php if($data['listnews'][$i]->id_category == $data['cats'][$j]->id ){
+                                echo $data['cats'][$j]->name;
+                            }?>
+                        <?php }?>
+                    </td>
+                    <td>
+                        <?php
+                        if ($data['listnews'][$i]->datecreate != '')
+                            echo DateTime::createFromFormat('YdmHis', $data['listnews'][$i]->datecreate)->format('d/m/Y');
+                        ?>
+                    </td>
+                    <td align="center">
+                        <?php if ($data['listnews'][$i]->is_status == '1')
+                            echo 'Đã kích hoạt';
+                        else
+                            echo 'Tài khoản đã khóa';
+                        ?>
+                    </td>
+                    <td>
+                        <?php echo $data['listnews'][$i]->position ?>
+                    </td>
+                </tr>
+            <?php }?>
+            </tbody>
+        </table>
+        <nav style="text-align:right">
+            <ul class="pagination">
+
+            </ul>
+        </nav>
+    </div>
+</section><!-- /.content -->
+<?php echo $this->tag->endForm(); ?>
+<script type="text/javascript">
+    $('#DateFrom').datetimepicker({
+        value: '<?php echo $data['dateFrom']  ?>', step: 1
+    });
+    $('#DateTo').datetimepicker({
+        value: '<?php echo $data['dateFrom']  ?>', step: 1
+    });
+</script>

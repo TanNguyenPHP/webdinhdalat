@@ -4,7 +4,6 @@
  * @var \Phalcon\Mvc\View\Engine\Php $this
  */
 ?>
-
 <?php
 echo $this->tag->form(
     array(
@@ -16,7 +15,6 @@ echo $this->tag->form(
     )
 );
 ?>
-
 <section class="content-header">
     <h2>
         Danh sách user
@@ -55,9 +53,9 @@ echo $this->tag->form(
                     <th scope="row" style="text-align:left">
                         <a href="edit/<?php echo $user->id ?>"><?php echo $user->username ?></a>
                     </th>
-                    <th scope="row" style="text-align:left">
+                    <td style="text-align:left">
                         <?php echo $user->name ?>
-                    </th>
+                    </td>
                     <td>
                         <?php if ($user->is_active == '1')
                             echo 'Đã kích hoạt';

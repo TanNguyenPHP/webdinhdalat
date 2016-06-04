@@ -4,18 +4,14 @@ namespace Webdinhdalat\Backend\Controllers;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\Users;
-use Webdinhdalat\Commons\SecuritySystem;
 use Webdinhdalat\Commons\Authentication;
+use Webdinhdalat\Commons\SecuritySystem;
 
 class UsersController extends ControllerBase
 {
-    /**
-     * Index action
-     */
+
     public function indexAction()
     {
-        if (!Authentication::CheckAuth())
-            return $this->response->redirect('quanly');
         //$this->persistent->parameters = null;
         $filter = '';
         $page = 1;
@@ -31,66 +27,14 @@ class UsersController extends ControllerBase
 
     }
 
-    /**
-     * Searches for users
-     */
-    public function searchAction()
-    {
-        if (!Authentication::CheckAuth())
-            return $this->response->redirect('quanly');
-        $numberPage = 1;
-        if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, 'Webdinhdalat\Modeldb\Models\Users', $_POST);
-            $this->persistent->parameters = $query->getParams();
-        } else {
-            $numberPage = $this->request->getQuery("page", "int");
-        }
-
-        $parameters = $this->persistent->parameters;
-        if (!is_array($parameters)) {
-            $parameters = array();
-        }
-        $parameters["order"] = "id";
-
-        $users = Users::find($parameters);
-        if (count($users) == 0) {
-            $this->flash->notice("The search did not find any users");
-
-            $this->dispatcher->forward(array(
-                "controller" => "users",
-                "action" => "index"
-            ));
-
-            return;
-        }
-
-        $paginator = new Paginator(array(
-            'data' => $users,
-            'limit' => 10,
-            'page' => $numberPage
-        ));
-
-        $this->view->page = $paginator->getPaginate();
-    }
-
-    /**
-     * Displays the creation form
-     */
     public function newAction()
     {
-        if (!Authentication::CheckAuth())
-            return $this->response->redirect('quanly');
+
     }
 
-    /**
-     * Edits a user
-     *
-     * @param string $id
-     */
     public function editAction($id)
     {
-        if (!Authentication::CheckAuth())
-            return $this->response->redirect('quanly');
+
         if (!$this->request->isPost()) {
 
             $user = Users::findFirstByid($id);
@@ -114,22 +58,27 @@ class UsersController extends ControllerBase
         }
     }
 
-    /**
-     * Creates a new user
-     */
     public function createAction()
     {
-        if (!Authentication::CheckAuth())
-            return $this->response->redirect('quanly');
         if (!$this->request->isPost()) {
             $this->dispatcher->forward(array(
                 'controller' => "users",
-                'action' => 'index'
+                'action' => 'create'
             ));
 
             return;
         }
 
+        $users= Users::findFirstByusername($this->request->getPost("username"));
+        if($users)
+        {
+            $this->flash->error("Trùng tên đăng nhập");
+            $this->dispatcher->forward(array(
+                'controller' => "users",
+                'action' => 'new'
+            ));
+            return;
+        }
         $user = new Users;
         $user->username = $this->request->getPost("username");
         $user->password = SecuritySystem::HashPassword($this->request->getPost("password"), $user->username);
@@ -152,19 +101,14 @@ class UsersController extends ControllerBase
             return;
         }
 
-        $this->flash->success("user was created successfully");
-
-        return $this->dispatcher->forward(array(
+        $this->flash->success("Tạo mới thành công");
+        /*return $this->dispatcher->forward(array(
             'controller' => "users",
             'action' => 'index'
-        ));
-        //return $this->response->redirect('backend/users/index');
+        ));*/
+        return $this->response->redirect('backend/users/index');
     }
 
-    /**
-     * Saves a user edited
-     *
-     */
     public function saveAction()
     {
         if (!Authentication::CheckAuth())
@@ -182,7 +126,7 @@ class UsersController extends ControllerBase
         $user = Users::findFirstByid($id);
 
         if (!$user) {
-            $this->flash->error("user does not exist " . $id);
+            $this->flash->error("Không tìm thấy users");
 
             $this->dispatcher->forward(array(
                 'controller' => "users",
@@ -210,19 +154,12 @@ class UsersController extends ControllerBase
             return;
         }
 
-        $this->flash->success("user was updated successfully");
+        $this->flash->success("Đã lưu");
         return $this->response->redirect('backend/users/index');
     }
 
-    /**
-     * Deletes a user
-     *
-     * @param string $id
-     */
     public function deleteAction($id)
     {
-        if (!Authentication::CheckAuth())
-            return $this->response->redirect('quanly');
         $user = Users::findFirstByid($id);
         if (!$user) {
             $this->flash->error("user was not found");

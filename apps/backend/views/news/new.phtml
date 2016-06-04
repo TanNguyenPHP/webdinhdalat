@@ -1,0 +1,107 @@
+<?php echo $this->getContent() ?>
+<?php
+echo $this->tag->form(
+    array(
+        "backend/news/create",
+        "autocomplete" => "off",
+        "class" => "form-horizontal",
+        "id" => "createNews"
+    )
+);
+?>
+<section class="content-header">
+    <h2>Bài viết mới</h2>
+    <div class="validation-summary-valid" data-valmsg-summary="true">
+        <ul>
+            <li style="display:none"></li>
+        </ul>
+    </div>
+</section>
+<section class="content">
+    <div class="arrage-popup">
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="cat">Danh mục bài viết</label>
+            <div class="col-md-6">
+                <select class="form-control" id="cat" name="cat">
+                    <?php foreach ($data["cats"] as $items): ?>
+                        <?php echo "<option value=\"$items->id\">$items->name</option>" ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="cat">Chọn ngôn ngữ</label>
+            <div class="col-md-6">
+                <select class="form-control" id="lang" name="lang">
+                    <?php foreach ($data["langs"] as $items): ?>
+                        <?php echo "<option value=\"$items->id\">$items->lang</option>" ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Name">Tiêu đề</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->textField(array("tittle", "size" => 30, "class" => "form-control", "id" => "fieldTitle", "minlength" => "4", "maxlength" => "64")) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="content_short">Tóm tắt bài viết</label>
+            <div class="col-md-6">
+                    <textarea class="form-control" cols="20" id="content_short" maxlength="128" name="content_short"
+                              rows="2"></textarea>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="content">Nội dung bài viết</label>
+            <div class="col-md-6">
+                    <textarea class="form-control" cols="20" id="content" maxlength="128" name="content"
+                              rows="40"></textarea>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="content_short">Ảnh đại diện</label>
+            <div class="col-md-6">
+                <input type="file" id="avatar_image" name="avatar_image">
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="seo_title">Keyword Title</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->textField(array("seo_title", "size" => 30, "class" => "form-control", "id" => "fieldSeo_title", "maxlength" => "48")) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="seo_desc">Meta Description</label>
+            <div class="col-md-6">
+                <textarea class="form-control" cols="20" id="seo_desc" maxlength="128" name="seo_desc" rows="2"></textarea>
+            </div>
+        </div>
+        <div style="text-align:center" class="col-md-12">
+            <input type="submit" value="Lưu" class="btn btn-info"/>
+            <a href="/webdinhdalat/backend/news/index" class="btn btn-info">Về danh sách</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>
+<?php echo $this->tag->endForm(); ?>
+<script>
+    CKEDITOR.replace( 'content' );
+    $().ready(function () {
+        // validate signup form on keyup and submit
+        $("#createNews").validate({
+            rules: {
+                tittle: {
+                    required: true,
+                    minlength: 4
+                }
+            },
+            messages: {
+                tittle: {
+                    required: "Nhập tên",
+                    minlength: "Lớn hơn 4 ký tự"
+                }
+            }
+        });
+    });
+</script>
