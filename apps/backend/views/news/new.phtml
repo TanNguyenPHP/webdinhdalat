@@ -86,7 +86,9 @@ echo $this->tag->form(
 </section>
 <?php echo $this->tag->endForm(); ?>
 <script>
-    CKEDITOR.replace( 'content' );
+    tinymce.init({
+        selector: '#content'
+    });
     $().ready(function () {
         // validate signup form on keyup and submit
         $("#createNews").validate({
