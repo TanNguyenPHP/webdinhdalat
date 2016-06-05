@@ -55,14 +55,14 @@ echo $this->tag->form(
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="content">Nội dung bài viết</label>
             <div class="col-md-6">
-                    <textarea class="form-control" cols="20" id="content" maxlength="128" name="content"
-                              rows="40"></textarea>
+                    <textarea class="form-control" cols="20" id="content" minlength="6" maxlength="128" name="content"
+                              rows="20"></textarea>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="content_short">Ảnh đại diện</label>
             <div class="col-md-6">
-                <input type="file" id="avatar_image" name="avatar_image">
+                <input type="file" id="avatar_image" name="avatar_image" accept="image/*">
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
@@ -87,7 +87,10 @@ echo $this->tag->form(
 <?php echo $this->tag->endForm(); ?>
 <script>
     tinymce.init({
-        selector: '#content'
+        selector: '#content',
+        toolbar: "image",
+        plugins: "image imagetools",
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
     });
     $().ready(function () {
         // validate signup form on keyup and submit
@@ -96,12 +99,20 @@ echo $this->tag->form(
                 tittle: {
                     required: true,
                     minlength: 4
+                },
+                content:{
+                    required:true,
+                    minlength: 6
                 }
             },
             messages: {
                 tittle: {
                     required: "Nhập tên",
                     minlength: "Lớn hơn 4 ký tự"
+                },
+                content:{
+                    required: "Nhập nội dung",
+                    minlength: "Lớn hơn 6 ký tự"
                 }
             }
         });

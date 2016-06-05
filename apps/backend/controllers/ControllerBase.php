@@ -24,6 +24,15 @@ class ControllerBase extends Controller
         }
 
     }
+    protected final function saveFile($path,$destination)
+    {
+        try{
+            move_uploaded_file($path, $destination);
+        }
+        catch (Exception $e){
+
+        }
+    }
     public function initialize()
     {
         if (!Authentication::CheckAuth())
