@@ -1,0 +1,94 @@
+<?php echo $this->getContent() ?>
+<?php
+echo $this->tag->form(
+    array(
+        "backend/mapsinfo/create",
+        "autocomplete" => "off",
+        "class" => "form-horizontal",
+        "id" => "createInfos"
+    )
+);
+?>
+<section class="content-header">
+    <h2>Thêm thông tin bản đồ</h2>
+    <div class="validation-summary-valid" data-valmsg-summary="true">
+        <ul>
+            <li style="display:none"></li>
+        </ul>
+    </div>
+</section>
+<section class="content">
+    <div class="arrage-popup">
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="cat">Chọn ngôn ngữ</label>
+            <div class="col-md-6">
+                <select class="form-control" id="lang" name="lang">
+                    <?php foreach ($data as $items): ?>
+                        <?php echo "<option value=\"$items->id\">$items->lang</option>" ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Name">Tên</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->textField(array("title", "size" => 30, "class" => "form-control", "id" => "fieldTitle", "minlength" => "2", "maxlength" => "64")) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Content">Mô tả</label>
+            <div class="col-md-6">
+                    <textarea class="form-control" cols="20" id="content" maxlength="512" name="content"
+                              rows="4"></textarea>
+                <span class="field-validation-valid" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="position">Thứ tự hiển thị</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->textField(array("position", "size" => 30, "class" => "form-control", "id" => "fieldposition", "maxlength" => "3", "value" => "0")) ?>
+            </div>
+        </div>
+        <div style="text-align:center" class="col-md-12">
+            <input type="submit" value="Lưu" class="btn btn-info"/>
+            <a href="/webdinhdalat/backend/mapsinfo/index" class="btn btn-info">Về danh sách</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>
+<?php echo $this->tag->endForm(); ?>
+<script>
+    $().ready(function () {
+        // validate signup form on keyup and submit
+        $("#createInfos").validate({
+            rules: {
+                title: {
+                    required: true,
+                    minlength: 2
+                },
+                content:{
+                    required: true,
+                    minlength: 6
+                },
+                position: {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                title: {
+                    required: "Nhập tên",
+                    minlength: "Lớn hơn 4 ký tự"
+                },
+                content:{
+                    required: "Nhập nội dung",
+                    minlength: "Nội dung phải có 6 ký tự"
+                },
+                position: {
+                    required: "Nhập thứ tự hiển thị",
+                    number: "Nhập số"
+                }
+            }
+        });
+    });
+</script>

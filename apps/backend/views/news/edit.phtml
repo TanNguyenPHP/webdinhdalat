@@ -2,16 +2,16 @@
 <?php
 echo $this->tag->form(
     array(
-        "backend/news/create",
+        "backend/news/save",
         "autocomplete" => "off",
         "class" => "form-horizontal",
-        "id" => "createNews",
+        "id" => "saveNews",
         "enctype" => "multipart/form-data"
     )
 );
 ?>
 <section class="content-header">
-    <h2>Bài viết mới</h2>
+    <h2>Sửa bài viết</h2>
     <div class="validation-summary-valid" data-valmsg-summary="true">
         <ul>
             <li style="display:none"></li>
@@ -25,7 +25,11 @@ echo $this->tag->form(
             <div class="col-md-6">
                 <select class="form-control" id="cat" name="cat">
                     <?php foreach ($data["cats"] as $items): ?>
-                        <?php echo "<option value=\"$items->id\">$items->name</option>" ?>
+                        <?php if ($data["news"]->id_category == $items->id)
+                            echo "<option value=\"$items->id\" selected>$items->name</option>";
+                        else
+                            echo "<option value=\"$items->id\">$items->name</option>";
+                        ?>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -35,7 +39,11 @@ echo $this->tag->form(
             <div class="col-md-6">
                 <select class="form-control" id="lang" name="lang">
                     <?php foreach ($data["langs"] as $items): ?>
-                        <?php echo "<option value=\"$items->id\">$items->lang</option>" ?>
+                        <?php if ($data["news"]->id_lang == $items->id)
+                            echo "<option value=\"$items->id\" selected>$items->lang</option>";
+                        else
+                            echo "<option value=\"$items->id\">$items->lang</option>";
+                        ?>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -43,21 +51,22 @@ echo $this->tag->form(
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="Name">Tiêu đề</label>
             <div class="col-md-6">
-                <?php echo $this->tag->textField(array("title", "size" => 30, "class" => "form-control", "id" => "fieldTitle", "minlength" => "4", "maxlength" => "64")) ?>
+                <?php echo $this->tag->textField(array("title", "size" => 30, "class" => "form-control", "id" => "fieldTitle", "minlength" => "4", "maxlength" => "64", "value" => $data['news']->title)) ?>
+                <input type="hidden" id="id" name="id" value="<?php echo $data['news']->id ?>>"/>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="content_short">Tóm tắt bài viết</label>
             <div class="col-md-6">
                     <textarea class="form-control" cols="20" id="content_short" maxlength="128" name="content_short"
-                              rows="2"></textarea>
+                              rows="2"><?php echo $data['news']->content_short ?></textarea>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="content">Nội dung bài viết</label>
             <div class="col-md-6">
                     <textarea class="form-control" cols="20" id="content" minlength="6" maxlength="128" name="content"
-                              rows="20"></textarea>
+                              rows="20"><?php echo $data['news']->content?></textarea>
                 <span id="messageContent" class="field-validation-valid" data-valmsg-for="Name"
                       data-valmsg-replace="true"></span>
             </div>
@@ -72,20 +81,31 @@ echo $this->tag->form(
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="position">Thứ tự hiển thị</label>
             <div class="col-md-6">
-                <?php echo $this->tag->textField(array("position", "size" => 30, "class" => "form-control", "id" => "fieldposition", "maxlength" => "3", "value" => "0")) ?>
+                <?php echo $this->tag->textField(array("position", "size" => 30, "class" => "form-control", "id" => "fieldposition", "maxlength" => "3", "value" => $data['news']->position)) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Show">Hiển thị</label>
+            <div class="col-md-6">
+                <?php
+                if ($data['news']->is_status == '1')
+                    echo $this->tag->checkField(array("is_status", "class" => "check-box", "value" => "1", "checked" => "checked"));
+                else
+                    echo $this->tag->checkField(array("is_status", "class" => "check-box", "value" => "0"));
+                ?>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="seo_title">Keyword Title</label>
             <div class="col-md-6">
-                <?php echo $this->tag->textField(array("seo_title", "size" => 30, "class" => "form-control", "id" => "fieldSeo_title", "maxlength" => "48")) ?>
+                <?php echo $this->tag->textField(array("seo_title", "size" => 30, "class" => "form-control", "id" => "fieldSeo_title", "maxlength" => "48", "value" => $data['news']->seo_title)) ?>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="seo_desc">Meta Description</label>
             <div class="col-md-6">
                 <textarea class="form-control" cols="20" id="seo_desc" maxlength="128" name="seo_desc"
-                          rows="2"></textarea>
+                          rows="2"><?php echo $data['news']->seo_desc ?></textarea>
             </div>
         </div>
         <div style="text-align:center" class="col-md-12">
@@ -103,7 +123,8 @@ echo $this->tag->form(
         plugins: "image imagetools",
         toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
     });
-    $('input[type="submit"]').prop("disabled", true);
+    //tinymce.activeEditor.setContent(' html');
+
     var a = 0;
     var b = 0;
     $('#avatar_image').bind('change', function () {

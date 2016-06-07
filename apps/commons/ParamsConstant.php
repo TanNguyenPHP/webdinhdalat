@@ -8,5 +8,7 @@ namespace Webdinhdalat\commons;
  */
 class ParamsConstant
 {
-    const  pathfolderpicture = "img\\";
+    const   pathfolderpicture = "img\\";
+    const   pathfolderavatarimage = "img\\imgavatar\\";
+
 }

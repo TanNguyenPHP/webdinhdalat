@@ -67,7 +67,7 @@ echo $this->tag->form(
                         <?php
                         $_datetime = $user->datecreate;
                         if ($_datetime != '')
-                            echo DateTime::createFromFormat('YdmHis', $_datetime)->format('d/m/Y');
+                            echo DateTime::createFromFormat('YmdHis', $_datetime)->format('d/m/Y');
                         ?>
                     </td>
                 </tr>

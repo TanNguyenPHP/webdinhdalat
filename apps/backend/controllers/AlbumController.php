@@ -19,14 +19,14 @@ class AlbumController extends ControllerBase
         $album = new Album();
 
         $album->name = $this->request->getPost("name");
-        $folder = RemoveUnicode::stripUnicode($album->name);
+        $folder = RemoveUnicode::stripUnicode($album->name) . "\\";
         $dir = params::pathfolderpicture . $folder;
         $result = parent::createFolder($dir);
         if ($result == 1) {
             $album->folder = $folder;
             $album->dir = $dir;
             $album->desc = $this->request->getPost("desc");
-            $album->datecreate = date('YdmHis');
+            $album->datecreate = date('YmdHis');
             $album->is_del = '0';
             if ($album->save())
                 return $this->response->redirect('backend/album/new');

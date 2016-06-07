@@ -84,7 +84,7 @@ class UsersController extends ControllerBase
         $user->password = SecuritySystem::HashPassword($this->request->getPost("password"), $user->username);
         $user->email = $this->request->getPost("email");
         $user->name = $this->request->getPost("name");
-        $user->datecreate = date('YdmHis');
+        $user->datecreate = date('YmdHis');
         $user->is_active = '1';
         $user->is_del = '0';
 

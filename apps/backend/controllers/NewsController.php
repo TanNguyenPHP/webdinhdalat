@@ -6,7 +6,10 @@ use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\News;
 use Webdinhdalat\Modeldb\Models\Category;
 use Webdinhdalat\Modeldb\Models\Language as Lang;
+use Webdinhdalat\Commons\ParamsConstant as Params;
+use Webdinhdalat\Commons\UtilsDateTime;
 use Phalcon\Di;
+
 class NewsController extends ControllerBase
 {
     public function indexAction()
@@ -16,13 +19,13 @@ class NewsController extends ControllerBase
         $dateFrom = "";
         $filter = "";
         $cat = "";
-        $limit = 20;
+        $limit = 10;
         $page = 1;
 
-        if (isset($_GET['dateTo']))
-            $dateTo = $_GET['dateTo'];
-        if (isset($_GET['dateFrom']))
-            $dateFrom = $_GET['dateFrom'];
+        if (!empty($_GET['DateTo']))
+            $dateTo = UtilsDateTime::ConvertStringToDateTime($_GET['DateTo'])->format('Ymd235959');
+        if (!empty($_GET['DateFrom']))
+            $dateFrom = UtilsDateTime::ConvertStringToDateTime($_GET['DateFrom'])->format('Ymd000000');
         if (isset($_GET['filter']))
             $filter = $_GET['filter'];
         if (isset($_GET['cat']))
@@ -33,8 +36,10 @@ class NewsController extends ControllerBase
             $page = (int)$_GET['page'];
 
         $listnews = News::findNewsPaging($page, $limit, $filter, $dateTo, $dateFrom, $cat);
-        //$cats = Category::findAll();
-
+        if ($dateFrom != '')
+            $dateFrom = \DateTime::createFromFormat('YmdHis', $dateFrom)->format('d/m/Y H:i');
+        if ($dateTo != '')
+            $dateTo = \DateTime::createFromFormat('YmdHis', $dateTo)->format('d/m/Y H:i');
         $data = array(
             "listnews" => $listnews,
             "cats" => Category::findAll(),
@@ -47,6 +52,67 @@ class NewsController extends ControllerBase
         );
 
         return $this->view->data = $data;
+    }
+
+    public function editAction($id)
+    {
+        $news = News::findFirstByid($id);
+        if (!$news) {
+            $this->flash->error("Bài viết không tồn tại");
+            return $this->response->redirect('backend/news/index');
+        }
+        $data = array(
+            "news" => $news,
+            "cats" => Category::findAll(),
+            "langs" => Lang::findAll()
+        );
+
+        return $this->view->data = $data;
+    }
+
+    public function saveAction()
+    {
+        $news = News::findFirstByid($this->request->getPost('id'));
+        if (!$news) {
+            $this->flash->error("Bài viết không tồn tại");
+            return $this->response->redirect('backend/news/index');
+        }
+
+        $news->title = $this->request->getPost('title');
+        $news->content_short = $this->request->getPost('content_short');
+        $news->content = $this->request->getPost('content');
+        $news->position = $this->request->getPost('position');
+        $news->id_category = $this->request->getPost('cat');
+        $news->id_lang = $this->request->getPost('lang');
+        $news->seo_title = $this->request->getPost('seo_title');
+        $news->seo_desc = $this->request->getPost('seo_desc');
+        $news->id_user = Di::getDefault()->getSession()->get('sessionUser');
+        $news->is_status = isset($_POST["is_active"]) ? '1' : '0';
+
+        try {
+            if (isset($_FILES['avatar_image'])) {
+                $this::saveImg($_FILES['avatar_image']);
+                $news->avatar_image = Params::pathfolderavatarimage . $_FILES['avatar_image']['name'];
+            }
+
+            if (!$news->save()) {
+                foreach ($news->getMessages() as $message) {
+                    $this->flash->error($message);
+                }
+                $this->dispatcher->forward(array(
+                    'controller' => "news",
+                    'action' => 'new'
+                ));
+            }
+        } catch (Exception $e) {
+            $this->flash->error(var_dump($e));
+            $this->dispatcher->forward(array(
+                'controller' => "news",
+                'action' => 'new'
+            ));
+        }
+
+        return $this->response->redirect('backend/news/index');
 
     }
 
@@ -66,14 +132,43 @@ class NewsController extends ControllerBase
         $news->title = $this->request->getPost('title');
         $news->content_short = $this->request->getPost('content_short');
         $news->content = $this->request->getPost('content');
+        $news->position = $this->request->getPost('position');
         $news->id_category = $this->request->getPost('cat');
         $news->id_lang = $this->request->getPost('lang');
         $news->seo_title = $this->request->getPost('seo_title');
         $news->seo_desc = $this->request->getPost('seo_desc');
-        $news->datecreate = date('YdmHis');
+        $news->datecreate = date('YmdHis');
         $news->id_user = Di::getDefault()->getSession()->get('sessionUser');
-        $news->is_del='0';
+        $news->is_del = '0';
+        $news->is_status = '1';
 
+        try {
+            $this::saveImg($_FILES['avatar_image']);
+            $news->avatar_image = Params::pathfolderavatarimage . $_FILES['avatar_image']['name'];
+            if (!$news->save()) {
+                foreach ($news->getMessages() as $message) {
+                    $this->flash->error($message);
+                }
+                $this->dispatcher->forward(array(
+                    'controller' => "news",
+                    'action' => 'new'
+                ));
+            }
+        } catch (Exception $e) {
+            $this->flash->error(var_dump($e));
+            $this->dispatcher->forward(array(
+                'controller' => "news",
+                'action' => 'new'
+            ));
+        }
 
+        return $this->response->redirect('backend/news/index');
+
+    }
+
+    private function saveImg($file)
+    {
+        $uploadfile = Params::pathfolderavatarimage . basename($file['name']);
+        $this::saveFile($file['tmp_name'], $uploadfile);
     }
 }
