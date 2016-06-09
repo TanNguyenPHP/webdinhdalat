@@ -68,7 +68,7 @@ class CategoryController extends ControllerBase
         }
         $this->flash->success("Tạo mới thành công");
 
-        return $this->response->redirect('backend/category/index');
+        return $this->response->redirect('/backend/category/index');
     }
 
     public function editAction($id)
@@ -78,7 +78,7 @@ class CategoryController extends ControllerBase
             $cat = Cat::findFirstByid($id);
             if (!$cat) {
                 $this->flash->error("Không tìm thấy");
-                return $this->response->redirect('backend/users/index');
+                return $this->response->redirect('/backend/users/index');
             }
             $cats = array(
                 "cat" => $cat,
@@ -134,7 +134,7 @@ class CategoryController extends ControllerBase
         }
 
         $this->flash->success("Đã lưu");
-        return $this->response->redirect('backend/category/index');
+        return $this->response->redirect('/backend/category/index');
     }
 
 }

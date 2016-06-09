@@ -15,6 +15,6 @@ return new \Phalcon\Config(array(
         'modelsDir'      => '../apps/backend/models/',
         'migrationsDir'  => '../apps/backend/migrations/',
         'viewsDir'       => '../apps/backend/views/',
-        'baseUri'        => '/webdinhdalat/'
+        'baseUri'        => ''
     )
 ));

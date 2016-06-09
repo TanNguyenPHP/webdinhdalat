@@ -12,7 +12,7 @@ class LoginController extends ControllerBase
 
     public function initialize()
     {
-        //$this->view->setTemplateAfter('sharelogin');
+
     }
 
     public function indexAction()
@@ -43,7 +43,7 @@ class LoginController extends ControllerBase
 
         if ($_checklogin == 0)//Success
         {
-            return $this->response->redirect('backend/users/index');
+            return $this->response->redirect('/backend/users/index');
         }
 
         if ($_checklogin == 3 || $_checklogin == 4 || $_checklogin == 5) {

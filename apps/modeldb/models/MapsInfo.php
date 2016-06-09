@@ -71,4 +71,12 @@ class MapsInfo extends Model
         return parent::findFirst($parameters);
     }
 
+    public static function findAll($lang)
+    {
+        $condition = "is_del ='0' ";
+        if ($lang != '')
+            $condition = $condition . "and id_lang = '$lang'";
+        return parent::find("$condition");
+    }
+
 }

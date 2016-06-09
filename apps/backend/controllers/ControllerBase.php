@@ -42,24 +42,24 @@ class ControllerBase extends Controller
     {
         // Add some local CSS resources
         $this->assets
-            ->addCss('css/backend/bootstrap.min.css')
-            ->addCss('css/backend/font-awesome.min.css')
-            ->addCss('css/backend/modalStyles.css')
-            ->addCss('css/backend/AdminLTE.min.css')
-            ->addCss('css/backend/skin-blue.min.css')
-            ->addCss('css/backend/jquery.datetimepicker.css')
-            ->addCss('css/backend/alertify.css')
-            ->addCss('css/backend/semantic.min.css')
-            ->addCss('css/backend/fine-uploader-new.css');
+            ->addCss('/css/backend/bootstrap.min.css')
+            ->addCss('/css/backend/font-awesome.min.css')
+            ->addCss('/css/backend/modalStyles.css')
+            ->addCss('/css/backend/AdminLTE.min.css')
+            ->addCss('/css/backend/skin-blue.min.css')
+            ->addCss('/css/backend/jquery.datetimepicker.css')
+            ->addCss('/css/backend/alertify.css')
+            ->addCss('/css/backend/semantic.min.css')
+            ->addCss('/css/backend/fine-uploader-new.css');
 
 
         // And some local JavaScript resources
         $this->assets
-            ->addJs('js/jquery-1.12.4.min.js')
-            ->addJs('js/jquery.validate.min.js')
-            ->addJs('js/jquery.datetimepicker.full.min.js')
-            ->addJs('js/fine-uploader.min.js')
-            ->addJs('ckeditor/tinymce.min.js');
+            ->addJs('/js/jquery-1.12.4.min.js')
+            ->addJs('/js/jquery.validate.min.js')
+            ->addJs('/js/jquery.datetimepicker.full.min.js')
+            ->addJs('/js/fine-uploader.min.js')
+            ->addJs('/ckeditor/tinymce.min.js');
 
         if (!Authentication::CheckAuth())
             return $this->response->redirect('quanly');

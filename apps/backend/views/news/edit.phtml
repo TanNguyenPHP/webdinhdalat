@@ -2,7 +2,7 @@
 <?php
 echo $this->tag->form(
     array(
-        "backend/news/save",
+        "save",
         "autocomplete" => "off",
         "class" => "form-horizontal",
         "id" => "saveNews",
@@ -74,7 +74,7 @@ echo $this->tag->form(
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="content_short">Ảnh đại diện</label>
             <div class="col-md-6">
-                <input type="file" id="avatar_image" name="avatar_image" accept="image/*" required>
+                <input type="file" id="avatar_image" name="avatar_image" accept="image/*">
                 <p id="pic_error2" style="display:none; color:#FF0000;">Kích thước ảnh không quá 2 MB.</p>
             </div>
         </div>
@@ -110,7 +110,7 @@ echo $this->tag->form(
         </div>
         <div style="text-align:center" class="col-md-12">
             <input type="submit" value="Lưu" id="submit" class="btn btn-info"/>
-            <a href="/webdinhdalat/backend/news/index" class="btn btn-info">Về danh sách</a>
+            <a href="/backend/news/index" class="btn btn-info">Về danh sách</a>
         </div>
         <div class="clearfix"></div>
     </div>

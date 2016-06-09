@@ -29,15 +29,15 @@ class AlbumController extends ControllerBase
             $album->datecreate = date('YmdHis');
             $album->is_del = '0';
             if ($album->save())
-                return $this->response->redirect('backend/album/new');
+                return $this->response->redirect('/backend/album/new');
         }else if($result == 0 || $result == 3)
         {
             $this->flash->error("Không tạo folder");
-            return $this->response->redirect('backend/album/index');
+            return $this->response->redirect('/backend/album/index');
         }else if($result == 2)
         {
             $this->flash->error("Folder đã được tạo");
-            return $this->response->redirect('backend/album/index');
+            return $this->response->redirect('/backend/album/index');
         }
 
     }

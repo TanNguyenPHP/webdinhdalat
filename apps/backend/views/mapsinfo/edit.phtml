@@ -2,16 +2,16 @@
 <?php
 echo $this->tag->form(
     array(
-        "create",
+        "save",
         "autocomplete" => "off",
         "class" => "form-horizontal",
-        "id" => "createInfos",
+        "id" => "editInfos",
         "enctype" => "multipart/form-data"
     )
 );
 ?>
 <section class="content-header">
-    <h2>Thêm thông tin bản đồ</h2>
+    <h2>Sửa thông tin bản đồ</h2>
     <div class="validation-summary-valid" data-valmsg-summary="true">
         <ul>
             <li style="display:none"></li>
@@ -24,8 +24,12 @@ echo $this->tag->form(
             <label class="text-label col-md-2" for="cat">Chọn ngôn ngữ</label>
             <div class="col-md-6">
                 <select class="form-control" id="lang" name="lang">
-                    <?php foreach ($data as $items): ?>
-                        <?php echo "<option value=\"$items->id\">$items->lang</option>" ?>
+                    <?php foreach ($data['langs'] as $items): ?>
+                        <?php if ($items->id == $data['mapsinfo']->id_lang)
+                            echo "<option value=\"$items->id\" selected>$items->lang</option>";
+                        else
+                            echo "<option value=\"$items->id\">$items->lang</option>";
+                        ?>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -33,28 +37,40 @@ echo $this->tag->form(
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="Name">Tên</label>
             <div class="col-md-6">
-                <?php echo $this->tag->textField(array("title", "size" => 30, "class" => "form-control", "id" => "fieldTitle", "minlength" => "2", "maxlength" => "64")) ?>
+                <?php echo $this->tag->textField(array("title", "size" => 30, "class" => "form-control", "id" => "fieldTitle", "minlength" => "2", "maxlength" => "64", "value" => $data['mapsinfo']->title)) ?>
+                <input type="hidden" id="id" name="id" value="<?php echo $data['mapsinfo']->id ?>>"/>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="Content">Mô tả</label>
             <div class="col-md-6">
                     <textarea class="form-control" cols="20" id="content" maxlength="512" name="content"
-                              rows="4"></textarea>
+                              rows="4"><?php echo $data['mapsinfo']->content; ?></textarea>
                 <span class="field-validation-valid" data-valmsg-for="Description" data-valmsg-replace="true"></span>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="image">Ảnh đại diện</label>
             <div class="col-md-6">
-                <input type="file" id="image" name="image" accept="image/*" required>
+                <input type="file" id="image" name="image" accept="image/*">
                 <p id="pic_error2" style="display:none; color:#FF0000;">Kích thước ảnh không quá 2 MB.</p>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Show">Hiển thị</label>
+            <div class="col-md-6">
+                <?php
+                if ($data['mapsinfo']->is_status == '1')
+                    echo $this->tag->checkField(array("is_status", "class" => "check-box", "value" => "1", "checked" => "checked"));
+                else
+                    echo $this->tag->checkField(array("is_status", "class" => "check-box", "value" => "0"));
+                ?>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="position">Thứ tự hiển thị</label>
             <div class="col-md-6">
-                <?php echo $this->tag->textField(array("position", "size" => 30, "class" => "form-control", "id" => "fieldposition", "maxlength" => "3", "value" => "0")) ?>
+                <?php echo $this->tag->textField(array("position", "size" => 30, "class" => "form-control", "id" => "fieldposition", "maxlength" => "3", "value" => $data['mapsinfo']->position)) ?>
             </div>
         </div>
         <div style="text-align:center" class="col-md-12">
@@ -92,13 +108,13 @@ echo $this->tag->form(
     });
     $().ready(function () {
         // validate signup form on keyup and submit
-        $("#createInfos").validate({
+        $("#editInfos").validate({
             rules: {
                 title: {
                     required: true,
                     minlength: 2
                 },
-                content:{
+                content: {
                     required: true,
                     minlength: 6
                 },
@@ -112,7 +128,7 @@ echo $this->tag->form(
                     required: "Nhập tên",
                     minlength: "Lớn hơn 4 ký tự"
                 },
-                content:{
+                content: {
                     required: "Nhập nội dung",
                     minlength: "Nội dung phải có 6 ký tự"
                 },

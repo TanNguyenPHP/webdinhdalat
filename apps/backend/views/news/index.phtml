@@ -7,7 +7,7 @@
 <?php
 echo $this->tag->form(
     array(
-        "backend/news/index",
+        "index",
         "autocomplete" => "off",
         "class" => "form-horizontal",
         "name" => "newsform",
@@ -110,10 +110,10 @@ echo $this->tag->form(
         </table>
         <nav style="text-align:right">
             <ul class="pagination">
-                <li><?php echo $this->tag->linkTo("backend/news/index", "First") ?></li>
-                <li><?php echo $this->tag->linkTo("backend/news/index?page=" . $data['listnews']->before, "Previous") ?></li>
-                <li><?php echo $this->tag->linkTo("backend/news/index?page=" . $data['listnews']->next, "Next") ?></li>
-                <li><?php echo $this->tag->linkTo("backend/news/index?page=" . $data['listnews']->last, "Last") ?></li>
+                <li><?php echo $this->tag->linkTo("/backend/news/index", "First") ?></li>
+                <li><?php echo $this->tag->linkTo("/backend/news/index?page=" . $data['listnews']->before, "Previous") ?></li>
+                <li><?php echo $this->tag->linkTo("/backend/news/index?page=" . $data['listnews']->next, "Next") ?></li>
+                <li><?php echo $this->tag->linkTo("/backend/news/index?page=" . $data['listnews']->last, "Last") ?></li>
             </ul>
         </nav>
     </div>

@@ -1,0 +1,75 @@
+<?php echo $this->getContent() ?>
+<?php
+echo $this->tag->form(
+    array(
+        "index",
+        "autocomplete" => "off",
+        "class" => "form-horizontal",
+        "name" => "mapsform",
+        "method" => "get"
+    )
+);
+?>
+<section class="content-header">
+    <h2>
+        Thông tin bản đồ
+    </h2>
+    <div class="arrange-button">
+        <a href="new" class="btn btn-info" id="modaltrigger" rel="leanModal">Thêm mới</a>
+    </div>
+</section>
+<section class="content">
+    <div class="sidebar-form">
+        <div>
+            <div class="form-group col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Ngôn ngữ</span>
+                    <select class="form-control" id="lang" name="lang" onchange="mapsform.submit()">
+                        <?php foreach ($data['langs'] as $items): ?>
+                            <?php if ($items->id == $data['lang'])
+                                echo "<option value=\"$items->id\" selected>$items->lang</option>";
+                            else
+                                echo "<option value=\"$items->id\">$items->lang</option>";
+                            ?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr style="background-color: #3c8dbc; color:#fff">
+                <th>Tên</th>
+                <th>Nội dung</th>
+                <th>Hiển thị</th>
+                <th>Vị trí</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($data['mapsinfo'] as $item): ?>
+                <tr>
+                    <th scope="row" style="text-align:left">
+                        <a href="edit/<?php echo $item->id ?>"><?php echo $item->title ?></a>
+                    </th>
+                    <td style="text-align:left">
+                        <?php echo $item->content ?>
+                    </td>
+                    <td>
+                        <?php if ($item->is_status == '1')
+                            echo '<input class="check-box" disabled="disabled" type="checkbox" checked>';
+                        else
+                            echo '<input class="check-box" disabled="disabled" type="checkbox">';
+                        ?>
+                    </td>
+                    <td align="center">
+                        <?php echo $item->position ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</section><!-- /.content -->
+<?php echo $this->tag->endForm(); ?>

@@ -59,7 +59,7 @@ class NewsController extends ControllerBase
         $news = News::findFirstByid($id);
         if (!$news) {
             $this->flash->error("Bài viết không tồn tại");
-            return $this->response->redirect('backend/news/index');
+            return $this->response->redirect('/backend/news/index');
         }
         $data = array(
             "news" => $news,
@@ -75,7 +75,7 @@ class NewsController extends ControllerBase
         $news = News::findFirstByid($this->request->getPost('id'));
         if (!$news) {
             $this->flash->error("Bài viết không tồn tại");
-            return $this->response->redirect('backend/news/index');
+            return $this->response->redirect('/backend/news/index');
         }
 
         $news->title = $this->request->getPost('title');
@@ -87,12 +87,15 @@ class NewsController extends ControllerBase
         $news->seo_title = $this->request->getPost('seo_title');
         $news->seo_desc = $this->request->getPost('seo_desc');
         $news->id_user = Di::getDefault()->getSession()->get('sessionUser');
-        $news->is_status = isset($_POST["is_active"]) ? '1' : '0';
+        $news->is_status = isset($_POST["is_status"]) ? '1' : '0';
 
         try {
             if (isset($_FILES['avatar_image'])) {
-                $this::saveImg($_FILES['avatar_image']);
-                $news->avatar_image = Params::pathfolderavatarimage . $_FILES['avatar_image']['name'];
+                if($_FILES['avatar_image']['size'] != 0)
+                {
+                    $this::saveImg($_FILES['avatar_image']);
+                    $news->avatar_image = Params::pathfolderavatarimage . $_FILES['avatar_image']['name'];
+                }
             }
 
             if (!$news->save()) {
@@ -112,7 +115,7 @@ class NewsController extends ControllerBase
             ));
         }
 
-        return $this->response->redirect('backend/news/index');
+        return $this->response->redirect('/backend/news/index');
 
     }
 
@@ -162,7 +165,7 @@ class NewsController extends ControllerBase
             ));
         }
 
-        return $this->response->redirect('backend/news/index');
+        return $this->response->redirect('/backend/news/index');
 
     }
 

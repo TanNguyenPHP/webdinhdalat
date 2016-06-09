@@ -52,7 +52,7 @@ class LanguageController extends ControllerBase
             'controller' => "users",
             'action' => 'index'
         ));*/
-        return $this->response->redirect('backend/language/index');
+        return $this->response->redirect('index');
 
     }
     public function editAction($id)
@@ -63,7 +63,7 @@ class LanguageController extends ControllerBase
             $langs = Lang::findFirstByid($id);
             if (!$langs) {
                 $this->flash->error("user was not found");
-                return $this->response->redirect('backend/users/index');
+                return $this->response->redirect('/backend/users/index');
             }
 
             $this->view->data = $langs;
@@ -114,6 +114,6 @@ class LanguageController extends ControllerBase
         }
 
         $this->flash->success("Đã lưu");
-        return $this->response->redirect('backend/language/index');
+        return $this->response->redirect('/backend/language/index');
     }
 }

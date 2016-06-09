@@ -22,7 +22,8 @@ class Module implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(array(
             'Webdinhdalat\Frontend\Controllers' => __DIR__ . '/controllers/',
-            'Webdinhdalat\Frontend\Models' => __DIR__ . '/models/',
+            'Webdinhdalat\Modeldb\Models' => '../apps/modeldb/models/',
+            'Webdinhdalat\Commons' => '../apps/commons/'
         ));
 
         $loader->register();

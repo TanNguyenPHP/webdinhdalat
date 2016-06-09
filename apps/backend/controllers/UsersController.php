@@ -69,9 +69,8 @@ class UsersController extends ControllerBase
             return;
         }
 
-        $users= Users::findFirstByusername($this->request->getPost("username"));
-        if($users)
-        {
+        $users = Users::findFirstByusername($this->request->getPost("username"));
+        if ($users) {
             $this->flash->error("Trùng tên đăng nhập");
             $this->dispatcher->forward(array(
                 'controller' => "users",

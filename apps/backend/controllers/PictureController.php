@@ -6,21 +6,73 @@ use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\Picture;
 use Webdinhdalat\Modeldb\Models\Album;
 use Webdinhdalat\Commons\ParamsConstant as params;
-use Webdinhdalat\Commons\RemoveUnicode;
+use Webdinhdalat\Commons\UploadHandler;
 
 class PictureController extends ControllerBase
 {
 
     public function newAction()
     {
-        $this->view->data= Album::find();
+        $this->view->data = Album::find();
     }
+
     public function createAction()
     {
-        $pic = new Picture();
-        $file = $_FILES['qqfile']['name'];
+        $uploader = new UploadHandler();
 
+        // Specify the list of valid extensions, ex. array("jpeg", "xml", "bmp")
+        $uploader->allowedExtensions = array(); // all files types allowed by default
 
+        // Specify max file size in bytes.
+        $uploader->sizeLimit = null;
+
+        // Specify the input name set in the javascript.
+        $uploader->inputName = "qqfile"; // matches Fine Uploader's default inputName value by default
+
+        // If you want to use the chunking/resume feature, specify the folder to temporarily save parts.
+        $uploader->chunksFolder = "chunks";
+
+        $method = $_SERVER["REQUEST_METHOD"];
+        try{
+            if ($method == "POST") {
+                header("Content-Type: text/plain");
+
+                // Assumes you have a chunking.success.endpoint set to point here with a query parameter of "done".
+                // For example: /myserver/handlers/endpoint.php?done
+                if (isset($_GET["done"])) {
+                    $result = $uploader->combineChunks(params::pathfolderpicture);
+                } // Handles upload requests
+                else {
+                    // Call handleUpload() with the name of the folder, relative to PHP's getcwd()
+                    $result = $uploader->handleUpload(params::pathfolderpicture);
+
+                    // To return a name used for uploaded file you can use the following line.
+                    $result["uploadName"] = $uploader->getUploadName();
+                    $pic = new Picture();
+                    $pic->id_album = $_REQUEST['albumid'];
+                    $pic->datecreate = date('YmdHis');
+                    $pic->position = '0';
+                    $pic->is_del = '0';
+                    $pic->name = $result["name"];
+                    $pic->dir = $result["target"];
+                    if (!$pic->save())
+                        return $this->response->redirect('/backend/picture/new');
+
+                }
+
+                return json_encode($result);
+            } // for delete file requests
+            else if ($method == "DELETE") {
+                $result = $uploader->handleDelete("files");
+                return json_encode($result);
+            } else {
+                header("HTTP/1.0 405 Method Not Allowed");
+            }
+        }
+        catch (Exception $e)
+        {
+
+        }
     }
 }
 
