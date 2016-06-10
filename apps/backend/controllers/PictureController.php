@@ -11,6 +11,30 @@ use Webdinhdalat\Commons\UploadHandler;
 class PictureController extends ControllerBase
 {
 
+    public function indexAction()
+    {
+        $album = "";
+        $limit = 10;
+        $page = 1;
+        if (isset($_GET['album']))
+            $album = $_GET['album'];
+        if (isset($_GET['limit']))
+            $limit = $_GET['limit'];
+        if (isset($_GET['page']))
+            $page = $_GET['page'];
+
+        $pics= Picture::findPicPaging($page,$limit,$album);
+
+        $data = array(
+            "pictures" => $pics,
+            "albums" => Album::find(),
+            "album" => $album,
+            "limit" => $limit,
+            "page" => $page
+        );
+
+        return $this->view->data = $data;
+    }
     public function newAction()
     {
         $this->view->data = Album::find();
@@ -33,7 +57,7 @@ class PictureController extends ControllerBase
         $uploader->chunksFolder = "chunks";
 
         $method = $_SERVER["REQUEST_METHOD"];
-        try{
+        try {
             if ($method == "POST") {
                 header("Content-Type: text/plain");
 
@@ -45,7 +69,6 @@ class PictureController extends ControllerBase
                 else {
                     // Call handleUpload() with the name of the folder, relative to PHP's getcwd()
                     $result = $uploader->handleUpload(params::pathfolderpicture);
-
                     // To return a name used for uploaded file you can use the following line.
                     $result["uploadName"] = $uploader->getUploadName();
                     $pic = new Picture();
@@ -55,6 +78,7 @@ class PictureController extends ControllerBase
                     $pic->is_del = '0';
                     $pic->name = $result["name"];
                     $pic->dir = $result["target"];
+                    $pic->is_show = '1';
                     if (!$pic->save())
                         return $this->response->redirect('/backend/picture/new');
 
@@ -68,10 +92,8 @@ class PictureController extends ControllerBase
             } else {
                 header("HTTP/1.0 405 Method Not Allowed");
             }
-        }
-        catch (Exception $e)
-        {
-
+        } catch (Exception $e) {
+            return $this->response->redirect('/backend/picture/new');
         }
     }
 }

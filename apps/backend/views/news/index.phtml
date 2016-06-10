@@ -96,9 +96,9 @@ echo $this->tag->form(
                     </td>
                     <td align="center">
                         <?php if ($data['listnews']->items[$i]->is_status == '1')
-                            echo 'Hiển thị';
+                            echo '<input class="check-box" disabled="disabled" type="checkbox" checked>';
                         else
-                            echo 'Không hiển thị';
+                            echo '<input class="check-box" disabled="disabled" type="checkbox">';
                         ?>
                     </td>
                     <td>

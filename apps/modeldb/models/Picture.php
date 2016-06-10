@@ -84,4 +84,33 @@ class Picture extends Model
         return parent::findFirst($parameters);
     }
 
+    public static function findAll($album)
+    {
+        $condition = "is_del ='0' and is_show='1' ";
+        if ($album != '')
+            $condition = $condition . "and id_album = '$album'";
+        return parent::find("$condition");
+    }
+    public static function findPicPaging($page, $limit, $album)
+    {
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($page, $limit, $album));
+
+        $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
+            "builder" => $queryBuilder,
+            "limit" => (int)$limit,
+            "page" => (int)$page
+        ));
+        return $paginator->getPaginate();
+    }
+    private static function buildparams($page, $limit, $album)
+    {
+        $conditions = "is_del ='0' and is_show='1' ";
+        if ($album != '')
+            $conditions = $conditions . "and id_album = '$album' ";
+        return $params = array(
+            'models' => array('Webdinhdalat\Modeldb\Models\Picture'),
+            'conditions' => $conditions,
+            'orderby' => array('name')
+        );
+    }
 }

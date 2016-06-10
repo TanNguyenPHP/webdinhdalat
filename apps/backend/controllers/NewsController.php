@@ -36,6 +36,7 @@ class NewsController extends ControllerBase
             $page = (int)$_GET['page'];
 
         $listnews = News::findNewsPaging($page, $limit, $filter, $dateTo, $dateFrom, $cat);
+
         if ($dateFrom != '')
             $dateFrom = \DateTime::createFromFormat('YmdHis', $dateFrom)->format('d/m/Y H:i');
         if ($dateTo != '')
