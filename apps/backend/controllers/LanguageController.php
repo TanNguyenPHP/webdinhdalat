@@ -4,7 +4,6 @@ namespace Webdinhdalat\Backend\Controllers;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\Language as Lang;
-use Webdinhdalat\Commons\Authentication;
 
 class LanguageController extends ControllerBase
 {

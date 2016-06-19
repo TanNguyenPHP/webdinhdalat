@@ -28,6 +28,7 @@ $di->setShared('router', function () {
 
     $router->setDefaultModule('frontend');
     $router->setDefaultNamespace('Webdinhdalat\Frontend\Controllers');
+
     $router->add(
         '/quanly',
         array(

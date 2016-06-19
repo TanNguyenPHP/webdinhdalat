@@ -12,6 +12,7 @@ use Phalcon\Di;
 
 class NewsController extends ControllerBase
 {
+
     public function indexAction()
     {
 
@@ -57,6 +58,7 @@ class NewsController extends ControllerBase
 
     public function editAction($id)
     {
+
         $news = News::findFirstByid($id);
         if (!$news) {
             $this->flash->error("Bài viết không tồn tại");
@@ -73,6 +75,7 @@ class NewsController extends ControllerBase
 
     public function saveAction()
     {
+
         $news = News::findFirstByid($this->request->getPost('id'));
         if (!$news) {
             $this->flash->error("Bài viết không tồn tại");

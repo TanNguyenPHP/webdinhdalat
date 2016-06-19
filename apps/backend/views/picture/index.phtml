@@ -43,7 +43,7 @@ echo $this->tag->form(
             </div>
             <div class="form-group col-sm-3">
                 <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Đến ngày</span>
+                    <span class="input-group-addon" id="basic-addon1">Hiển thị</span>
                     <select class="form-control" name="limit" id="limit" onchange = "picform.submit()">
                         <?php for ($i=0; $i <= 50;$i = $i + 10){
                             if($i == $data['limit'] )
@@ -80,7 +80,7 @@ echo $this->tag->form(
                         <?php } ?>
                     </td>
                     <td style="text-align:left">
-                        <input type="text" id="fielddir" name="dir" readonly="true" value="<?php echo $_SERVER['SERVER_NAME']."\\" . $data['pictures']->items[$i]->dir;?>">
+                        <input type="text" id="fielddir" name="dir" readonly="true" value="<?php  echo str_replace("\\", "/", $_SERVER['SERVER_NAME']."\\" . $data['pictures']->items[$i]->dir);?>">
                     </td>
                     <td align="center">
                         <?php if ($data['pictures']->items[$i]->is_show == '1')
