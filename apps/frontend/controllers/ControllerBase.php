@@ -4,7 +4,6 @@ namespace Webdinhdalat\Frontend\Controllers;
 
 use Phalcon\Mvc\Controller;
 
-
 class ControllerBase extends Controller
 {
     public function initialize()
@@ -12,6 +11,6 @@ class ControllerBase extends Controller
         // Add some local CSS resources
         $this->assets
             ->addCss('css/frontend/main.css');
-
+        $this->tag->setTitle("Dinh Đà Lạt");
     }
 }

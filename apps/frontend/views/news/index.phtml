@@ -21,7 +21,9 @@
                     <img class="img-responsive" src="images/news/big-1.png" alt="hinh to nhat">
                     <div class="special-content">
                         <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                        <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc trưng của mùa thu trong không khí se lạnh. Cảm giác dễ chịu, khiến ai nấy đều khoan khoái và hào hứng ghé thăm Đà Lạt, dù không phải lần đầu đến.</p>
+                        <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc trưng của mùa
+                            thu trong không khí se lạnh. Cảm giác dễ chịu, khiến ai nấy đều khoan khoái và hào hứng ghé
+                            thăm Đà Lạt, dù không phải lần đầu đến.</p>
                         <button class="special-button">đọc thêm</button>
                     </div>
                 </div>
@@ -32,7 +34,8 @@
                             <div class="content">
                                 <span>23/12/1988</span>
                                 <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc trưng.</p>
+                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc
+                                    trưng.</p>
                                 <button class="new-button">đọc thêm</button>
                             </div>
                         </div>
@@ -41,7 +44,8 @@
                             <div class="content">
                                 <span>23/12/1988</span>
                                 <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc trưng.</p>
+                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc
+                                    trưng.</p>
                                 <button class="new-button">đọc thêm</button>
                             </div>
                         </div>
@@ -50,7 +54,8 @@
                             <div class="content">
                                 <span>23/12/1988</span>
                                 <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc trưng.</p>
+                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc
+                                    trưng.</p>
                                 <button class="new-button">đọc thêm</button>
                             </div>
                         </div>
@@ -59,7 +64,8 @@
                             <div class="content">
                                 <span>23/12/1988</span>
                                 <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc trưng.</p>
+                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc
+                                    trưng.</p>
                                 <button class="new-button">đọc thêm</button>
                             </div>
                         </div>
@@ -69,7 +75,7 @@
             <div class="latest-new">
                 <p>Tin tức củ</p>
             </div>
-            <div class="row right-news">
+            <div id="pagenews" class="row right-news" data-page="1">
                 <div class="news-frame col-md-3">
                     <img class="img-responsive" src="images/news/1.png" alt="hinh to nhat">
                     <div class="special-content">
@@ -106,3 +112,44 @@
         </div>
     </div>
 </section>
+<script>
+    var is_loading = false; // initialize is_loading by false to accept new loading
+    var pages = 1;
+    var end = 'false';
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var page = {'page': pages, 'endpage': end};
+            if (is_loading == false) {
+                is_loading = true;
+                $.ajax({
+                    url: 'news/loadmorenews',
+                    type: 'POST',
+                    data: page,
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.endload != 'end') {
+                            var html = '<div id="pagenews" class="row right-news" data-page="' + result.nextpage + '">';
+                            $.each(result.listnews, function (key, item) {
+                                html += '<div class="news-frame col-md-3">';
+                                html += '<img class="img-responsive" src="' + item.avatar_image + '" alt="hinh to nhat">';
+                                html += '<div class="special-content">';
+                                html += '<h3>' + item.title + '</h3>';
+                                html += '<p>' + item.content_short + '</p>';
+                                html += '<button class="new-button">đọc thêm</button>';
+                                html += '</div>';
+                                html += '</div>';
+                            });
+                            html += '</div>';
+                            $('#pagenews').append(html);
+                        }
+                        // append: add the new statments to the existing data
+                        pages = result.nextpage;
+                        end = result.endpage;
+                        // set is_loading to false to accept new loading
+                        is_loading = false;
+                    }
+                });
+            }
+        });
+    });
+</script>

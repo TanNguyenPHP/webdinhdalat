@@ -68,7 +68,8 @@ class PictureController extends ControllerBase
                 } // Handles upload requests
                 else {
                     // Call handleUpload() with the name of the folder, relative to PHP's getcwd()
-                    $result = $uploader->handleUpload(params::pathfolderpicture);
+
+                    $result = $uploader->handleUpload(str_replace("\\","",params::pathfolderpicture));
                     // To return a name used for uploaded file you can use the following line.
                     $result["uploadName"] = $uploader->getUploadName();
                     $pic = new Picture();

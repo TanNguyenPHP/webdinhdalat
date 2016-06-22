@@ -2,10 +2,11 @@
 <?php
 echo $this->tag->form(
     array(
-        "save",
+        "/backend/news/save",
         "autocomplete" => "off",
         "class" => "form-horizontal",
         "id" => "saveNews",
+        "method" => "post",
         "enctype" => "multipart/form-data"
     )
 );
@@ -66,7 +67,7 @@ echo $this->tag->form(
             <label class="text-label col-md-2" for="content">Nội dung bài viết</label>
             <div class="col-md-6">
                     <textarea class="form-control" cols="20" id="content" minlength="6" maxlength="128" name="content"
-                              rows="20"><?php echo $data['news']->content?></textarea>
+                              rows="20"><?php echo $data['news']->content ?></textarea>
                 <span id="messageContent" class="field-validation-valid" data-valmsg-for="Name"
                       data-valmsg-replace="true"></span>
             </div>

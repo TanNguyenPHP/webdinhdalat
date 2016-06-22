@@ -80,7 +80,7 @@ echo $this->tag->form(
                         <?php } ?>
                     </td>
                     <td style="text-align:left">
-                        <input type="text" id="fielddir" name="dir" readonly="true" value="<?php  echo str_replace("\\", "/", $_SERVER['SERVER_NAME']."\\" . $data['pictures']->items[$i]->dir);?>">
+                        <input type="text" id="fielddir" name="dir" readonly="true" value="<?php  echo "http://" . str_replace("\\", "/", $_SERVER['SERVER_NAME']."\\" . $data['pictures']->items[$i]->dir);?>">
                     </td>
                     <td align="center">
                         <?php if ($data['pictures']->items[$i]->is_show == '1')

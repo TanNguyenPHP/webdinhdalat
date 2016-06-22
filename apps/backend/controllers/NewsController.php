@@ -8,6 +8,7 @@ use Webdinhdalat\Modeldb\Models\Category;
 use Webdinhdalat\Modeldb\Models\Language as Lang;
 use Webdinhdalat\Commons\ParamsConstant as Params;
 use Webdinhdalat\Commons\UtilsDateTime;
+use  Webdinhdalat\Commons\UtilsSEO;
 use Phalcon\Di;
 
 class NewsController extends ControllerBase
@@ -22,6 +23,7 @@ class NewsController extends ControllerBase
         $cat = "";
         $limit = 10;
         $page = 1;
+        $id_lang = "";
 
         if (!empty($_GET['DateTo']))
             $dateTo = UtilsDateTime::ConvertStringToDateTime($_GET['DateTo'])->format('Ymd235959');
@@ -36,7 +38,7 @@ class NewsController extends ControllerBase
         if (isset($_GET['page']))
             $page = (int)$_GET['page'];
 
-        $listnews = News::findNewsPaging($page, $limit, $filter, $dateTo, $dateFrom, $cat);
+        $listnews = News::findNewsPaging($page, $limit, $filter, $dateTo, $dateFrom, $cat, $id_lang);
 
         if ($dateFrom != '')
             $dateFrom = \DateTime::createFromFormat('YmdHis', $dateFrom)->format('d/m/Y H:i');
@@ -92,11 +94,10 @@ class NewsController extends ControllerBase
         $news->seo_desc = $this->request->getPost('seo_desc');
         $news->id_user = Di::getDefault()->getSession()->get('sessionUser');
         $news->is_status = isset($_POST["is_status"]) ? '1' : '0';
-
+        $news->slug = UtilsSEO::CreateSlug($news->title);
         try {
             if (isset($_FILES['avatar_image'])) {
-                if($_FILES['avatar_image']['size'] != 0)
-                {
+                if ($_FILES['avatar_image']['size'] != 0) {
                     $this::saveImg($_FILES['avatar_image']);
                     $news->avatar_image = Params::pathfolderavatarimage . $_FILES['avatar_image']['name'];
                 }
@@ -148,6 +149,7 @@ class NewsController extends ControllerBase
         $news->id_user = Di::getDefault()->getSession()->get('sessionUser');
         $news->is_del = '0';
         $news->is_status = '1';
+        $news->slug = UtilsSEO::CreateSlug($news->title);
 
         try {
             $this::saveImg($_FILES['avatar_image']);

@@ -1,0 +1,67 @@
+<?php echo $this->getContent(); ?>
+<section class="contact">
+    <div class="contact-header">
+        <h1>Liên hệ<h1>
+                <span>để được hổ trợ tốt nhất</span>
+    </div>
+    <div id="contact-wrapper" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Get in touch</h4>
+                <form action="/" method="post" class="contact-form row">
+                    <div class="col-md-6 col-sm-12">
+                        <label for="yourname" class="field">
+                            <input type="text" id="yourname" name="yourname" placeholder="Enter Your Name" required>
+                            <span class="icon-user icon"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <label for="youremail" class="field">
+                            <input type="email" id="youremail" name="youremail" placeholder="Enter Your Email" required>
+                            <span class="icon-mail2 icon"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="subject" class="field">
+                            <input type="text" id="subject" name="subject" placeholder="Enter Subject" required>
+                            <span class="icon-book icon"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-12 col-sm-12" field>
+                        <label for="message" class="field clearHeight">
+                            <textarea rows="5" id="message" placeholder="Include all the details you can" required></textarea>
+                            <span class="icon-bubbles2 icon"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <button name="submit" type="submit" id="contact-submit">Send Email</button>
+                    </div>
+                </form>
+            </div>
+            <div class="contact-info col-md-4 col-centered">
+                <h4>Contact Info</h4>
+                <address>
+                    <p><i class="icon-home2"></i><strong>Main Office :</strong> <span>127/97 Ni Su Huynh Lien, F12, Q.Tan Binh</span></p>
+                    <p><i class="icon-leaf"></i><strong>Show Room :</strong> 270A Bac Hai, F3, Q.Tan Binh </p>
+                    <p><i class="icon-phone"></i><strong>Tel :</strong> +(08) 39747047 </p>
+                    <p><i class="icon-printer"></i><strong>Fax :</strong> +(08) 39747052 </p>
+                    <p><i class="icon-envelop"></i><strong>Email :</strong> sale@gwall.vn </p>
+                </address>
+                <div class="social-networks">
+                    <h4>Social Networking</h4>
+                    <nav>
+                        <ul>
+                            <li><a href="#"><i class="icon-facebook3"></i></a></li>
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-pinterest"></i></a></li>
+                            <li><a href="#"><i class="icon-google-plus3"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div><!-- Container contact info-->
+    <div class="map-wrapper">
+        <div class="map-canvas" id="map-canvas"></div>
+    </div>
+</section>

@@ -1,13 +1,11 @@
 $(document).ready(function(){
 	$('#nav-icon').click(function(){
-		$(this).toggleClass('close-menu open', function(){
-			if('.navigator'.css('display') == 'none'){
-				$('.navigator').css('display','block');
-			} else {
-				// $('.navigator').addClass('show-menu');
-				$('.navigator').css('display','none');
-			}
-		});
+		$(this).toggleClass('close-menu open');
+		if($(this).hasClass('open')){
+			$('.navigator').css('display','block');
+		} else {
+			$('.navigator').css('display','none');
+		}
 	});
 
 	

@@ -97,6 +97,7 @@ class News extends Model
     public $datecreate;
     public $id_user;
     public $content_short;
+    public $slug;
 
     /**
      * Returns table name mapped in the model.
@@ -130,9 +131,9 @@ class News extends Model
         return parent::findFirst($parameters);
     }
 
-    public static function findNewsPaging($page, $limit, $filter, $dateTo, $dateFrom, $cat)
+    public static function findNewsPaging($page = '', $limit = '', $filter = '', $dateTo = '', $dateFrom = '', $cat = '', $id_lang = '', $content = '')
     {
-        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($page, $limit, $filter, $dateTo, $dateFrom, $cat));
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($page, $limit, $filter, $dateTo, $dateFrom, $cat, $id_lang, $content));
 
         $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
             "builder" => $queryBuilder,
@@ -142,7 +143,7 @@ class News extends Model
         return $paginator->getPaginate();
     }
 
-    private static function buildparams($page, $limit, $filter, $dateTo, $dateFrom, $cat)
+    private static function buildparams($page, $limit, $filter = '', $dateTo = '', $dateFrom = '', $cat = '', $id_lang = '', $content = '')
     {
         $conditions = '1=1';
         if ($filter != '')
@@ -153,10 +154,18 @@ class News extends Model
             $conditions = $conditions . " and datecreate <= '$dateTo'";
         if ($cat != '')
             $conditions = $conditions . " and id_category = '$cat'";
+        if ($id_lang != '')
+            $conditions = $conditions . " and id_lang = '$id_lang'";
         $conditions = $conditions . " and is_del != '1' ";
+        $cols = array('id', 'title', 'position', 'id_category', 'datecreate', 'id_lang', 'is_status', 'avatar_image','content_short');
+        if ($content != '')
+            $cols = array('id', 'title', 'position', 'id_category',
+                'datecreate', 'id_lang', 'is_status',
+                'avatar_image', 'content', 'content_short',
+                'slug', 'seo_title', 'seo_desc', 'seo_keyword');
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\News'),
-            'columns' => array('id', 'title', 'position', 'id_category', 'datecreate', 'id_lang','is_status'),
+            'columns' => $cols,
             'conditions' => $conditions,
             // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
             'orderby' => array('title', 'datecreate desc')
