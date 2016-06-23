@@ -1,6 +1,8 @@
 <?php
+namespace Webdinhdalat\Modeldb\Models;
 
-class Menu extends \Phalcon\Mvc\Model
+use Phalcon\Mvc\Model;
+class Menu extends Model
 {
 
     /**
@@ -32,6 +34,7 @@ class Menu extends \Phalcon\Mvc\Model
      * @var string
      */
     public $position;
+    public $is_active;
 
     /**
      * Returns table name mapped in the model.
@@ -53,7 +56,12 @@ class Menu extends \Phalcon\Mvc\Model
     {
         return parent::find($parameters);
     }
+    public static function findall($id_lang ='')
+    {
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($id_lang));
 
+        return $queryBuilder->getQuery()->execute();
+    }
     /**
      * Allows to query the first record that match the specified conditions
      *
@@ -64,5 +72,18 @@ class Menu extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
-
+    private static function buildparams($id_lang ='')
+    {
+        $conditions = '1=1';
+        if ($id_lang != '')
+            $conditions = $conditions . " and id_lang = '$id_lang' ";
+        return $params = array(
+            'models' => array('Webdinhdalat\Modeldb\Models\Menu'),
+            'columns' => array('id', 'name','id_lang','url','position','is_active'),
+            'conditions' => $conditions,
+            // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
+            'order' => array('name')
+            // or 'limit' => array(20, 20),
+        );
+    }
 }

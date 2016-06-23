@@ -110,8 +110,6 @@ class UsersController extends ControllerBase
 
     public function saveAction()
     {
-        if (!Authentication::CheckAuth())
-            return $this->response->redirect('quanly');
         if (!$this->request->isPost()) {
             $this->dispatcher->forward(array(
                 'controller' => "users",

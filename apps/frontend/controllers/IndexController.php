@@ -2,16 +2,16 @@
 
 namespace Webdinhdalat\Frontend\Controllers;
 use Phalcon\Mvc\View;
+use Webdinhdalat\Modeldb\Models\Webconfig as config;
 
 class IndexController extends ControllerBase
 {
-    public function initialize()
-    {
 
-    }
     public function indexAction()
     {
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);//Render đến View tham khảo tại https://docs.phalconphp.com/en/latest/reference/views.html#control-rendering-levels
+        $data = config::findFirst("id_lang = '1'");
+        return $this->view->data = $data;
         //$json= json_encode(Maps::findAll('1'),JSON_UNESCAPED_UNICODE);
         //return $this->view->data = Maps::findAll('1');
         //return $this->view->data = json_encode(Maps::findAll('1'),JSON_UNESCAPED_UNICODE);
