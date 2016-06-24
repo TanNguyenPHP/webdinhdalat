@@ -48,10 +48,11 @@ class MenuController extends ControllerBase
         } catch (Exception $e) {
             return json_encode('Lỗi');
         }
-        $this->response->setContentType('application/json', 'UTF-8');
+        $data = "Mở";
         if ($menu->is_active == '0')
-            return 'Đóng';
-        else
-            return 'Mở';
+            $data = 'Đóng';
+
+
+        return $this::sendText($data);
     }
 }

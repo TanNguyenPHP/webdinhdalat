@@ -38,6 +38,15 @@ $di->setShared('router', function () {
             'action' => 'index'
         )
     );
+    //$router->add(
+    //    "/news/:params",
+    //    array(
+     //       'module' => 'frontend',
+     //       'controller' => 'news',
+      //      'action' => 'detail',
+       //     'params' => 1
+       // )
+    //);
     return $router;
 });
 

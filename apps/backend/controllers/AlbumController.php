@@ -19,7 +19,7 @@ class AlbumController extends ControllerBase
         $album = new Album();
 
         $album->name = $this->request->getPost("name");
-        $folder = RemoveUnicode::stripUnicode($album->name) . "\\";
+        $folder = RemoveUnicode::stripUnicode($album->name);
         $dir = params::pathfolderpicture . $folder;
         $result = parent::createFolder($dir);
         if ($result == 1) {

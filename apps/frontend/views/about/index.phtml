@@ -1,8 +1,8 @@
 <?php echo $this->getContent(); ?>
 <section class="news">
     <div class="news-header">
-        <h1>Muc Tin</h1>
-        <span>tin tức cập nhập thường xuyên</span>
+        <h1>Giới Thiệu</h1>
+        <span>Giới Thiệu Tập Đoàn Hoàn Cầu</span>
     </div>
 </section>
 <div class="container">
@@ -10,13 +10,13 @@
         <div class="col-md-12">
             <article>
                 <header>
-                    <h3><?php echo $data->title ?></h3>
+                    <h3><?php echo $data->title; ?></h3>
                     <div class="meta">
-                        <span><time datetime=""><?php echo DateTime::createFromFormat('YmdHis', $data->datecreate)->format('d/m/Y') ?></span>
+                        <span><?php echo DateTime::createFromFormat('YmdHis', $data->datecreate)->format('d/m/Y');?></span>
                     </div>
                 </header>
                 <div>
-                    <?php echo $data->content ?>
+                    <?php echo $data->content; ?>
                 </div>
             </article>
         </div>

@@ -50,6 +50,8 @@ class Contact extends Model
      * @var string
      */
     public $is_status;
+    public $subject;
+    public $date;
 
     /**
      * Validations and business logic
@@ -61,7 +63,7 @@ class Contact extends Model
         $this->validate(
             new Email(
                 array(
-                    'field'    => 'email',
+                    'field' => 'email',
                     'required' => true,
                 )
             )
@@ -106,9 +108,9 @@ class Contact extends Model
         return parent::findFirst($parameters);
     }
 
-    public static function findContactPaging($page,$limit,$name,$phone)
+    public static function findContactPaging($page, $limit, $name, $phone)
     {
-        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($page,$limit,$name,$phone));
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($page, $limit, $name, $phone));
 
         $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
             "builder" => $queryBuilder,
@@ -117,7 +119,8 @@ class Contact extends Model
         ));
         return $paginator->getPaginate();
     }
-    private static function buildparams($page,$limit,$name,$phone)
+
+    private static function buildparams($page, $limit, $name, $phone)
     {
         $conditions = "1=1 ";
         if ($name != '')
@@ -127,7 +130,7 @@ class Contact extends Model
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\Contact'),
             'conditions' => $conditions,
-            'orderby' => array('name','date desc')
+            'orderby' => array('name', 'date desc')
         );
     }
 }

@@ -142,7 +142,16 @@ class News extends Model
         ));
         return $paginator->getPaginate();
     }
+    public static function findAllNewsOfCategory($cat = '', $id_lang = '',$page='',$limit='')
+    {
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($page, $limit, '', '', '', $cat, $id_lang, ''));
 
+        return $queryBuilder->getQuery()->execute();
+    }
+    public static function findFirstNewsOfCategory($cat = '', $id_lang = '')
+    {
+        return parent::findFirst("id_category = '$cat' and id_lang = '$id_lang'");
+    }
     private static function buildparams($page, $limit, $filter = '', $dateTo = '', $dateFrom = '', $cat = '', $id_lang = '', $content = '')
     {
         $conditions = '1=1';
@@ -157,7 +166,7 @@ class News extends Model
         if ($id_lang != '')
             $conditions = $conditions . " and id_lang = '$id_lang'";
         $conditions = $conditions . " and is_del != '1' ";
-        $cols = array('id', 'title', 'position', 'id_category', 'datecreate', 'id_lang', 'is_status', 'avatar_image','content_short');
+        $cols = array('id', 'title', 'position', 'id_category', 'datecreate', 'id_lang', 'is_status', 'avatar_image','content_short','slug');
         if ($content != '')
             $cols = array('id', 'title', 'position', 'id_category',
                 'datecreate', 'id_lang', 'is_status',
@@ -168,8 +177,8 @@ class News extends Model
             'columns' => $cols,
             'conditions' => $conditions,
             // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
-            'orderby' => array('title', 'datecreate desc')
-            // or 'limit' => array(20, 20),
+            'orderby' => array('title', 'datecreate desc'),
+            'limit' =>  "$limit"
         );
     }
 

@@ -94,7 +94,7 @@ class NewsController extends ControllerBase
         $news->seo_desc = $this->request->getPost('seo_desc');
         $news->id_user = Di::getDefault()->getSession()->get('sessionUser');
         $news->is_status = isset($_POST["is_status"]) ? '1' : '0';
-        $news->slug = UtilsSEO::CreateSlug($news->title);
+        $news->slug = UtilsSEO::CreateSlug($news->title). '-'. date('dmYHi');
         try {
             if (isset($_FILES['avatar_image'])) {
                 if ($_FILES['avatar_image']['size'] != 0) {
@@ -149,7 +149,7 @@ class NewsController extends ControllerBase
         $news->id_user = Di::getDefault()->getSession()->get('sessionUser');
         $news->is_del = '0';
         $news->is_status = '1';
-        $news->slug = UtilsSEO::CreateSlug($news->title);
+        $news->slug = UtilsSEO::CreateSlug($news->title).'-'.date('dmYHi');
 
         try {
             $this::saveImg($_FILES['avatar_image']);

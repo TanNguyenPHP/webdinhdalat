@@ -18,101 +18,54 @@
         <div class="container">
             <div class="row">
                 <div class="special col-md-6">
-                    <img class="img-responsive" src="images/news/big-1.png" alt="hinh to nhat">
-                    <div class="special-content">
-                        <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                        <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc trưng của mùa
-                            thu trong không khí se lạnh. Cảm giác dễ chịu, khiến ai nấy đều khoan khoái và hào hứng ghé
-                            thăm Đà Lạt, dù không phải lần đầu đến.</p>
-                        <button class="special-button">đọc thêm</button>
-                    </div>
+                    <?php if ($data->count() == 0): ?>
+                        <h3><?php echo "Chưa có bài viết" ?></php></h3>
+                    <?php else: ?>
+                        <?php foreach ($data as $items): ?>
+                            <img class="img-responsive" src="<?php echo '\\' . $items->avatar_image ?>"
+                                 alt="hinh to nhat">
+                            <div class="special-content">
+                                <h3><?php echo $items->title ?></h3>
+                                <?php echo $items->content_short ?>
+                                <div class="button">
+                                    <a class="new-button" href="<?php echo '\\news\\detail\\' . $items->slug ?>">đọc
+                                        thêm</a>
+                                </div>
+                            </div>
+                            <?php break; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
                 <div class="right-news col-md-6">
                     <div class="row">
-                        <div class="col-md-6">
-                            <img class="img-responsive" src="images/news/1.png" alt="hinh to nhat">
-                            <div class="content">
-                                <span>23/12/1988</span>
-                                <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc
-                                    trưng.</p>
-                                <button class="new-button">đọc thêm</button>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-responsive" src="images/news/2.png" alt="hinh to nhat">
-                            <div class="content">
-                                <span>23/12/1988</span>
-                                <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc
-                                    trưng.</p>
-                                <button class="new-button">đọc thêm</button>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-responsive" src="images/news/3.png" alt="hinh to nhat">
-                            <div class="content">
-                                <span>23/12/1988</span>
-                                <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc
-                                    trưng.</p>
-                                <button class="new-button">đọc thêm</button>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="img-responsive" src="images/news/4.png" alt="hinh to nhat">
-                            <div class="content">
-                                <span>23/12/1988</span>
-                                <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                                <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần, để lại những mảng màu đặc
-                                    trưng.</p>
-                                <button class="new-button">đọc thêm</button>
-                            </div>
-                        </div>
+                        <?php if ($data->count() > 0): ?>
+                            <?php foreach ($data as $items): ?>
+                                <div class="col-md-6">
+                                    <img class="img-responsive" src="<?php echo '\\' . $items->avatar_image ?>"
+                                         alt="hinh to nhat">
+                                    <div class="content">
+                                        <span>23/12/1988</span>
+                                        <h3><?php echo $items->title ?></h3>
+                                        <?php echo $items->content_short ?>
+                                        <a class="new-button" href="<?php echo '\\news\\detail\\' . $items->slug ?>">đọc
+                                            thêm</a>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
             <div class="latest-new">
-                <p>Tin tức củ</p>
+                <p>Tin tức</p>
             </div>
-            <div id="pagenews" class="row right-news" data-page="1">
-                <div class="news-frame col-md-3">
-                    <img class="img-responsive" src="images/news/1.png" alt="hinh to nhat">
-                    <div class="special-content">
-                        <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                        <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần.</p>
-                        <button class="new-button">đọc thêm</button>
-                    </div>
-                </div>
-                <div class="news-frame col-md-3">
-                    <img class="img-responsive" src="images/news/2.png" alt="hinh to nhat">
-                    <div class="special-content">
-                        <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                        <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần.</p>
-                        <button class="new-button">đọc thêm</button>
-                    </div>
-                </div>
-                <div class="news-frame col-md-3">
-                    <img class="img-responsive" src="images/news/3.png" alt="hinh to nhat">
-                    <div class="special-content">
-                        <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                        <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần.</p>
-                        <button class="new-button">đọc thêm</button>
-                    </div>
-                </div>
-                <div class="news-frame col-md-3">
-                    <img class="img-responsive" src="images/news/4.png" alt="hinh to nhat">
-                    <div class="special-content">
-                        <h3>TRẢI NGHIỆM CÁC CUNG ĐƯỜNG ĐÈO ĐẸP VÀO ĐÀ LẠT</h3>
-                        <p>Tháng 9 là lúc những cơn mưa mùa hạ bắt đầu thưa dần.</p>
-                        <button class="new-button">đọc thêm</button>
-                    </div>
-                </div>
+            <div id="pagenews" class=“row”>
+
             </div>
         </div>
     </div>
 </section>
-<script>
+<script defer type="text/javascript">
     var is_loading = false; // initialize is_loading by false to accept new loading
     var pages = 1;
     var end = 'false';
@@ -122,20 +75,20 @@
             if (is_loading == false) {
                 is_loading = true;
                 $.ajax({
-                    url: 'news/loadmorenews',
+                    url: '/news/loadmorenews',
                     type: 'POST',
                     data: page,
                     dataType: 'json',
                     success: function (result) {
                         if (result.endload != 'end') {
-                            var html = '<div id="pagenews" class="row right-news" data-page="' + result.nextpage + '">';
+                            var html = '<div id="pagenews" class="row right-news" data-page="' + pages + '">';
                             $.each(result.listnews, function (key, item) {
                                 html += '<div class="news-frame col-md-3">';
-                                html += '<img class="img-responsive" src="' + item.avatar_image + '" alt="hinh to nhat">';
+                                html += '<img class="img-responsive" src="\\' + item.avatar_image + '" alt="hinh to nhat">';
                                 html += '<div class="special-content">';
                                 html += '<h3>' + item.title + '</h3>';
                                 html += '<p>' + item.content_short + '</p>';
-                                html += '<button class="new-button">đọc thêm</button>';
+                                html += '<a class="new-button" href="/news/detail/' + item.slug + '">đọc thêm</a>';
                                 html += '</div>';
                                 html += '</div>';
                             });
@@ -147,6 +100,25 @@
                         end = result.endpage;
                         // set is_loading to false to accept new loading
                         is_loading = false;
+                    },
+                    error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        console.log(msg);
                     }
                 });
             }
