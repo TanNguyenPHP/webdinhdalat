@@ -7,10 +7,9 @@
     <div class="menu-common">
         <div class="decor"></div>
         <ul>
-            <li><a href="#">vườn hoa</a></li>
-            <li><a href="#">cưởi ngựa</a></li>
-            <li><a href="#">rừng thông</a></li>
-            <li><a href="#">nội thất dinh</a></li>
+            <?php foreach ($data as $item): ?>
+            <?php echo "<li><a href=\"#\">$item->name</a></li>" ?>
+            <?php endforeach; ?>
         </ul>
         <div class="decor"></div>
     </div>

@@ -29,7 +29,8 @@
                     </div>
                     <div class="col-md-12 col-sm-12" field>
                         <label for="message" class="field clearHeight">
-                            <textarea rows="5" id="message" name="message" placeholder="Include all the details you can" required></textarea>
+                            <textarea rows="5" id="message" name="message" placeholder="Include all the details you can"
+                                      required></textarea>
                             <span class="icon-bubbles2 icon"></span>
                         </label>
                     </div>
@@ -41,7 +42,8 @@
             <div class="contact-info col-md-4 col-centered">
                 <h4>Contact Info</h4>
                 <address>
-                    <p><i class="icon-home2"></i><strong>Main Office :</strong> <span>127/97 Ni Su Huynh Lien, F12, Q.Tan Binh</span></p>
+                    <p><i class="icon-home2"></i><strong>Main Office :</strong> <span>127/97 Ni Su Huynh Lien, F12, Q.Tan Binh</span>
+                    </p>
                     <p><i class="icon-leaf"></i><strong>Show Room :</strong> 270A Bac Hai, F3, Q.Tan Binh </p>
                     <p><i class="icon-phone"></i><strong>Tel :</strong> +(08) 39747047 </p>
                     <p><i class="icon-printer"></i><strong>Fax :</strong> +(08) 39747052 </p>
@@ -65,3 +67,47 @@
         <div class="map-canvas" id="map-canvas"></div>
     </div>
 </section>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+
+<script type="text/javascript">
+    function initialize() {
+        // set up coordinate
+        var latlng = new google.maps.LatLng(10.783464, 106.648305);
+        var latlngbachai = new google.maps.LatLng(10.780098, 106.65813);
+        // call the map into ui
+        var map = new google.maps.Map(
+            document.getElementById('map-canvas'), {
+                center: latlng,
+                zoom: 18,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+        // cotent infowindow
+        var contentString = '<div>' +
+            '<h4>Cong Ty TNHH GreenWall</h4>' +
+            '<div>' +
+            '<p><strong>Address : </strong> 127/97 Ni Su Huynh Lien</p>' +
+            '<p><strong>Phone : </strong> 0909109786</p>' +
+            '<img alt="cong ty" src="images">' +
+            '</div>' +
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: "hello world!"
+        });
+        //center map when resize
+        google.maps.event.addDomListener(window, "resize", function () {
+            var center = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(center);
+        });
+
+        infowindow.open(map, marker);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
