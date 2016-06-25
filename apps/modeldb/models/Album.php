@@ -40,6 +40,7 @@ class Album extends \Phalcon\Mvc\Model
      */
     public $datecreate;
     public $desc;
+    public $is_website;
 
     /**
      * Returns table name mapped in the model.
@@ -60,6 +61,11 @@ class Album extends \Phalcon\Mvc\Model
     public static function find($parameters = null)
     {
         return parent::find($parameters);
+    }
+
+    public static function findAll($name = "")
+    {
+        return parent::find(array("name like '%$name%' and is_del = '0'", 'order' => 'datecreate desc'));
     }
 
     /**

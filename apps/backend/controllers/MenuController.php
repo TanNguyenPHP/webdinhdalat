@@ -43,10 +43,10 @@ class MenuController extends ControllerBase
                 foreach ($menu->getMessages() as $message) {
                     $this->flash->error($message);
                 }
-                return json_encode('Lỗi');
+                return $this::sendText('Lỗi');
             }
         } catch (Exception $e) {
-            return json_encode('Lỗi');
+            return $this::sendText('Lỗi');
         }
         $data = "Mở";
         if ($menu->is_active == '0')

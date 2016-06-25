@@ -59,6 +59,7 @@ class ControllerBase extends Controller
             ->addJs('/js/jquery.validate.min.js')
             ->addJs('/js/jquery.datetimepicker.full.min.js')
             ->addJs('/js/fine-uploader.min.js')
+            ->addJs('/js/alertify.min.js')
             ->addJs('/ckeditor/tinymce.min.js');
 
         if (!Authentication::CheckAuth())

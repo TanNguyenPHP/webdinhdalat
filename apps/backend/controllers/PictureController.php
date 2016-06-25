@@ -23,7 +23,7 @@ class PictureController extends ControllerBase
         if (isset($_GET['page']))
             $page = $_GET['page'];
 
-        $pics= Picture::findPicPaging($page,$limit,$album);
+        $pics = Picture::findPicPaging($page, $limit, $album);
 
         $data = array(
             "pictures" => $pics,
@@ -35,9 +35,40 @@ class PictureController extends ControllerBase
 
         return $this->view->data = $data;
     }
+
     public function newAction()
     {
         $this->view->data = Album::find();
+    }
+
+    public function delAction()
+    {
+        $id = $this->request->getPost("id");
+        $pic = Picture::findFirstByid($id);
+        $pic->is_del = '1';
+        if (!$pic) {
+            $this->flash->error("Hình ảnh ko tồn tại");
+
+            $this->dispatcher->forward(array(
+                'controller' => "picture",
+                'action' => 'index'
+            ));
+
+            return;
+        }
+        try {
+
+            if (!$pic->save()) {
+                foreach ($pic->getMessages() as $message) {
+                    $this->flash->error($message);
+                }
+                return $this::sendText('fa fa-times');
+            }
+        } catch (Exception $e) {
+            return $this::sendText('fa fa-times');
+        }
+
+        return $this::sendText('fa fa-check-circle');
     }
 
     public function createAction()
@@ -69,7 +100,7 @@ class PictureController extends ControllerBase
                 else {
                     // Call handleUpload() with the name of the folder, relative to PHP's getcwd()
 
-                    $result = $uploader->handleUpload(str_replace("\\","",params::pathfolderpicture));
+                    $result = $uploader->handleUpload(str_replace("\\", "", params::pathfolderpicture));
                     // To return a name used for uploaded file you can use the following line.
                     $result["uploadName"] = $uploader->getUploadName();
                     $pic = new Picture();
