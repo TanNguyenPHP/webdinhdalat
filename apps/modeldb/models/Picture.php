@@ -92,6 +92,16 @@ class Picture extends Model
             $condition = $condition . "and id_album = '$album'";
         return parent::find("$condition");
     }
+
+    public static function findPicOfAlbum($id = null)
+    {
+        $query = new \Phalcon\Mvc\Model\Query\Builder();
+        $query->addFrom('Webdinhdalat\Modeldb\Models\Picture', 'a')
+            ->columns('a')
+            ->inWhere('a.id_album',$id);
+        return $query->getQuery()->execute();
+    }
+
     public static function findPicPaging($page, $limit, $album)
     {
         $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($page, $limit, $album));

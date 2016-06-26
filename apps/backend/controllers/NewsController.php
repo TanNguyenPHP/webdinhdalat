@@ -46,7 +46,7 @@ class NewsController extends ControllerBase
             $dateTo = \DateTime::createFromFormat('YmdHis', $dateTo)->format('d/m/Y H:i');
         $data = array(
             "listnews" => $listnews,
-            "cats" => Category::findAll(),
+            "cats" => Category::findParent('0'),
             "dateTo" => $dateTo,
             "dateFrom" => $dateFrom,
             "filter" => $filter,

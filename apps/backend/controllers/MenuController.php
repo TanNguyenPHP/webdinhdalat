@@ -52,7 +52,6 @@ class MenuController extends ControllerBase
         if ($menu->is_active == '0')
             $data = 'Đóng';
 
-
         return $this::sendText($data);
     }
 }

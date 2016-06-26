@@ -35,7 +35,6 @@ class NewsController extends ControllerBase
 
     public function loadmorenewsAction()
     {
-
         $cat = "3";
         $limit = 4;
         $page = 1;

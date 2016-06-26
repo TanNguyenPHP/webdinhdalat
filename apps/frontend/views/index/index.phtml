@@ -5,16 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title><?php echo $data->title; ?></title>
-    <link rel="stylesheet" href="../../css/frontend/main.css">
+    <link rel="stylesheet" href="/css/frontend/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="../../js/main.js"></script>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script src="/js/main.js"></script>
 </head>
 <body>
 <section id="header">
@@ -26,6 +19,65 @@
             <span></span>
         </div>
     </header>
+    <div class="book-form">
+        <img class="book" width="250" src="/images/king.png" alt="">
+        <div id="book-wrapper" class="container">
+            <div class="row">
+                <div class="col-md-10 col-sm-12 col-centered">
+                    <h3>Đặt Vé</h3>
+                    <form action="/" method="post" class="contact-form row">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="yourname" class="field">
+                                <input type="text" id="yourname" name="yourname" placeholder="Họ Tên" required>
+                                <span class="icon-user icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="youremail" class="field">
+                                <input type="email" id="youremail" name="youremail" placeholder="Số Điện Thoại" required>
+                                <span class="icon-mail2 icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <label for="subject" class="field">
+                                <input type="text" id="subject" name="subject" placeholder="Địa Chỉ">
+                                <span class="icon-book icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="email" class="field">
+                                <input type="text" id="email" name="email" placeholder="Email">
+                                <span class="icon-user icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="youremail" class="field">
+                                <input type="text" id="yourdate" name="yourdate">
+                                <span class="icon-mail2 icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <label for="youremail" class="field">
+                                <input type="email" id="youremail" name="youremail" placeholder="Mã Capcha">
+                                <span class="icon-mail2 icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <button name="submit" type="submit" id="contact-submit">Send Email</button>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <img class="img-responsive" src="/images/captcha.jpg" alt="">
+                        </div>
+                        <script>
+                            $('#yourdate').datetimepicker({
+                                value: '', step: 1
+                            });
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <nav class="navigator" style="display:none">
         <ul>
             <li><a href="/about">giới thiệu</a></li>

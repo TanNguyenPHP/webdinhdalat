@@ -7,13 +7,21 @@
     <div class="menu-common">
         <div class="decor"></div>
         <ul>
-            <?php foreach ($data as $item): ?>
+            <?php foreach ($data['albums'] as $item): ?>
             <?php echo "<li><a href=\"#\">$item->name</a></li>" ?>
             <?php endforeach; ?>
         </ul>
         <div class="decor"></div>
     </div>
     <div class="gallery-content">
+        <?php foreach ($data as $items): ?>
+            <div class="text-content">
+                <div class="overlay">
+                    <img class="img-responsive" src="images/gallery/1.png" alt="nha">
+                </div>
+                <h3><a href="">vườn hoa</a></h3>
+            </div>
+        <?php endforeach; ?>
         <div class="text-content">
             <div class="overlay">
                 <img class="img-responsive" src="images/gallery/1.png" alt="nha">

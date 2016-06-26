@@ -68,5 +68,23 @@ class Category extends Model
     {
         return parent::find("is_status != '3'");
     }
+    public static function findParent($pid="")
+    {
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($pid));
+
+        return $queryBuilder->getQuery()->execute();
+    }
+
+    private static function buildparams($pid ="")
+    {
+        $conditions = "is_status != '3' ";
+        if ($pid != '')
+            $conditions = $conditions . "and pid = '%$pid%' ";
+        return $params = array(
+            'models' => array('Webdinhdalat\Modeldb\Models\Category'),
+            'conditions' => $conditions,
+            'orderby' => array('name')
+        );
+    }
 
 }

@@ -2,7 +2,6 @@
 namespace Webdinhdalat\Modeldb\Models;
 
 use Phalcon\Mvc\Model;
-use Webdinhdalat\Modeldb\Models\Picture;
 
 class Album extends Model
 {
@@ -82,34 +81,59 @@ class Album extends Model
         return parent::findFirst($parameters);
     }
 
-    public static function findPicOfAlbum($name = "")
+    public static function findAlbumOfPicPaging($page = "", $limit = "", $id = "", $name = "", $is_website = "")
     {
-        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($name));
-        //$query = $queryBuilder->getPhql();
-        $queryBuilder->getQuery()->execute();
-
         $query = new \Phalcon\Mvc\Model\Query\Builder();
         $query->addFrom('Webdinhdalat\Modeldb\Models\Album', 'a')
-            ->columns('a.name')
-            ->join('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p');
-        $data = $query->getQuery()->execute();
-        return $data;
+            ->columns('a.name,a.id')
+            ->innerJoin('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p')
+            ->where("p.is_del = '0' and a.id_del = '0'")
+            ->groupBy(array('a.name,a.id'))
+            ->orderBy('a.datecreate desc');
+        $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
+            "builder" => $query,
+            "limit" => (int)$limit,
+            "page" => (int)$page
+        ));
+        return $paginator->getPaginate();
     }
 
-    private static function buildparams($name = '')
+    public static function findAllAlbum($id = "", $name = "", $is_website = "")
     {
-        //$query = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($id_lang));
+        $query = new \Phalcon\Mvc\Model\Query\Builder();
+        $query->addFrom('Webdinhdalat\Modeldb\Models\Album', 'a')
+            ->columns('a.name,a.id')
+            ->innerJoin('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p')
+            ->where("p.is_del = '0' and a.id_del = '0'")
+            ->groupBy(array('a.name,a.id'))
+            ->orderBy('a.datecreate desc');
+        return $query->getQuery()->execute();
+    }
 
-        $conditions = '1=1';
+    public static function findPicOfAlbum($id_album = "", $name = "", $is_website = "")
+    {
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($id_album, $name, $is_website));
+
+        $PicOfAlbums = $queryBuilder->getQuery()->execute();
+        $albums = self::findAllAlbum();
+        return array('albums' => $albums, 'pic' => $PicOfAlbums);
+    }
+
+    private static function buildparams($id_album = "", $name = "", $is_website = "")
+    {
+        $conditions = "p.is_del = '0' and a.id_del = '0'";
+        if ($id_album != "")
+            $conditions = $conditions . " and a.id = '$id_album' ";
         if ($name != '')
             $conditions = $conditions . " and a.name = '$name' ";
+        if ($is_website != '')
+            $conditions = $conditions . " and a.is_website = '$is_website' ";
         return $params = array(
-            'models' => array('a'=>'Webdinhdalat\Modeldb\Models\Album'),
-            'columns' => ('a.name'),
-            'innerJoin' => array('0' => array('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p'))
-            //'conditions' => $conditions
-            // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
-            //'order' => array('a.id')
+            'models' => array('a' => 'Webdinhdalat\Modeldb\Models\Album'),
+            'columns' => ('a.name, p.id, p.name, p.dir, p.id_album, p.position'),
+            'innerJoin' => array('0' => array('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p')),
+            'conditions' => $conditions,
+            'order' => array('a.datecreate desc')
             // or 'limit' => array(20, 20),
         );
     }
