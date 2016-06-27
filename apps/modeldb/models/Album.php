@@ -81,14 +81,14 @@ class Album extends Model
         return parent::findFirst($parameters);
     }
 
-    public static function findAlbumOfPicPaging($page = "", $limit = "", $id = "", $name = "", $is_website = "")
+    public static function findAlbumOfPicPaging($page = "", $limit = "")
     {
-        $query = new \Phalcon\Mvc\Model\Query\Builder();
+        $query = new \Phalcon\Mvc\Model\Query\Builder();// lay nhung album co anh kem theo
         $query->addFrom('Webdinhdalat\Modeldb\Models\Album', 'a')
-            ->columns('a.name,a.id')
+            ->columns('a.id,a.name,p.dir')
             ->innerJoin('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p')
-            ->where("p.is_del = '0' and a.id_del = '0'")
-            ->groupBy(array('a.name,a.id'))
+            ->where("p.is_del = '0' and a.is_del = '0'")
+            ->groupBy(array('a.id'))
             ->orderBy('a.datecreate desc');
         $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
             "builder" => $query,
@@ -104,7 +104,7 @@ class Album extends Model
         $query->addFrom('Webdinhdalat\Modeldb\Models\Album', 'a')
             ->columns('a.name,a.id')
             ->innerJoin('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p')
-            ->where("p.is_del = '0' and a.id_del = '0'")
+            ->where("p.is_del = '0' and a.is_del = '0'")
             ->groupBy(array('a.name,a.id'))
             ->orderBy('a.datecreate desc');
         return $query->getQuery()->execute();
@@ -121,7 +121,7 @@ class Album extends Model
 
     private static function buildparams($id_album = "", $name = "", $is_website = "")
     {
-        $conditions = "p.is_del = '0' and a.id_del = '0'";
+        $conditions = "p.is_del = '0' and a.is_del = '0'";
         if ($id_album != "")
             $conditions = $conditions . " and a.id = '$id_album' ";
         if ($name != '')

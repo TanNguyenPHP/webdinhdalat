@@ -4,20 +4,28 @@ namespace Webdinhdalat\Frontend\Controllers;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\News;
-use Webdinhdalat\Modeldb\Models\Menu;
+use Webdinhdalat\Modeldb\Models\Category;
 use Phalcon\Di;
 
 class NewsController extends ControllerBase
 {
 
-    public function indexAction()
+    public function indexAction($id = "")
     {
-        $title = Menu::findFirstByid('6');
-        $this->tag->prependTitle($title->title . " | ");
-
-        $data = News::findAllNewsOfCategory('3', '1','1','4');//$cat = '', $id_lang = '',$page='',$limit=''//Thay đổi tham số thành dynamic
-
-        return $this->view->data = $data;
+        $catid = "3";
+        $data = News::findAllNewsOfCategory($catid, '1', '1', '4');//$cat = '', $id_lang = '',$page='',$limit=''//Thay đổi tham số thành dynamic;
+        if ($id != "") {
+            $data = News::findAllNewsOfCategory($id, '1', '1', '4');
+            $_cat = Category::findFirstByid($id);
+            $catid = $_cat->id;
+            $this->tag->prependTitle($_cat->name . " | ");
+        } else {
+            $_cat = Category::findFirstByid($catid);
+            $catid = $_cat->id;
+            $this->tag->prependTitle($_cat->name . " | ");
+        }
+        $cats = Category::findParent('2');
+        return $this->view->data = array('data' => $data, 'cats' => $cats, 'catid' => $catid);
     }
 
     public function detailAction($id)
@@ -45,6 +53,8 @@ class NewsController extends ControllerBase
             $page = (int)$_POST['page'];
         if (isset($_POST['endpage']))
             $endpage = $_POST['endpage'];
+        if (isset($_POST['catid']))
+            $cat = $_POST['catid'];
 
         if ($endpage == 'true') {
             $data = array(

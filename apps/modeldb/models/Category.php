@@ -79,7 +79,7 @@ class Category extends Model
     {
         $conditions = "is_status != '3' ";
         if ($pid != '')
-            $conditions = $conditions . "and pid = '%$pid%' ";
+            $conditions = $conditions . "and pid = '$pid' ";
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\Category'),
             'conditions' => $conditions,

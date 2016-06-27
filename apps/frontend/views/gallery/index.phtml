@@ -7,44 +7,76 @@
     <div class="menu-common">
         <div class="decor"></div>
         <ul>
-            <?php foreach ($data['albums'] as $item): ?>
-            <?php echo "<li><a href=\"#\">$item->name</a></li>" ?>
+            <?php foreach ($data->items as $item): ?>
+                <?php echo "<li><a href=\"#\">$item->name</a></li>" ?>
             <?php endforeach; ?>
         </ul>
         <div class="decor"></div>
     </div>
-    <div class="gallery-content">
-        <?php foreach ($data as $items): ?>
+    <div class="gallery-content" id="gallery-content">
+        <?php foreach ($data->items as $item): ?>
             <div class="text-content">
                 <div class="overlay">
-                    <img class="img-responsive" src="images/gallery/1.png" alt="nha">
+                    <img class="img-responsive" src="<?php echo '\\' . $item->dir ?>" alt="nha">
                 </div>
-                <h3><a href="">vườn hoa</a></h3>
+                <h3><a href=""><?php echo $item->name ?></a></h3>
             </div>
         <?php endforeach; ?>
-        <div class="text-content">
-            <div class="overlay">
-                <img class="img-responsive" src="images/gallery/1.png" alt="nha">
-            </div>
-            <h3><a href="">vườn hoa</a></h3>
-        </div>
-        <div class="text-content">
-            <div class="overlay">
-                <img class="img-responsive" src="images/gallery/2.png" alt="nha">
-            </div>
-            <h3><a href="">cưởi ngựa</a></h3>
-        </div>
-        <div class="text-content">
-            <div class="overlay">
-                <img class="img-responsive" src="images/gallery/1.png" alt="nha">
-            </div>
-            <h3><a href="">rừng thông</a></h3>
-        </div>
-        <div class="text-content">
-            <div class="overlay">
-                <img class="img-responsive" src="images/gallery/2.png" alt="nha">
-            </div>
-            <h3><a href="">nội thất trong dinh</a></h3>
-        </div>
     </div>
 </section>
+<script defer type="text/javascript">
+    var is_loading = false; // initialize is_loading by false to accept new loading
+    var pages = 2;
+    var end = 'false';
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var page = {'page': pages, 'endpage': end};
+            if (is_loading == false & end == 'false') {
+                is_loading = true;
+                $.ajax({
+                    url: '/gallery/morealbum',
+                    type: 'POST',
+                    data: page,
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.endload != 'end') {
+                            var html = '<div class="text-content">';
+                            $.each(result.albums, function (key, item) {
+                                html += '<div class="overlay">'
+                                html += '<img class="img-responsive" src="\\' + item.dir + '" >'
+                                html += '</div>'
+                                html += '<h3><a href="/gallery/detail/#">' + item.name + '</a></h3>'
+                            });
+                            html += '</div>';
+                            $('#gallery-content').append(html);
+                        }
+                        // append: add the new statments to the existing data
+                        pages = result.nextpage;
+                        end = result.endpage;
+                        // set is_loading to false to accept new loading
+                        is_loading = false;
+                    },
+                    error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        console.log(msg);
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -7,10 +7,9 @@
     <div class="menu-common">
         <div class="decor"></div>
         <ul>
-            <li><a href="#">thông báo</a></li>
-            <li><a href="#">thông tin du lịch</a></li>
-            <li><a href="#">tin mới</a></li>
-            <li><a href="#">tuyển dụng</a></li>
+            <?php foreach ($data['cats'] as $items): ?>
+                <li><a href="/news/<?php echo $items->id ?>"><?php echo $items->name ?></a></li>
+            <?php endforeach; ?>
         </ul>
         <div class="decor"></div>
     </div>
@@ -18,10 +17,10 @@
         <div class="container">
             <div class="row">
                 <div class="special col-md-6">
-                    <?php if ($data->count() == 0): ?>
+                    <?php if ($data['data']->count() == 0): ?>
                         <h3><?php echo "Chưa có bài viết" ?></php></h3>
                     <?php else: ?>
-                        <?php foreach ($data as $items): ?>
+                        <?php foreach ($data['data'] as $items): ?>
                             <img class="img-responsive" src="<?php echo '\\' . $items->avatar_image ?>"
                                  alt="hinh to nhat">
                             <div class="special-content">
@@ -38,8 +37,8 @@
                 </div>
                 <div class="right-news col-md-6">
                     <div class="row">
-                        <?php if ($data->count() > 0): ?>
-                            <?php foreach ($data as $items): ?>
+                        <?php if ($data['data']->count() > 0): ?>
+                            <?php foreach ($data['data'] as $items): ?>
                                 <div class="col-md-6">
                                     <img class="img-responsive" src="<?php echo '\\' . $items->avatar_image ?>"
                                          alt="hinh to nhat">
@@ -69,10 +68,11 @@
     var is_loading = false; // initialize is_loading by false to accept new loading
     var pages = 1;
     var end = 'false';
+    var catid = <?php echo $data['catid'];?>;
     $(document).ready(function () {
         $(window).scroll(function () {
-            var page = {'page': pages, 'endpage': end};
-            if (is_loading == false) {
+            var page = {'page': pages, 'endpage': end, 'catid': catid};
+            if (is_loading == false & end == 'false') {
                 is_loading = true;
                 $.ajax({
                     url: '/news/loadmorenews',

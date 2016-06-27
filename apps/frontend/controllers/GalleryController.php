@@ -8,7 +8,7 @@ class GalleryController extends ControllerBase
 {
     public function indexAction()
     {
-        $data = Album::findAlbumOfPicPaging('1', '4','','','1');// load page 1
+        $data = Album::findAlbumOfPicPaging('1', '4');// load page 1
 
         return $this->view->data = $data;
     }
@@ -16,7 +16,7 @@ class GalleryController extends ControllerBase
     public function morealbumAction()
     {
         $limit = 4;
-        $page = 2;
+        $page = 1;
         $endpage = 'false';
 
         if (isset($_POST['page']))
@@ -32,24 +32,22 @@ class GalleryController extends ControllerBase
             );
             return $this::sendJson($data);
         }
-        $album = Album::findAlbumOfPicPaging($page, $limit,'','1');
+        $album = Album::findAlbumOfPicPaging($page, $limit);
         $albums = array();
-        $id_albums = array();
         foreach ($album->items as $item) {
             $albums[] = array(
                 'name' => $item->name,
-                'id' => $item->id
+                'id' => $item->id,
+                'dir' => $item->dir
             );
-            $id_albums[] = array($item->id);
-        }
-        $pic = Picture::findPicOfAlbum($id_albums);
 
-        if ($page == $album->last) {
+        }
+
+        if ($page == $album->last||$album->items->count() == 0) {
             $endpage = 'true';
         }
         $data = array(
             "albums" => $albums,
-            "pic"=> $pic,
             "nextpage" => $album->next,
             "endpage" => $endpage
         );
