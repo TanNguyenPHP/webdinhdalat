@@ -32,6 +32,10 @@ class Category extends Model
      */
     public $pid;
     public $is_status;
+    public $slug;
+    public $is_del;
+    public $title;
+    public $meta_description;
 
     /**
      * Returns table name mapped in the model.
@@ -64,22 +68,28 @@ class Category extends Model
     {
         return parent::findFirst($parameters);
     }
+
     public static function findAll()
     {
-        return parent::find("is_status != '3'");
+        return parent::find("is_status = '1' and is_del = '0'");
     }
-    public static function findParent($pid="")
+
+    public static function findConditionAll($pid = "",$slug="" ,$is_status = "")
     {
-        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($pid));
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($pid ,$slug, $is_status));
 
         return $queryBuilder->getQuery()->execute();
     }
 
-    private static function buildparams($pid ="")
+    private static function buildparams($pid = "",$slug="", $is_status = "")
     {
-        $conditions = "is_status != '3' ";
+        $conditions = "is_del = '0' ";
         if ($pid != '')
             $conditions = $conditions . "and pid = '$pid' ";
+        if ($is_status != '')
+            $conditions = $conditions . "and is_status = '$is_status' ";
+        if ($slug != '')
+            $conditions = $conditions . "and slug = '$slug' ";
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\Category'),
             'conditions' => $conditions,

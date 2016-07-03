@@ -4,8 +4,8 @@ namespace Webdinhdalat\Backend\Controllers;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\Users;
-use Webdinhdalat\Commons\Authentication;
 use Webdinhdalat\Commons\SecuritySystem;
+use Phalcon\Di;
 
 class UsersController extends ControllerBase
 {
@@ -34,7 +34,6 @@ class UsersController extends ControllerBase
 
     public function editAction($id)
     {
-
         if (!$this->request->isPost()) {
 
             $user = Users::findFirstByid($id);
@@ -105,7 +104,7 @@ class UsersController extends ControllerBase
             'controller' => "users",
             'action' => 'index'
         ));*/
-        return $this->response->redirect('backend/users/index');
+        return $this->response->redirect('/backend/users/index');
     }
 
     public function saveAction()
@@ -152,7 +151,7 @@ class UsersController extends ControllerBase
         }
 
         $this->flash->success("Đã lưu");
-        return $this->response->redirect('backend/users/index');
+        return $this->response->redirect('/backend/users/index');
     }
 
     public function deleteAction($id)
@@ -191,4 +190,35 @@ class UsersController extends ControllerBase
         ));
     }
 
+    public function changepassAction()
+    {
+
+    }
+
+    public function savepassAction()
+    {
+        $id = Di::getDefault()->getSession()->get('sessionUser');
+        $user = Users::findFirstByid($id);
+        $passold = SecuritySystem::HashPassword($_POST['OldPassword'], $user->username);
+        if ($passold == $user->password) {
+            $user->password = SecuritySystem::HashPassword($_POST['NewPassword'], $user->username);
+            $user->save();
+            $this->flash->success("Mật khẩu được thay đổi");
+            $this->dispatcher->forward(array(
+                'controller' => "users",
+                'action' => 'changepass'
+            ));
+        } else {
+            $this->flash->error("Mật khẩu cũ sai");
+            $this->dispatcher->forward(array(
+                'controller' => "users",
+                'action' => 'changepass'
+            ));
+        }
+    }
+    public function logoffAction()
+    {
+        $this->session->destroy();
+        return $this->response->redirect('/quanly');
+    }
 }

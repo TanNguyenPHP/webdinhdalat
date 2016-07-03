@@ -48,14 +48,14 @@ class LoginController extends ControllerBase
 
         if ($_checklogin == 3 || $_checklogin == 4 || $_checklogin == 5) {
             $this->flashSession->error('wrong pass');//$this->flash->error("Wrong username or password");
-            return $this->response->redirect('quanly');
+            return $this->response->redirect('/quanly');
         }
         if ($_checklogin == 2) {
             $this->flashSession->error("Account not active");//$this->flash->error("Account not active");
-            return $this->response->redirect('quanly');
+            return $this->response->redirect('/quanly');
         }
 
-        return $this->response->redirect('quanly');
+        return $this->response->redirect('/quanly');
     }
 
     ////////////////////function helper////////////////////////////////////////////////////////////////////
@@ -63,7 +63,7 @@ class LoginController extends ControllerBase
     {
         $user = Users::findFirst("username = '$Username'");
         if ($user) {
-            if (strcmp(SecuritySystem::HashPassword($Password, $Username), $user->password)) {//dùng hàm strcmp so sánh chuỗi với binary
+            if (SecuritySystem::HashPassword($Password, $Username) == $user->password) {//dùng hàm strcmp so sánh chuỗi với binary
                 if ($user->is_active == '1' & $user->is_del == '0') {
                     $this->registerSessionUser($user);
                     return 0;

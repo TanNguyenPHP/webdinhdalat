@@ -3,6 +3,7 @@
 namespace Webdinhdalat\Frontend\Controllers;
 
 use Phalcon\Mvc\Controller;
+use Webdinhdalat\Commons\ParamsSEO;
 
 class ControllerBase extends Controller
 {
@@ -20,7 +21,13 @@ class ControllerBase extends Controller
             ->addJs('/js/alertify.min.js')
             ->addJs('/ckeditor/tinymce.min.js');
         $this->tag->setTitle("Dinh Đà Lạt");
+        self::setMetaDescription("Test he thống");
 
+    }
+
+    protected function setMetaDescription($content)
+    {
+        ParamsSEO::$meta_description = "$content";
     }
 
     protected function sendJson($data)

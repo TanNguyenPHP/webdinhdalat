@@ -12,20 +12,25 @@ class NewsController extends ControllerBase
 
     public function indexAction($id = "")
     {
-        $catid = "3";
-        $data = News::findAllNewsOfCategory($catid, '1', '1', '4');//$cat = '', $id_lang = '',$page='',$limit=''//Thay đổi tham số thành dynamic;
-        if ($id != "") {
-            $data = News::findAllNewsOfCategory($id, '1', '1', '4');
-            $_cat = Category::findFirstByid($id);
-            $catid = $_cat->id;
-            $this->tag->prependTitle($_cat->name . " | ");
-        } else {
-            $_cat = Category::findFirstByid($catid);
-            $catid = $_cat->id;
-            $this->tag->prependTitle($_cat->name . " | ");
+        try {
+            $cat = Category::findConditionAll('', $id, '1');
+            $cats = Category::findConditionAll($cat[0]->id, '', '1');
+            $data = News::findAllNewsOfCategory($cat[0]->id, '1', '1', '4');//$cat = '', $id_lang = '',$page='',$limit=''//Thay đổi tham số thành dynamic;
+            if ($data == null) {
+                $data = News::findAllNewsOfCategory($cats[0]->id, '1', '1', '4');
+                $cat = $cats;
+                if ($data != null) {
+                    $this->tag->prependTitle($cats[0]->title . " | ");
+                    self::setMetaDescription($cats[0]->meta_description);
+                }
+            } else {
+                $this->tag->prependTitle($cat[0]->title . " | ");
+                self::setMetaDescription($cat[0]->meta_description);
+            }
+            return $this->view->data = array('data' => $data, 'cat' => $cat, 'catid' => $cat[0]->id);
+        } catch (\Exception $e) {
+            return $this->response->redirect('/index');
         }
-        $cats = Category::findParent('2');
-        return $this->view->data = array('data' => $data, 'cats' => $cats, 'catid' => $catid);
     }
 
     public function detailAction($id)
@@ -37,6 +42,7 @@ class NewsController extends ControllerBase
                 return $this->response->redirect('/index');
             }
             $this->tag->prependTitle($data->seo_title . " | ");
+            self::setMetaDescription($data->seo_desc);
             return $this->view->data = $data;
         }
     }

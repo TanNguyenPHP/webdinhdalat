@@ -4,11 +4,10 @@ namespace Webdinhdalat\Backend\Controllers;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\Category as Cat;
+use Webdinhdalat\Commons\UtilsSEO;
 
 class CategoryController extends ControllerBase
 {
-
-
     public function indexAction()
     {
         $cats = Cat::findAll();
@@ -52,7 +51,12 @@ class CategoryController extends ControllerBase
         $cats->name = $this->request->getPost("name");
         $cats->desc = $this->request->getPost("desc");
         $cats->pid = $this->request->getPost("pid");
+        $cats->title = $this->request->getPost("title");
+        $cats->meta_description = $this->request->getPost("meta_description");
         $cats->is_status = '1';
+        $cats->slug = UtilsSEO::CreateSlug($cats->name);
+        $cats->is_del = '0';
+
         if (!$cats->save()) {
             foreach ($cats->getMessages() as $message) {
                 $this->flash->error($message);
@@ -95,12 +99,11 @@ class CategoryController extends ControllerBase
                 'controller' => "category",
                 'action' => 'index'
             ));
-
             return;
         }
 
         $id = $this->request->getPost("id");
-        $cat = Lang::findFirstByid($id);
+        $cat = Cat::findFirstByid($id);
 
         if (!$cat) {
             $this->flash->error("Không tìm thấy danh mục");
@@ -116,7 +119,10 @@ class CategoryController extends ControllerBase
         $cat->name = $this->request->getPost("name");
         $cat->is_status = isset($_POST["is_status"]) ? '1' : '0';
         $cat->pid = $this->request->getPost("pid");
+        $cat->title = $this->request->getPost("title");
+        $cat->meta_description = $this->request->getPost("meta_description");
         $cat->desc = $this->request->getPost("desc");
+        $cat->slug = UtilsSEO::CreateSlug($cat->name);
         if (!$cat->save()) {
 
             foreach ($cat->getMessages() as $message) {

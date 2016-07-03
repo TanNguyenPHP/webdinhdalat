@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title><?php echo $data->title; ?></title>
+    <title><?php echo $data['data']->title; ?></title>
+    <meta name="description" content="<?php echo $data['data']->meta; ?>">
     <link rel="stylesheet" href="/css/frontend/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="/js/main.js"></script>
@@ -80,13 +81,11 @@
     </div>
     <nav class="navigator" style="display:none">
         <ul>
-            <li><a href="/about">giới thiệu</a></li>
-            <li><a href="#">dịch vụ</a></li>
-            <li><a href="#">bảng giá</a></li>
-            <li><a href="#">bản đồ dinh</a></li>
-            <li><a href="/gallery">thư viện ảnh</a></li>
-            <li><a href="/news">tin tức</a></li>
-            <li><a href="/contact">liên hệ</a></li>
+            <?php foreach($data['menu'] as $item) : ?>
+            <li>
+                <a href="/<?php echo $item->url. '/'. $item->slug_category ?>"><?php echo $item->name?></a>
+            </li>
+            <?php endforeach; ?>
         </ul>
     </nav>
     <div class="content-header">
@@ -258,9 +257,9 @@
             <div class="company-info col-md-4 col-xs-12">
                 <h4>công ty cổ phần hoàn cầu đà lạt</h4>
                 <address>
-                    Địa chỉ: <?php echo $data->address ?><br>
-                    Điện thoại: <?php echo $data->cellphone ?> Fax: <?php echo $data->fax ?><br>
-                    Email: <?php echo $data->email ?>
+                    Địa chỉ: <?php echo $data['data']->address ?><br>
+                    Điện thoại: <?php echo $data['data']->cellphone ?> Fax: <?php echo $data['data']->fax ?><br>
+                    Email: <?php echo $data['data']->email ?>
                 </address>
             </div>
             <div class="company-logo col-md-4 col-xs-12">
@@ -269,8 +268,7 @@
             <div class="social col-md-4 col-xs-12">
                 <h4>Social Network</h4>
                 <ul>
-                    <li><a href="<?php echo $data->facebook; ?>"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-                    <li><a href=""><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+                    <li><a href="<?php echo $data['data']->facebook; ?>"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>

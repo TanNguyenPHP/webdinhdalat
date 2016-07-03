@@ -20,7 +20,7 @@ echo $this->tag->form(
 <section class="content">
     <div class="arrage-popup">
         <div class="arrange-div form-group col-md-12">
-            <label class="text-label col-md-2" for="Lang">Ngôn ngữ</label>
+            <label class="text-label col-md-2" for="Lang">Tên danh mục</label>
             <div class="col-md-6">
                 <input class="form-control" id="name" name="name" type="text" value="<?php echo $data['cat']->name ?>"/>
                 <input type="hidden" id="id" name="id" value="<?php echo $data['cat']->id ?>>"/>
@@ -39,6 +39,19 @@ echo $this->tag->form(
                         ?>
                     <?php endforeach; ?>
                 </select>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="title">Title</label>
+            <div class="col-md-6">
+                <input class="form-control valid" id="title" maxlength="32" name="title" type="text" value="<?php echo $data['cat']->title ?>">
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="meta_description">Meta description</label>
+            <div class="col-md-6">
+                    <textarea class="form-control" cols="20" id="meta_description" maxlength="128" name="meta_description"
+                              rows="2"><?php echo $data['cat']->meta_description ?></textarea>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
@@ -61,7 +74,7 @@ echo $this->tag->form(
         </div>
         <div style="text-align:center" class="col-md-12">
             <input type="submit" value="Lưu" class="btn btn-info"/>
-            <a href="/webdinhdalat/backend/category/index" class="btn btn-info">Về danh sách</a>
+            <a href="/backend/category/index" class="btn btn-info">Về danh sách</a>
         </div>
         <div class="clearfix"></div>
     </div>

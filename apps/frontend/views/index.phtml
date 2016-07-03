@@ -1,3 +1,6 @@
+<?php
+use  Webdinhdalat\Commons\ParamsSEO as params;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,15 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <?php echo $this->tag->getTitle(); ?>
+    <meta name="description" content="<?php echo params::$meta_description ?>">
     <?php $this->assets->outputCss() ?>
     <script src="/js/jquery-1.12.4.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/jquery.validate.min.js"></script>
-    <script   src="/js/jquery.datetimepicker.full.min.js"></script>
-
-       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
+    <script src="/js/jquery.datetimepicker.full.min.js"></script>
 </head>
 <body>
 <div class="book-form">
@@ -100,7 +100,5 @@
         </div>
     </div>
 </footer>
-
-
 </body>
 </html>

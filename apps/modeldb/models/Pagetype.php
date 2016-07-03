@@ -1,9 +1,10 @@
 <?php
+
 namespace Webdinhdalat\Modeldb\Models;
 
 use Phalcon\Mvc\Model;
 
-class Language extends Model
+class Pagetype extends Model
 {
 
     /**
@@ -16,16 +17,15 @@ class Language extends Model
      *
      * @var string
      */
-    public $lang;
+    public $type;
 
     /**
      *
      * @var string
      */
     public $desc;
+    public $name;
 
-    public $is_status;
-    public $code;
     /**
      * Returns table name mapped in the model.
      *
@@ -33,32 +33,29 @@ class Language extends Model
      */
     public function getSource()
     {
-        return 'language';
+        return 'pagetype';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Language[]
+     * @return Pagetype[]
      */
     public static function find($parameters = null)
     {
         return parent::find($parameters);
     }
+
     /**
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Language
+     * @return Pagetype
      */
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
     }
 
-    public static function findAll()
-    {
-        return parent::find("is_status = '1'");
-    }
 }

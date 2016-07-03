@@ -37,6 +37,19 @@ echo $this->tag->form(
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="title">Title</label>
+            <div class="col-md-6">
+                <input class="form-control valid" id="title" maxlength="32" name="title" type="text" value="">
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="meta_description">Meta description</label>
+            <div class="col-md-6">
+                    <textarea class="form-control" cols="20" id="meta_description" maxlength="128" name="meta_description"
+                              rows="2"></textarea>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="Price">Mô tả</label>
             <div class="col-md-6">
                     <textarea class="form-control" cols="20" id="desc" maxlength="128" name="desc"
@@ -46,7 +59,7 @@ echo $this->tag->form(
         </div>
         <div style="text-align:center" class="col-md-12">
             <input type="submit" value="Lưu" class="btn btn-info"/>
-            <a href="/webdinhdalat/backend/language/index" class="btn btn-info">Về danh sách</a>
+            <a href="/backend/language/index" class="btn btn-info">Về danh sách</a>
         </div>
         <div class="clearfix"></div>
     </div>

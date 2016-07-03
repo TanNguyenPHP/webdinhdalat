@@ -40,7 +40,7 @@ echo $this->tag->form(
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="ConfirmPassword">Nhập lại mật khẩu</label>
             <div class="col-md-6">
-                <?php echo $this->tag->passwordField(array("ComfirmPassword", "size" => 30, "class" => "form-control", "id" => "fieldComfirmPassword","minlength" => "5", "maxlength" => "64")) ?>
+                <?php echo $this->tag->passwordField(array("ConfirmPassword", "size" => 30, "class" => "form-control", "id" => "fieldConfirmPassword","minlength" => "5", "maxlength" => "64")) ?>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
@@ -70,7 +70,7 @@ echo $this->tag->form(
                     required: true,
                     minlength: 6
                 },
-                ComfirmPassword: {
+                ConfirmPassword: {
                     required: true,
                     minlength: 5,
                     equalTo: "#fieldPassword"
@@ -89,7 +89,7 @@ echo $this->tag->form(
                     required: "Nhập mật khẩu",
                     minlength: "Mật khẩu phải lớn hơn 5 ký tự"
                 },
-                ComfirmPassword: {
+                ConfirmPassword: {
                     required: "Nhập lại mật khẩu",
                     minlength: "Mật khẩu phải lớn hơn 5 ký tự",
                     equalTo: "Mật khậu nhập lại không đúng"

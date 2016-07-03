@@ -46,7 +46,7 @@ class NewsController extends ControllerBase
             $dateTo = \DateTime::createFromFormat('YmdHis', $dateTo)->format('d/m/Y H:i');
         $data = array(
             "listnews" => $listnews,
-            "cats" => Category::findParent('0'),
+            "cats" => Category::findConditionAll(),
             "dateTo" => $dateTo,
             "dateFrom" => $dateFrom,
             "filter" => $filter,
@@ -109,14 +109,14 @@ class NewsController extends ControllerBase
                 }
                 $this->dispatcher->forward(array(
                     'controller' => "news",
-                    'action' => 'new'
+                    'action' => 'index'
                 ));
             }
         } catch (Exception $e) {
             $this->flash->error(var_dump($e));
             $this->dispatcher->forward(array(
                 'controller' => "news",
-                'action' => 'new'
+                'action' => 'index'
             ));
         }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,7 @@
             </a>
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
-                <form action="/backend/login/logoff" method="post" id="logoutForm">
+                <form action="/backend/users/logoff" method="post" id="logoutForm">
                     <input name="__RequestVerificationToken" type="hidden"
                            value=""/>
                     <ul class="nav navbar-nav">
@@ -38,7 +38,7 @@
                         <!-- User Account Menu -->
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
-                            <a href="backend/users/index" class="dropdown-toggle" title="Tài khoản">
+                            <a href="/backend/users/changepass" class="dropdown-toggle" title="Tài khoản">
                                 <!-- The user image in the navbar-->
                                 <img src="/img/backend/avatar5.png" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->

@@ -7,8 +7,8 @@
     <div class="menu-common">
         <div class="decor"></div>
         <ul>
-            <?php foreach ($data['cats'] as $items): ?>
-                <li><a href="/news/<?php echo $items->id ?>"><?php echo $items->name ?></a></li>
+            <?php foreach ($data['cat'] as $items): ?>
+                <li><a href="/news/<?php echo $items->slug ?>"><?php echo $items->name ?></a></li>
             <?php endforeach; ?>
         </ul>
         <div class="decor"></div>
@@ -75,7 +75,7 @@
             if (is_loading == false & end == 'false') {
                 is_loading = true;
                 $.ajax({
-                    url: '/news/loadmorenews',
+                    url: '/frontend/news/loadmorenews',
                     type: 'POST',
                     data: page,
                     dataType: 'json',

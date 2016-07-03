@@ -38,6 +38,9 @@ class Menu extends Model
     public $is_active;
     public $meta_description;
     public $title;
+    public $id_category;
+    public $slug_category;
+    public $is_static;
 
     /**
      * Returns table name mapped in the model.
@@ -80,15 +83,15 @@ class Menu extends Model
 
     private static function buildparams($id_lang = '')
     {
-        $conditions = '1=1';
+        $conditions = "is_active = '1'";
         if ($id_lang != '')
             $conditions = $conditions . " and id_lang = '$id_lang' ";
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\Menu'),
-            'columns' => array('id', 'name', 'id_lang', 'url', 'position', 'is_active'),
+            'columns' => array('id', 'name', 'id_lang', 'url', 'position', 'is_active','slug_category'),
             'conditions' => $conditions,
             // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
-            'order' => array('name')
+            'order' => array('position')
             // or 'limit' => array(20, 20),
         );
     }

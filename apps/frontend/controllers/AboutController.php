@@ -19,7 +19,7 @@ class AboutController extends ControllerBase
 
         if($data == null)
         {
-            return $this->response->redirect('index/index');
+            return $this->response->redirect('/index');
         }
         $this->tag->prependTitle("Giới thiệu | ");
         return $this->view->data = $data;
