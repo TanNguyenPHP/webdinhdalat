@@ -22,55 +22,49 @@ use  Webdinhdalat\Commons\ParamsSEO as params;
         <div class="row">
             <div class="col-md-10 col-sm-12 col-centered">
                 <h3>Đặt Vé</h3>
-                <form action="/" method="post" class="contact-form row">
-                    <div class="col-md-6 col-sm-12">
-                        <label for="yourname" class="field">
-                            <input type="text" id="yourname" name="yourname" placeholder="Họ Tên" required>
-                            <span class="icon-user icon"></span>
-                        </label>
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <label for="youremail" class="field">
-                            <input type="email" id="youremail" name="youremail" placeholder="Số Điện Thoại" required>
-                            <span class="icon-mail2 icon"></span>
-                        </label>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label for="subject" class="field">
-                            <input type="text" id="subject" name="subject" placeholder="Địa Chỉ">
-                            <span class="icon-book icon"></span>
-                        </label>
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <label for="email" class="field">
-                            <input type="text" id="email" name="email" placeholder="Email">
-                            <span class="icon-user icon"></span>
-                        </label>
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <label for="youremail" class="field">
-                            <input type="text" id="yourdate" name="yourdate">
-                            <span class="icon-mail2 icon"></span>
-                        </label>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label for="youremail" class="field">
-                            <input type="email" id="youremail" name="youremail" placeholder="Mã Capcha">
-                            <span class="icon-mail2 icon"></span>
-                        </label>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <button name="submit" type="submit" id="contact-submit">Send Email</button>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <img class="img-responsive" src="/images/captcha.jpg" alt="">
-                    </div>
-                    <script>
-                        $('#yourdate').datetimepicker({
-                            value: '', step: 1
-                        });
-                    </script>
-                </form>
+                <form action="/" method="post" class="contact-form row row-1">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="yourname" class="field">
+                                <input type="text" id="yourname" name="yourname" placeholder="Họ Tên" required>
+                                <span class="icon-user icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="youremail" class="field">
+                                <input type="email" id="youremail" name="youremail" placeholder="Số Điện Thoại" required>
+                                <span class="icon-phone icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <label for="subject" class="field">
+                                <input type="text" id="subject" name="subject" placeholder="Địa Chỉ">
+                                <span class="icon-book icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="email" class="field">
+                                <input type="text" id="email" name="email" placeholder="Email">
+                                <span class="icon-mail2 icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="youremail" class="field">
+                                <input type="text" id="yourdate" name="yourdate">
+                                <span class="icon-calendar icon"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <img class="img-responsive" src="/images/captcha.jpg" alt="">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <button name="submit" type="submit" id="contact-submit">Send Email</button>
+                        </div>
+                        <script>
+                            $('#yourdate').datetimepicker({
+                                value: '', step: 1
+                            });
+                        </script>
+                    </form>
             </div>
         </div>
     </div>
