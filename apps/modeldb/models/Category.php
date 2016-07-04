@@ -36,7 +36,7 @@ class Category extends Model
     public $is_del;
     public $title;
     public $meta_description;
-
+    public $id_lang;
     /**
      * Returns table name mapped in the model.
      *

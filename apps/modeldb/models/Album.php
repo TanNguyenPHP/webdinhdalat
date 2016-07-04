@@ -81,13 +81,13 @@ class Album extends Model
         return parent::findFirst($parameters);
     }
 
-    public static function findAlbumOfPicPaging($page = "", $limit = "")
+    public static function findAlbumOfPicPagingShowWeb($page = "", $limit = "")
     {
         $query = new \Phalcon\Mvc\Model\Query\Builder();// lay nhung album co anh kem theo
         $query->addFrom('Webdinhdalat\Modeldb\Models\Album', 'a')
             ->columns('a.id,a.name,p.dir')
             ->innerJoin('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p')
-            ->where("p.is_del = '0' and a.is_del = '0'")
+            ->where("p.is_del = '0' and a.is_del = '0' and a.is_website='1'")
             ->groupBy(array('a.id'))
             ->orderBy('a.datecreate desc');
         $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(

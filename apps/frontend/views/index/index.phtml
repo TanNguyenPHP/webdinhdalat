@@ -28,34 +28,35 @@
             <div class="row">
                 <div class="col-md-10 col-sm-12 col-centered">
                     <h3>Đặt Vé</h3>
-                    <form action="/" method="post" class="contact-form row row-1">
+                    <form action="/" method="post" id="bookform" class="contact-form row row-1">
                         <div class="col-md-6 col-sm-12">
                             <label for="yourname" class="field">
-                                <input type="text" id="yourname" name="yourname" placeholder="Họ Tên" required>
+                                <input type="text" id="namebook" name="namebook" placeholder="Họ Tên" maxlength="64">
                                 <span class="icon-user icon"></span>
                             </label>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label for="youremail" class="field">
-                                <input type="email" id="youremail" name="youremail" placeholder="Số Điện Thoại" required>
+                                <input type="email" id="phonebook" name="phonebook" placeholder="Số Điện Thoại">
                                 <span class="icon-phone icon"></span>
                             </label>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <label for="subject" class="field">
-                                <input type="text" id="subject" name="subject" placeholder="Địa Chỉ">
+                                <input type="text" id="contentbook" name="contentbook" placeholder="Nội dung"
+                                       maxlength="64">
                                 <span class="icon-book icon"></span>
                             </label>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label for="email" class="field">
-                                <input type="text" id="email" name="email" placeholder="Email">
+                                <input type="text" id="emailbook" name="emailbook" placeholder="Email">
                                 <span class="icon-mail2 icon"></span>
                             </label>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label for="youremail" class="field">
-                                <input type="text" id="yourdate" name="yourdate">
+                                <input type="text" id="datebook" name="datebook">
                                 <span class="icon-calendar icon"></span>
                             </label>
                         </div>
@@ -73,10 +74,10 @@
     </div>
     <nav class="navigator" style="display:none">
         <ul>
-            <?php foreach($data['menu'] as $item) : ?>
-            <li>
-                <a href="/<?php echo $item->url. '/'. $item->slug_category ?>"><?php echo $item->name?></a>
-            </li>
+            <?php foreach ($data['menu'] as $item) : ?>
+                <li>
+                    <a href="/<?php echo $item->url . '/' . $item->slug_category ?>"><?php echo $item->name ?></a>
+                </li>
             <?php endforeach; ?>
         </ul>
     </nav>
@@ -259,7 +260,8 @@
             <div class="social col-md-4 col-xs-12">
                 <h4>Social Network</h4>
                 <ul>
-                    <li><a href="<?php echo $data['data']->facebook; ?>"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                    <li><a href="<?php echo $data['data']->facebook; ?>"><i class="fa fa-facebook-square"
+                                                                            aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -268,6 +270,53 @@
 <script>
     $('#yourdate').datetimepicker({
         value: '', step: 1
+    });
+    $().ready(function () {
+        // validate signup form on keyup and submit
+        $("#bookform").validate({
+            rules: {
+                namebook: {
+                    required: true,
+                    minlength: 4
+                },
+                emailbook: {
+                    required: true,
+                    email: true
+                },
+                contentbook: {
+                    required: true,
+                    minlength: 4
+                },
+                phonebook: {
+                    required: true,
+                    number: true
+                },
+                datebook: {
+                    required: true
+                }
+            },
+            messages: {
+                namebook: {
+                    required: "Nhập tên",
+                    minlength: "Lớn hơn 4 ký tự"
+                },
+                emailbook: {
+                    required: "Nhập email",
+                    email: "Không đúng định dạng email"
+                },
+                contentbook: {
+                    required: "Nhập nội dung",
+                    minlength: "Nội dung quá ngắn"
+                },
+                phonebook: {
+                    required: "Nhập điện thoại",
+                    minlength: "Nhập số"
+                },
+                datebook: {
+                    required: "Nhập ngày"
+                }
+            }
+        });
     });
 </script>
 </body>

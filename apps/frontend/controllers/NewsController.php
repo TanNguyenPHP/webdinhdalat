@@ -12,12 +12,16 @@ class NewsController extends ControllerBase
 
     public function indexAction($id = "")
     {
+        $is_status = "1";
+        $page = "1";
+        $limit = "4";
+
         try {
-            $cat = Category::findConditionAll('', $id, '1');
-            $cats = Category::findConditionAll($cat[0]->id, '', '1');
-            $data = News::findAllNewsOfCategory($cat[0]->id, '1', '1', '4');//$cat = '', $id_lang = '',$page='',$limit=''//Thay đổi tham số thành dynamic;
+            $cat = Category::findConditionAll('', $id, $is_status);
+            $cats = Category::findConditionAll($cat[0]->id, '', $is_status);
+            $data = News::findAllNewsOfCategory($cat[0]->id, '', $page, $limit);//$cat = '', $id_lang = '',$page='',$limit=''//Thay đổi tham số thành dynamic;
             if ($data == null) {
-                $data = News::findAllNewsOfCategory($cats[0]->id, '1', '1', '4');
+                $data = News::findAllNewsOfCategory($cats[0]->id, '', $page, $limit);
                 $cat = $cats;
                 if ($data != null) {
                     $this->tag->prependTitle($cats[0]->title . " | ");
@@ -52,7 +56,7 @@ class NewsController extends ControllerBase
         $cat = "3";
         $limit = 4;
         $page = 1;
-        $id_lang = "1";
+
         $endpage = 'false';
 
         if (isset($_POST['page']))
@@ -70,7 +74,7 @@ class NewsController extends ControllerBase
             );
             return $this::sendJson($data);
         }
-        $listnews = News::findNewsPaging($page, $limit, "", "", "", $cat, $id_lang);
+        $listnews = News::findNewsPaging($page, $limit, "", "", "", $cat, '');
         $news = array();
         foreach ($listnews->items as $item) {
             $news[] = array(

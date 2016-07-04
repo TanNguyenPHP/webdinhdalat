@@ -8,29 +8,29 @@
         <div class="row">
             <div class="col-md-8">
                 <h4>Get in touch</h4>
-                <form action="/contact/create" method="post" class="contact-form row">
+                <form action="/contact/create" method="post" id="contactform" class="contact-form row">
                     <div class="col-md-6 col-sm-12">
                         <label for="yourname" class="field">
-                            <input type="text" id="yourname" name="yourname" placeholder="Enter Your Name" required>
+                            <input type="text" id="namecontact" name="namecontact" placeholder="Họ Tên" maxlength="64">
                             <span class="icon-user icon"></span>
                         </label>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <label for="youremail" class="field">
-                            <input type="email" id="youremail" name="youremail" placeholder="Enter Your Email" required>
+                            <input type="email" id="emailcontact" name="emailcontact" placeholder="Email">
                             <span class="icon-mail2 icon"></span>
                         </label>
                     </div>
                     <div class="col-md-12 col-sm-12">
                         <label for="subject" class="field">
-                            <input type="text" id="subject" name="subject" placeholder="Enter Subject" required>
+                            <input type="text" id="subjectcontact" name="subjectcontact" placeholder="Tiêu đề" maxlength="64">
                             <span class="icon-book icon"></span>
                         </label>
                     </div>
                     <div class="col-md-12 col-sm-12" field>
                         <label for="message" class="field clearHeight">
-                            <textarea rows="5" id="message" name="message" placeholder="Include all the details you can"
-                                      required></textarea>
+                            <textarea rows="5" id="messagecontact" name="messagecontact" placeholder="Nội dung"
+                                      maxlength="1024"></textarea>
                             <span class="icon-bubbles2 icon"></span>
                         </label>
                     </div>
@@ -44,7 +44,6 @@
                 <address>
                     <p><i class="icon-home2"></i><strong>Main Office :</strong> <span>127/97 Ni Su Huynh Lien, F12, Q.Tan Binh</span>
                     </p>
-                    <p><i class="icon-leaf"></i><strong>Show Room :</strong> 270A Bac Hai, F3, Q.Tan Binh </p>
                     <p><i class="icon-phone"></i><strong>Tel :</strong> +(08) 39747047 </p>
                     <p><i class="icon-printer"></i><strong>Fax :</strong> +(08) 39747052 </p>
                     <p><i class="icon-envelop"></i><strong>Email :</strong> sale@gwall.vn </p>
@@ -110,4 +109,45 @@
         infowindow.open(map, marker);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+    $().ready(function () {
+        // validate signup form on keyup and submit
+        $("#contactform").validate({
+            rules: {
+                namecontact: {
+                    required: true,
+                    minlength: 4
+                },
+                emailcontact: {
+                    required: true,
+                    email: true
+                },
+                subjectcontact: {
+                    required: true,
+                    minlength: 4
+                },
+                messagecontact: {
+                    required: true,
+                    minlength: 4
+                }
+            },
+            messages: {
+                namecontact: {
+                    required: "Nhập tên",
+                    minlength: "Lớn hơn 4 ký tự"
+                },
+                emailcontact: {
+                    required: "Nhập email",
+                    email: "Không đúng định dạng email"
+                },
+                subjectcontact: {
+                    required: "Nhập tên",
+                    minlength: "Nội dung quá ngắn"
+                },
+                messagecontact: {
+                    required: "Nhập nội dung",
+                    minlength: "Nội dung quá ngắn"
+                }
+            }
+        });
+    });
 </script>

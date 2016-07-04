@@ -146,4 +146,5 @@ $di->setShared('dispatcher', function () use ($di) {
     $dispatcher = new Phalcon\Mvc\Dispatcher();
     $dispatcher->setDefaultNamespace('Webdinhdalat\Frontend\Controllers');
     return $dispatcher;
+
 });

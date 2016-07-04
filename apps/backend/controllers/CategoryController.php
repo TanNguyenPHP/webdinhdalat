@@ -5,6 +5,7 @@ use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\Category as Cat;
 use Webdinhdalat\Commons\UtilsSEO;
+use Webdinhdalat\Modeldb\Models\Language;
 
 class CategoryController extends ControllerBase
 {
@@ -13,6 +14,7 @@ class CategoryController extends ControllerBase
         $cats = Cat::findAll();
         $listcat = $cats;
         $catlist = array();
+
         for ($j = 0; $j < count($cats); $j++) {
             $cat = array(
                 "id" => $cats[$j]->id,
@@ -34,7 +36,7 @@ class CategoryController extends ControllerBase
 
     public function newAction()
     {
-        $this->view->data = Cat::findAll();
+        $this->view->data = array('cats' => Cat::findAll(), 'langs' => Language::findAll());
     }
 
     public function createAction()
@@ -52,6 +54,7 @@ class CategoryController extends ControllerBase
         $cats->desc = $this->request->getPost("desc");
         $cats->pid = $this->request->getPost("pid");
         $cats->title = $this->request->getPost("title");
+        $cats->id_lang = $this->request->getPost("lang");
         $cats->meta_description = $this->request->getPost("meta_description");
         $cats->is_status = '1';
         $cats->slug = UtilsSEO::CreateSlug($cats->name);
@@ -85,7 +88,8 @@ class CategoryController extends ControllerBase
             }
             $cats = array(
                 "cat" => $cat,
-                "cats" => Cat::find("id != $cat->id and is_status != '3' ")
+                "cats" => Cat::find("id != $cat->id and is_status != '3' "),
+                "langs"=>  Language::findAll()
             );
 
             $this->view->data = $cats;
@@ -120,6 +124,7 @@ class CategoryController extends ControllerBase
         $cat->is_status = isset($_POST["is_status"]) ? '1' : '0';
         $cat->pid = $this->request->getPost("pid");
         $cat->title = $this->request->getPost("title");
+        $cats->id_lang = $this->request->getPost("lang");
         $cat->meta_description = $this->request->getPost("meta_description");
         $cat->desc = $this->request->getPost("desc");
         $cat->slug = UtilsSEO::CreateSlug($cat->name);
