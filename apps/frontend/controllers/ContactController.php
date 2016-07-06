@@ -13,10 +13,10 @@ class ContactController extends ControllerBase
     {
 
         $contact = new Contact();
-        $contact->email = $this->request->getPost("youremail");
-        $contact->name = $this->request->getPost("yourname");
-        $contact->subject = $this->request->getPost("subject");
-        $contact->content = $this->request->getPost("message");
+        $contact->email = $this->request->getPost("emailcontact");
+        $contact->name = $this->request->getPost("namecontact");
+        $contact->subject = $this->request->getPost("subjectcontact");
+        $contact->content = $this->request->getPost("messagecontact");
         $contact->is_status = "0";
         $contact->date = date('YmdHis');
         if (!$contact->save()) {

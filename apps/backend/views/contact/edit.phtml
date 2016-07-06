@@ -1,0 +1,65 @@
+<?php echo $this->getContent() ?>
+<?php
+echo $this->tag->form(
+    array(
+        "/backend/contact/save",
+        "autocomplete" => "off",
+        "class" => "form-horizontal",
+        "id" => "contactForm"
+    )
+);
+?>
+<section class="content-header">
+    <h2>Thông tin liên lạc</h2>
+</section>
+<section class="content">
+    <div class="arrage-popup">
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Name">Tên người gởi</label>
+            <div class="col-md-6">
+                <input type="text" id="fieldName" readonly name="name" class="form-control" size="30" minlength="4"
+                       maxlength="64" value="<?php echo $data->name ?>">
+                <input type="hidden" id="idcontact" name="idcontact" value="<?php echo $data->id ?>"/>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="position">Email</label>
+            <div class="col-md-6">
+                <input type="text" id="email" readonly name="email" class="form-control" size="30" maxlength="64"
+                       value="<?php echo $data->email ?>">
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="title">Tiêu đề</label>
+            <div class="col-md-6">
+                <input class="form-control valid" id="subject" readonly maxlength="128" name="subject" type="text"
+                       value="<?php echo $data->subject ?>">
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="meta_description">Meta description</label>
+            <div class="col-md-6">
+                    <textarea class="form-control" cols="20" id="content" maxlength="128"
+                              name="content" readonly
+                              rows="4"><?php echo $data->content ?></textarea>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Show">Đã xem</label>
+            <div class="col-md-6">
+                <?php
+                if ($data->is_status == '1')
+                    echo $this->tag->checkField(array("is_status", "class" => "check-box", "value" => "1", "checked" => "checked"));
+                else
+                    echo $this->tag->checkField(array("is_status", "class" => "check-box", "value" => "0"));
+                ?>
+            </div>
+        </div>
+        <div style="text-align:center" class="col-md-12">
+            <input type="submit" value="Lưu" class="btn btn-info"/>
+            <a href="/backend/menu/index" class="btn btn-info">Về danh sách</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>
+<?php echo $this->tag->endForm(); ?>

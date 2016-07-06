@@ -93,7 +93,7 @@ class Category extends Model
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\Category'),
             'conditions' => $conditions,
-            'orderby' => array('name')
+            'order' => array('name')
         );
     }
 

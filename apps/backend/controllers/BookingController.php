@@ -35,5 +35,34 @@ class BookingController extends ControllerBase
         return $this->view->data = $data;
     }
 
+    public function changestatusAction()
+    {
+        $id = $this->request->getPost("id");
+        $book = Booking::findFirstByid($id);
+        $book->is_status = '1';
+        if (!$book) {
+            $this->flash->error("Thông tin ko tồn tại");
+
+            $this->dispatcher->forward(array(
+                'controller' => "booking",
+                'action' => 'index'
+            ));
+
+            return;
+        }
+        try {
+
+            if (!$book->save()) {
+                foreach ($book->getMessages() as $message) {
+                    $this->flash->error($message);
+                }
+                return $this::sendText('fa fa-times');
+            }
+        } catch (Exception $e) {
+            return $this::sendText('fa fa-times');
+        }
+
+        return $this::sendText('fa fa-check-circle');
+    }
 }
 

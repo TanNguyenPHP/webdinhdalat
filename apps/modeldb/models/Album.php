@@ -133,7 +133,7 @@ class Album extends Model
             'columns' => ('a.name, p.id, p.name, p.dir, p.id_album, p.position'),
             'innerJoin' => array('0' => array('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p')),
             'conditions' => $conditions,
-            'order' => array('a.datecreate desc')
+            'order' => 'a.datecreate desc'
             // or 'limit' => array(20, 20),
         );
     }

@@ -1,7 +1,6 @@
 <?php
 namespace Webdinhdalat\Modeldb\Models;
 
-use Phalcon\Mvc\Model\Validator\Email as Email;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Query;
 use Phalcon\Di;
@@ -80,23 +79,6 @@ class Booking extends Model
      *
      * @return boolean
      */
-    public function validation()
-    {
-        $this->validate(
-            new Email(
-                array(
-                    'field'    => 'email',
-                    'required' => true,
-                )
-            )
-        );
-
-        if ($this->validationHasFailed() == true) {
-            return false;
-        }
-
-        return true;
-    }
 
     /**
      * Returns table name mapped in the model.
@@ -129,9 +111,10 @@ class Booking extends Model
     {
         return parent::findFirst($parameters);
     }
-    public static function findBookPaging($page,$limit,$name,$phone)
+
+    public static function findBookPaging($page, $limit, $name, $phone)
     {
-        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($page,$limit,$name,$phone));
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($page, $limit, $name, $phone));
 
         $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
             "builder" => $queryBuilder,
@@ -140,7 +123,8 @@ class Booking extends Model
         ));
         return $paginator->getPaginate();
     }
-    private static function buildparams($page,$limit,$name,$phone)
+
+    private static function buildparams($page, $limit, $name, $phone)
     {
         $conditions = "1=1 ";
         if ($name != '')
@@ -150,7 +134,7 @@ class Booking extends Model
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\Booking'),
             'conditions' => $conditions,
-            'orderby' => array('name','date desc')
+            'order' => 'datecreate desc, name'
         );
     }
 

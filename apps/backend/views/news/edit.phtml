@@ -45,14 +45,14 @@ echo $this->tag->form(
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="content_short">Tóm tắt bài viết</label>
             <div class="col-md-6">
-                    <textarea class="form-control" cols="20" id="content_short" maxlength="128" name="content_short"
+                    <textarea class="form-control" cols="20" id="content_short" maxlength="196" name="content_short"
                               rows="2"><?php echo $data['news']->content_short ?></textarea>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="content">Nội dung bài viết</label>
             <div class="col-md-6">
-                    <textarea class="form-control" cols="20" id="content" minlength="6" maxlength="128" name="content"
+                    <textarea class="form-control" cols="20" id="content" minlength="6"  name="content"
                               rows="20"><?php echo $data['news']->content ?></textarea>
                 <span id="messageContent" class="field-validation-valid" data-valmsg-for="Name"
                       data-valmsg-replace="true"></span>

@@ -23,30 +23,6 @@
                         </div>
                         <h3><a href=""><?php echo $item->name ?></a></h3>
                     </div>
-                    <div class="text-content col-md-3">
-                        <div class="overlay background-ov">
-                            <img class="img-responsive" src="<?php echo '\\' . $item->dir ?>" alt="nha">
-                        </div>
-                        <h3><a href=""><?php echo $item->name ?></a></h3>
-                    </div>
-                    <div class="text-content col-md-3">
-                        <div class="overlay background-ov">
-                            <img class="img-responsive" src="<?php echo '\\' . $item->dir ?>" alt="nha">
-                        </div>
-                        <h3><a href=""><?php echo $item->name ?></a></h3>
-                    </div>
-                    <div class="text-content col-md-3">
-                        <div class="overlay background-ov">
-                            <img class="img-responsive" src="<?php echo '\\' . $item->dir ?>" alt="nha">
-                        </div>
-                        <h3><a href=""><?php echo $item->name ?></a></h3>
-                    </div>
-                    <div class="text-content col-md-3">
-                        <div class="overlay background-ov">
-                            <img class="img-responsive" src="<?php echo '\\' . $item->dir ?>" alt="nha">
-                        </div>
-                        <h3><a href=""><?php echo $item->name ?></a></h3>
-                    </div>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -74,7 +50,7 @@
                                 html += '<div class="overlay background-ov">'
                                 html += '<img class="img-responsive" src="\\' + item.dir + '" >'
                                 html += '</div>'
-                                html += '<h3><a href="/gallery/detail/#">' + item.name + '</a></h3>'
+                                html += '<h3><a href="/gallery/detail/' + item.id + '">' + item.name + '</a></h3>'
                                 html += '</div>'
                                 html += '</div>'
                             });

@@ -42,13 +42,13 @@ echo $this->tag->form(
                 <div class="form-group col-sm-3">
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Hiển thị</span>
-                        <select class="form-control" name="limit" id="limit" onchange = "bookform.submit()">
-                            <?php for ($i=0; $i <= 50;$i = $i + 10){
-                                if($i == $data['limit'] )
+                        <select class="form-control" name="limit" id="limit" onchange="bookform.submit()">
+                            <?php for ($i = 10; $i <= 50; $i = $i + 10) {
+                                if ($i == $data['limit'])
                                     echo "<option value=\"$i\" selected>$i</option>";
                                 else
                                     echo "<option value=\"$i\">$i</option>";
-                            }?>
+                            } ?>
                         </select>
                     </div>
                 </div>
@@ -63,6 +63,7 @@ echo $this->tag->form(
                     <th>Email</th>
                     <th>Nội dung</th>
                     <th>Ngày gửi</th>
+                    <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -86,6 +87,16 @@ echo $this->tag->form(
                                 echo DateTime::createFromFormat('YmdHis', $item->datecreate)->format('d/m/Y');
                             ?>
                         </td>
+                        <td>
+                            <?php if ($item->is_status == '1'): ?>
+                                <a class="delete-btn add-button-disable" href="#" disabled="disabled"><i
+                                        class="fa fa-check-circle"></i></a>
+                            <?php else: ?>
+                                <a class="delete-btn add-button-disable" href="#" disabled="disabled"
+                                   onclick="FunctionAccpect('<?php echo $item->id ?>');"><i
+                                        class="fa fa-times" id="icon-<?php echo $item->id ?>"></i></a>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -101,3 +112,26 @@ echo $this->tag->form(
         </div>
     </section><!-- /.content -->
 <?php echo $this->tag->endForm(); ?>
+<script>
+    var is_loading = false;
+    function FunctionAccpect(id) {
+        var a = alertify.confirm('Xác nhận thông tin', function (e) {
+            if (e) {
+                if (is_loading == false) {
+                    is_loading = true;
+                    var icon = '#icon-' + id;
+                    $.ajax({
+                        url: '/backend/booking/changestatus',
+                        type: 'POST',
+                        data: {id: id},
+                        dataType: 'text',
+                        success: function (result) {
+                            $(icon).attr("class", result);
+                            is_loading=false;
+                        }
+                    });
+                }
+            }
+        }).set('title', 'Thông Báo').show();
+    }
+</script>

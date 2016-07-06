@@ -1,7 +1,6 @@
 <?php
 namespace Webdinhdalat\Modeldb\Models;
 
-use Phalcon\Mvc\Model\Validator\Email as Email;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Query;
 use Phalcon\Di;
@@ -58,23 +57,6 @@ class Contact extends Model
      *
      * @return boolean
      */
-    public function validation()
-    {
-        $this->validate(
-            new Email(
-                array(
-                    'field' => 'email',
-                    'required' => true,
-                )
-            )
-        );
-
-        if ($this->validationHasFailed() == true) {
-            return false;
-        }
-
-        return true;
-    }
 
     /**
      * Returns table name mapped in the model.
@@ -130,7 +112,7 @@ class Contact extends Model
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\Contact'),
             'conditions' => $conditions,
-            'orderby' => array('name', 'date desc')
+            'order' => 'date desc, name'
         );
     }
 }

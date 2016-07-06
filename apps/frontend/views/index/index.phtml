@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-10 col-sm-12 col-centered">
                     <h3>Đặt Vé</h3>
-                    <form action="/" method="post" id="bookform" class="contact-form row row-1">
+                    <form action="/booking/create" method="post" id="bookform" class="contact-form row row-1">
                         <div class="col-md-6 col-sm-12">
                             <label for="yourname" class="field">
                                 <input type="text" id="namebook" name="namebook" placeholder="Họ Tên" maxlength="64">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <label for="youremail" class="field">
-                                <input type="email" id="phonebook" name="phonebook" placeholder="Số Điện Thoại">
+                                <input type="text" id="phonebook" name="phonebook" placeholder="Số Điện Thoại">
                                 <span class="icon-phone icon"></span>
                             </label>
                         </div>
@@ -135,10 +135,8 @@
             <div class="col-md-3 col-centered wrapper-content">
                 <img src="/images/king.png" alt="">
                 <div class="content">
-                    <h3 class="header-content-title">Dinh II</h3>
-                    <p>Dinh II được xây dựng từ năm 1933 đến năm 1937, bởi bàn tay tài hoa của các kiến trúc sư người
-                        Pháp. Vào năm 1942, toàn quyền Decoux đã làm việc tại đây
-                    </p>
+                    <h3 class="header-content-title"><?php echo $data['news'][1]->title; ?></h3>
+                    <p><?php echo $data['news'][1]->content_short ?></p>
                     <div>
                         <button class="king-button">đọc thêm</button>
                     </div>
@@ -147,10 +145,8 @@
             <div class="col-md-5 col-centered wrapper-content wrapper-content-special">
                 <img class="king-special" src="/images/king.png" alt="">
                 <div class="content-special">
-                    <h3 class="header-content-title">Dinh I</h3>
-                    <p>Dinh I nằm cách trung tâm thành phố Đà lạt không xa về hướng Đông-Nam trên độ cao 1,550m, Dinh 1
-                        được bao quanh bởi rừng thông.
-                    </p>
+                    <h3 class="header-content-title"><?php echo $data['news'][0]->title; ?></h3>
+                    <p><?php echo $data['news'][0]->content_short ?></p>
                     <div>
                         <button class="king-button">đọc thêm</button>
                     </div>
@@ -159,10 +155,8 @@
             <div class="col-md-3 col-centered wrapper-content">
                 <img src="/images/king.png" alt="">
                 <div class="content">
-                    <h3 class="header-content-title">Dinh III</h3>
-                    <p>Dinh III toạ lạc ở độ cao gần 1,600 mét, công trình được xây dựng bởi sự kết hợp giữa các kiến
-                        trúc người Pháp và Việt Nam.
-                    </p>
+                    <h3 class="header-content-title"><?php echo $data['news'][2]->title; ?></h3>
+                    <p><?php echo $data['news'][2]->content_short ?></p>
                     <div>
                         <button class="king-button">đọc thêm</button>
                     </div>
@@ -235,13 +229,15 @@
     <div class="header-title">
         <h2 class="yellow">nhận bài viết mới</h2>
     </div>
-    <div class="email-box">
-        <label for="email">
-            <input type="text" id="email" value="Email cua ban">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-        </label>
-        <button>Đăng Ký</button>
-    </div>
+    <form action="/newsletter/create" method="post" id="letterform">
+        <div class="email-box">
+            <label for="email">
+                <input type="text" id="emailletter" name="emailletter" value="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </label>
+            <button name="letter-submit" type="submit" id="letter-submit" >Đăng Ký</button>
+        </div>
+    </form>
 </section>
 <footer>
     <div class="container">
@@ -268,10 +264,24 @@
     </div>
 </footer>
 <script>
-    $('#yourdate').datetimepicker({
+    $('#datebook').datetimepicker({
         value: '', step: 1
     });
     $().ready(function () {
+        $('#letterform').validate({
+            rules: {
+                emailletter: {
+                    required: true,
+                    email: 4
+                }
+            },
+            messages: {
+                emailletter: {
+                    required: "Nhập email",
+                    email: "Không đúng dịnh dạng"
+                }
+            }
+        });
         // validate signup form on keyup and submit
         $("#bookform").validate({
             rules: {
@@ -310,7 +320,7 @@
                 },
                 phonebook: {
                     required: "Nhập điện thoại",
-                    minlength: "Nhập số"
+                    number: "Nhập số"
                 },
                 datebook: {
                     required: "Nhập ngày"

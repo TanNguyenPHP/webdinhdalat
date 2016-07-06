@@ -19,16 +19,16 @@ use  Webdinhdalat\Commons\ParamsSEO as params;
         <div class="row">
             <div class="col-md-10 col-sm-12 col-centered">
                 <h3>Đặt Vé</h3>
-                <form action="/" method="post" id="bookform" class="contact-form row row-1">
+                <form action="/booking/create" method="post" id="bookform" class="contact-form row row-1">
                     <div class="col-md-6 col-sm-12">
-                        <label for="yourname" class="field">
+                        <label for="namebook" class="field">
                             <input type="text" id="namebook" name="namebook" placeholder="Họ Tên" >
                             <span class="icon-user icon"></span>
                         </label>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <label for="youremail" class="field">
-                            <input type="email" id="phonebook" name="phonebook" placeholder="Số Điện Thoại" >
+                        <label for="cellphbook" class="field">
+                            <input type="text" id="phonebook" name="phonebook" placeholder="Số Điện Thoại" >
                             <span class="icon-phone icon"></span>
                         </label>
                     </div>
@@ -86,7 +86,7 @@ use  Webdinhdalat\Commons\ParamsSEO as params;
     </div>
 </footer>
 <script>
-    $('#yourdate').datetimepicker({
+    $('#datebook').datetimepicker({
         value: '', step: 1
     });
     $().ready(function () {
@@ -128,7 +128,7 @@ use  Webdinhdalat\Commons\ParamsSEO as params;
                 },
                 phonebook: {
                     required: "Nhập điện thoại",
-                    minlength: "Nhập số"
+                    number: "Nhập số"
                 },
                 datebook: {
                     required: "Nhập ngày"

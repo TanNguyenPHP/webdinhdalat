@@ -34,5 +34,58 @@ class ContactController extends ControllerBase
             'phone' => $phone);
         return $this->view->data = $data;
     }
+
+    public function editAction($id)
+    {
+
+        if (!$this->request->isPost()) {
+
+            $contact= Contact::findFirstByid($id);
+            if (!$contact) {
+                $this->flash->error("Không có thông tin");
+                return $this->response->redirect('backend/contact/index');
+            }
+
+            $this->view->data = $contact;
+        }
+    }
+
+    public function saveAction()
+    {
+        if (!$this->request->isPost()) {
+            $this->dispatcher->forward(array(
+                'controller' => "contact",
+                'action' => 'index'
+            ));
+
+            return;
+        }
+        $contact = Contact::findFirstByid($this->request->getPost("idcontact"));
+        if (!$contact) {
+            $this->flash->error("Không tồn tại");
+            $this->dispatcher->forward(array(
+                'controller' => "contact",
+                'action' => 'index'
+            ));
+            return;
+        }
+        $contact->is_status = isset($_POST["is_status"]) ? '1' : '0';
+
+        if (!$contact->save()) {
+            foreach ($contact->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward(array(
+                'controller' => "contact",
+                'action' => 'index'
+            ));
+
+            return;
+        }
+
+        $this->flash->success("Tạo mới thành công");
+        return $this->response->redirect('/backend/contact/index');
+    }
 }
 
