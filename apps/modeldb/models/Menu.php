@@ -63,9 +63,9 @@ class Menu extends Model
         return parent::find($parameters);
     }
 
-    public static function findall($id_lang = '')
+    public static function findall($id_lang = '', $is_active = '')
     {
-        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($id_lang));
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($id_lang, $is_active));
 
         return $queryBuilder->getQuery()->execute();
     }
@@ -81,14 +81,16 @@ class Menu extends Model
         return parent::findFirst($parameters);
     }
 
-    private static function buildparams($id_lang = '')
+    private static function buildparams($id_lang = '', $is_active = '')
     {
-        $conditions = "is_active = '1'";
+        $conditions = "1=1 ";
         if ($id_lang != '')
             $conditions = $conditions . " and id_lang = '$id_lang' ";
+        if ($is_active != '')
+            $conditions = $conditions . " and is_active = '$is_active' ";
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\Menu'),
-            'columns' => array('id', 'name', 'id_lang', 'url', 'position', 'is_active','slug_category'),
+            'columns' => array('id', 'name', 'id_lang', 'url', 'position', 'is_active', 'slug_category'),
             'conditions' => $conditions,
             // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
             'order' => array('position')

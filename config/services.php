@@ -143,8 +143,39 @@ $di->set('flash', function () {
  * Set the default namespace for dispatcher
  */
 $di->setShared('dispatcher', function () use ($di) {
-    $dispatcher = new Phalcon\Mvc\Dispatcher();
-    $dispatcher->setDefaultNamespace('Webdinhdalat\Frontend\Controllers');
+
+    $eventsManager = new \Phalcon\Events\Manager();
+
+    $eventsManager->attach("dispatch:beforeException", function($event, $dispatcher, $exception) {
+
+        //Handle 404 exceptions
+        if ($exception instanceof \Phalcon\Mvc\Dispatcher\Exception) {
+            $dispatcher->forward(array(
+                'controller' => 'index',
+                'action' => 'index'
+            ));
+            return false;
+        }
+
+        //Handle other exceptions
+        $dispatcher->forward(array(
+            'controller' => 'index',
+            'action' => 'index'
+        ));
+
+        return false;
+    });
+
+    $dispatcher = new \Phalcon\Mvc\Dispatcher();
+
+    //Bind the EventsManager to the dispatcher
+    $dispatcher->setEventsManager($eventsManager);
+
     return $dispatcher;
+
+
+    //$dispatcher = new Phalcon\Mvc\Dispatcher();
+    //$dispatcher->setDefaultNamespace('Webdinhdalat\Frontend\Controllers');
+    //return $dispatcher;
 
 });

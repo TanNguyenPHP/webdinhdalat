@@ -69,7 +69,7 @@ class MenuController extends ControllerBase
         $menu->name = $this->request->getPost("name");
         $menu->id_lang = $this->request->getPost("lang");
         $menu->position = $this->request->getPost("position");
-        $menu->is_active = '1';
+        $menu->is_active = isset($_POST["is_active"]) ? '1' : '0';
         if (isset($_POST["cat"]))
             $menu->slug_category = $this->request->getPost("cat");
         if (isset($_POST["pagetype"]))

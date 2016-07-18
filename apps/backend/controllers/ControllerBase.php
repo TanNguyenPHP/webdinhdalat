@@ -63,7 +63,7 @@ class ControllerBase extends Controller
             ->addJs('/ckeditor/tinymce.min.js');
 
         if (!Authentication::CheckAuth())
-            return $this->response->redirect('quanly');
+            return $this->response->redirect('/quanly');
     }
     protected function sendJson($data) {
         $this->view->disable();

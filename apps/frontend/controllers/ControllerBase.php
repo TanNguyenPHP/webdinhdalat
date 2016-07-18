@@ -21,7 +21,7 @@ class ControllerBase extends Controller
             ->addJs('/js/jquery.validate.min.js')
             ->addJs('/js/jquery.datetimepicker.full.min.js');
         $data = config::findFirst("id_lang = '1'");//Language
-        $menu = menu::findall('1');//Language
+        $menu = menu::findall('1','1');//Language
         $this->tag->setTitle($data->title);
         self::setMetaDescription($data->meta);
         return $this->view->datamain = array('data' => $data, 'menu' => $menu);

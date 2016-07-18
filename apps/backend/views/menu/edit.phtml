@@ -87,6 +87,17 @@ echo $this->tag->form(
                               rows="2"><?php echo $data['menu']->meta_description ?></textarea>
             </div>
         </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Show">Hiển thị</label>
+            <div class="col-md-6">
+                <?php
+                if ($data['menu']->is_active == '1')
+                    echo $this->tag->checkField(array("is_active", "class" => "check-box", "value" => "1", "checked" => "checked"));
+                else
+                    echo $this->tag->checkField(array("is_active", "class" => "check-box", "value" => "0"));
+                ?>
+            </div>
+        </div>
         <div style="text-align:center" class="col-md-12">
             <input type="submit" value="Lưu" class="btn btn-info"/>
             <a href="/backend/menu/index" class="btn btn-info">Về danh sách</a>
