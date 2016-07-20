@@ -8,7 +8,7 @@ class GalleryController extends ControllerBase
 {
     public function indexAction()
     {
-        $data = Album::findAlbumOfPicPaging('1', '4');// load page 1
+        $data = Album::findAlbumOfPicPagingShowWeb('1', '4');// load page 1
 
         return $this->view->data = $data;
     }
@@ -32,7 +32,7 @@ class GalleryController extends ControllerBase
             );
             return $this::sendJson($data);
         }
-        $album = Album::findAlbumOfPicPaging($page, $limit);
+        $album = Album::findAlbumOfPicPagingShowWeb($page, $limit);
         $albums = array();
         foreach ($album->items as $item) {
             $albums[] = array(
