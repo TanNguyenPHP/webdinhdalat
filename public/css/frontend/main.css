@@ -8,7 +8,7 @@
 .book-form {
     position: fixed;
     z-index: 999;
-    right: -420px;
+    right: -450px;
     top: 20%;
     background: rgba(8, 8, 8, 0.28);
     width: 460px;
