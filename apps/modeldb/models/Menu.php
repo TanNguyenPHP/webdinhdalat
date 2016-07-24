@@ -93,7 +93,7 @@ class Menu extends Model
             'columns' => array('id', 'name', 'id_lang', 'url', 'position', 'is_active', 'slug_category'),
             'conditions' => $conditions,
             // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
-            'order' => array('position')
+            'order' => 'position'
             // or 'limit' => array(20, 20),
         );
     }

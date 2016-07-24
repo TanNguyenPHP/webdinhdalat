@@ -2,7 +2,6 @@
 namespace Webdinhdalat\Frontend\Controllers;
 
 use Webdinhdalat\Modeldb\Models\Album;
-use Webdinhdalat\Modeldb\Models\Picture;
 
 class GalleryController extends ControllerBase
 {
