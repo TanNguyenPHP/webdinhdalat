@@ -14,18 +14,19 @@
         <div class="decor"></div>
     </div>
     <div class="gallery-content" id="gallery-content">
-        <?php foreach ($data->items as $item): ?>
-            <div class="gallery-content container">
-                <div class="row" id="row-content">
+        <div class="gallery-content container">
+            <div class="row" id="row-content">
+                <?php foreach ($data->items as $item): ?>
                     <div class="text-content col-md-3">
                         <div class="overlay background-ov">
                             <img class="img-responsive" src="<?php echo '\\' . $item->dir ?>" alt="nha">
                         </div>
                         <h3><a href=""><?php echo $item->name ?></a></h3>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>
-        <?php endforeach; ?>
+        </div>
+
     </div>
     <div id="gallery" style="display:none;">
     
