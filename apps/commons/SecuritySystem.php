@@ -20,7 +20,6 @@ class SecuritySystem
         $security = new Security();
         $security->setDefaultHash(3);//MD5
         $key = self::GenKey($username);
-        $security->setDefaultHash(1);//Lock random Byte
         return $security->hash($pass , $key) . $key;
     }
 

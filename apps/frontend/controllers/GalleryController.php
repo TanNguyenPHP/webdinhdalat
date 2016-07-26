@@ -8,7 +8,28 @@ class GalleryController extends ControllerBase
     public function indexAction()
     {
         $data = Album::findAlbumOfPicPagingShowWeb('1', '4');// load page 1
-
+        $this->assets
+            ->addCss('/js/unitegallery/css/unite-gallery.css');
+        $this->assets
+            ->addJs('/js/unitegallery/js/ug-api.js')
+            ->addJs('/js/unitegallery/js/ug-avia.js')
+            ->addJs('/js/unitegallery/js/ug-carousel.js')
+            ->addJs('/js/unitegallery/js/ug-common-libraries.js')
+            ->addJs('/js/unitegallery/js/ug-functions.js')
+            ->addJs('/js/unitegallery/js/ug-gallery.js')
+            ->addJs('/js/unitegallery/js/ug-gridpanel.js')
+            ->addJs('/js/unitegallery/js/ug-lightbox.js')
+            ->addJs('/js/unitegallery/js/ug-panelsbase.js')
+            ->addJs('/js/unitegallery/js/ug-strippanel.js')
+            ->addJs('/js/unitegallery/js/ug-tabs.js')
+            ->addJs('/js/unitegallery/js/ug-thumbsgeneral.js')
+            ->addJs('/js/unitegallery/js/ug-thumbsstrip.js')
+            ->addJs('/js/unitegallery/js/ug-tiledesign.js')
+            ->addJs('/js/unitegallery/js/ug-tiles.js')
+            ->addJs('/js/unitegallery/js/ug-touchslider.js')
+            ->addJs('/js/unitegallery/js/ug-touchthumbs.js')
+            ->addJs('/js/unitegallery/js/ug-video.js')
+            ->addJs('/js/unitegallery/js/ug-zoomslider.js');
         return $this->view->data = $data;
     }
 

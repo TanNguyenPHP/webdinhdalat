@@ -9,7 +9,6 @@ use Webdinhdalat\Commons\Authentication;
 
 class LoginController extends ControllerBase
 {
-
     public function initialize()
     {
 
@@ -40,14 +39,13 @@ class LoginController extends ControllerBase
         $password = $this->request->getPost("Password");
 
         $_checklogin = $this->checklogin($username, $password);
-        $_pass=SecuritySystem::HashPassword($password, $username);
         if ($_checklogin == 0)//Success
         {
             return $this->response->redirect('/backend/users/index');
         }
 
         if ($_checklogin == 3 || $_checklogin == 4 || $_checklogin == 5) {
-            $this->flashSession->error("$_pass");//$this->flash->error("Wrong username or password");
+            $this->flashSession->error("Wrong pass");//$this->flash->error("Wrong username or password");
             return $this->response->redirect('/quanly');
         }
         if ($_checklogin == 2) {
@@ -63,7 +61,7 @@ class LoginController extends ControllerBase
     {
         $user = Users::findFirst("username = '$Username'");
         if ($user) {
-            if (SecuritySystem::CheckHashPassword($Password, $user->password)){//(SecuritySystem::HashPassword($Password, $Username) == $user->password) {//dùng hàm strcmp so sánh chuỗi với binary
+            if (SecuritySystem::CheckHashPassword($Password, $user->password)) {//(SecuritySystem::HashPassword($Password, $Username) == $user->password) {//dùng hàm strcmp so sánh chuỗi với binary
                 if ($user->is_active == '1' & $user->is_del == '0') {
                     $this->registerSessionUser($user);
                     return 0;
@@ -72,22 +70,20 @@ class LoginController extends ControllerBase
                     return 1;// account del
                 else if ($user->is_active == '0')
                     return 2;// account not active
+            } else {
+                return 3;//Wrong password
+            }
         } else {
-            return 3;//Wrong password
+            return 4;// Wrong username
         }
-    } else
-{
-return 4;// Wrong username
-}
 
-return 5;
-}
+        return 5;
+    }
 
-private
-function registerSessionUser($user)
-{
-    $this->session->set('sessionUser', $user->id);
-}
+    private function registerSessionUser($user)
+    {
+        $this->session->set('sessionUser', $user->id);
+    }
 
 }
 
