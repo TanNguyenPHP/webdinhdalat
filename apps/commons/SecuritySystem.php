@@ -18,9 +18,10 @@ class SecuritySystem
     public static function HashPassword($pass, $username)
     {
         $security = new Security();
-        $security->setDefaultHash(8);//Sha512
+        $security->setDefaultHash(3);//MD5
         $key = self::GenKey($username);
-        return $security->hash($pass . $key) . $key;
+        $security->setDefaultHash(1);//Lock random Byte
+        return $security->hash($pass , $key) . $key;
     }
 
     private static function GenPassword($username, $password)
