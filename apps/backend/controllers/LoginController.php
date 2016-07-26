@@ -63,7 +63,7 @@ class LoginController extends ControllerBase
     {
         $user = Users::findFirst("username = '$Username'");
         if ($user) {
-            if (SecuritySystem::HashPassword($Password, $Username) == $user->password) {//dùng hàm strcmp so sánh chuỗi với binary
+            if (SecuritySystem::CheckHashPassword($Password, $user->password)){//(SecuritySystem::HashPassword($Password, $Username) == $user->password) {//dùng hàm strcmp so sánh chuỗi với binary
                 if ($user->is_active == '1' & $user->is_del == '0') {
                     $this->registerSessionUser($user);
                     return 0;
@@ -72,19 +72,22 @@ class LoginController extends ControllerBase
                     return 1;// account del
                 else if ($user->is_active == '0')
                     return 2;// account not active
-            } else {
-                return 3;//Wrong password
-            }
         } else {
-            return 4;// Wrong username
+            return 3;//Wrong password
         }
-        return 5;
-    }
+    } else
+{
+return 4;// Wrong username
+}
 
-    private function registerSessionUser($user)
-    {
-        $this->session->set('sessionUser', $user->id);
-    }
+return 5;
+}
+
+private
+function registerSessionUser($user)
+{
+    $this->session->set('sessionUser', $user->id);
+}
 
 }
 
