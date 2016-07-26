@@ -40,14 +40,14 @@ class LoginController extends ControllerBase
         $password = $this->request->getPost("Password");
 
         $_checklogin = $this->checklogin($username, $password);
-
+        $_pass=SecuritySystem::HashPassword($password, $username);
         if ($_checklogin == 0)//Success
         {
             return $this->response->redirect('/backend/users/index');
         }
 
         if ($_checklogin == 3 || $_checklogin == 4 || $_checklogin == 5) {
-            $this->flashSession->error('wrong pass');//$this->flash->error("Wrong username or password");
+            $this->flashSession->error("$_pass");//$this->flash->error("Wrong username or password");
             return $this->response->redirect('/quanly');
         }
         if ($_checklogin == 2) {
