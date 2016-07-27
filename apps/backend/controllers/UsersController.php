@@ -198,7 +198,7 @@ class UsersController extends ControllerBase
     public function savepassAction()
     {
         $id = Di::getDefault()->getSession()->get('sessionUser');
-        $user = Users::findFirstByid($id);
+        $user = Users::findFirstByid($id['id']);
         $passold = SecuritySystem::HashPassword($_POST['OldPassword'], $user->username);
         if ($passold == $user->password) {
             $user->password = SecuritySystem::HashPassword($_POST['NewPassword'], $user->username);

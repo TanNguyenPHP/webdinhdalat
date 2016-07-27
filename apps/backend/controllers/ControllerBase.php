@@ -4,7 +4,7 @@ namespace Webdinhdalat\Backend\Controllers;
 
 use Webdinhdalat\Commons\Authentication;
 use Phalcon\Mvc\Controller;
-
+use Phalcon\Di;
 class ControllerBase extends Controller
 {
     protected final function UrlBase()
@@ -64,6 +64,8 @@ class ControllerBase extends Controller
 
         if (!Authentication::CheckAuth())
             return $this->response->redirect('/quanly');
+        $name = Di::getDefault()->getSession()->get('sessionUser');
+        return $this->view->userinfo = $name['name'];
     }
     protected function sendJson($data) {
         $this->view->disable();

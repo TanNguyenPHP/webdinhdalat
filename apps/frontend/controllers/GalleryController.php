@@ -9,8 +9,10 @@ class GalleryController extends ControllerBase
     {
         $data = Album::findAlbumOfPicPagingShowWeb('1', '4');// load page 1
         $this->assets
-            ->addCss('/js/unitegallery/css/unite-gallery.css');
+            ->addCss('/js/unitegallery/css/unite-gallery.css')
+            ->addCss('/js/unitegallery/themes/default/ug-theme-default.css');
         $this->assets
+            ->addJs('/js/unitegallery/js/unitegallery.min.js')
             ->addJs('/js/unitegallery/js/ug-api.js')
             ->addJs('/js/unitegallery/js/ug-avia.js')
             ->addJs('/js/unitegallery/js/ug-carousel.js')
@@ -29,7 +31,9 @@ class GalleryController extends ControllerBase
             ->addJs('/js/unitegallery/js/ug-touchslider.js')
             ->addJs('/js/unitegallery/js/ug-touchthumbs.js')
             ->addJs('/js/unitegallery/js/ug-video.js')
-            ->addJs('/js/unitegallery/js/ug-zoomslider.js');
+            ->addJs('/js/unitegallery/js/ug-theme-slider.js')
+            ->addJs('/js/unitegallery/js/ug-zoomslider.js')
+            ->addJs('/js/unitegallery/themes/default/ug-theme-default.js');
         return $this->view->data = $data;
     }
 

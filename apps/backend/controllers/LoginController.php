@@ -82,7 +82,10 @@ class LoginController extends ControllerBase
 
     private function registerSessionUser($user)
     {
-        $this->session->set('sessionUser', $user->id);
+        $this->session->set('sessionUser', array(
+            'id' => $user->id,
+            'name' => $user->username
+        ));
     }
 
 }

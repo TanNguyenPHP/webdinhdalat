@@ -128,24 +128,6 @@ class Album extends Model
         return array('albums' => $albums, 'pic' => $tets);
     }
 
-    private static function buildparams($id_album = "", $name = "", $is_website = "")
-    {
-        $conditions = '1=1';//"p.is_del = '0' and a.is_del = '0'";
-        /*if ($id_album != "")
-            $conditions = $conditions . " and a.id = '$id_album' ";
-        if ($name != '')
-            $conditions = $conditions . " and a.name = '$name' ";
-        if ($is_website != '')
-            $conditions = $conditions . " and a.is_website = '$is_website' ";*/
-        return $params = array(
-            'models' => array('a' => 'Webdinhdalat\Modeldb\Models\Album'),
-            'columns' => array('a.name', 'p.id', 'p.name', 'p.dir', 'p.id_album','p.position'),
-            'joins' => array('0' => array('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p','')),
-            'conditions' => $conditions,
-            'order' => 'a.datecreate desc'
-            // or 'limit' => array(20, 20),
-        );
 
-    }
 
 }
