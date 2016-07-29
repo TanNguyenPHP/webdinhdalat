@@ -38,7 +38,7 @@ class PictureController extends ControllerBase
 
     public function newAction()
     {
-        $this->view->data = Album::find();
+        $this->view->data = Album::findAll();
     }
 
     public function delAction()
