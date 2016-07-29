@@ -40,6 +40,13 @@ echo $this->tag->form(
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Code">Giới thiệu</label>
+            <div class="col-md-6">
+                <textarea class="form-control" cols="20" id="introduce" maxlength="1024" name="introduce"
+                          rows="5"><?php echo $data->introduce ?></textarea>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="Code">Email Cty</label>
             <div class="col-md-6">
                 <input class="form-control" id="email" name="email" type="text" value="<?php echo $data->email ?>" maxlength="64"/>

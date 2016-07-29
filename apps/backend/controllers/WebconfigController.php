@@ -53,6 +53,7 @@ class WebconfigController extends ControllerBase
         $config->companyname = $this->request->getPost("company");
         $config->cellphone = $this->request->getPost("cellphone");
         $config->email = $this->request->getPost("email");
+        $config->introduce = $this->request->getPost("introduce");
         if (!$config->save()) {
 
             foreach ($config->getMessages() as $message) {

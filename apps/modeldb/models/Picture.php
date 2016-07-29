@@ -93,12 +93,13 @@ class Picture extends Model
         return parent::find("$condition");
     }
 
-    public static function findPicOfAlbum($id = null)
+    public static function findPicOfAlbum($id = "")
     {
         $query = new \Phalcon\Mvc\Model\Query\Builder();
         $query->addFrom('Webdinhdalat\Modeldb\Models\Picture', 'a')
-            ->columns('a')
-            ->inWhere('a.id_album',$id);
+            ->columns('a.id,a.dir')
+            ->where("a.is_del = '0'")
+            ->inWhere('a.id_album', ["$id"]);
         return $query->getQuery()->execute();
     }
 

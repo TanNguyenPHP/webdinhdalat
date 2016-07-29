@@ -50,6 +50,7 @@ class Webconfig extends Model
     public $facebook;
     public $google;
     public $twitter;
+    public $introduce;
 
     /**
      * Returns table name mapped in the model.

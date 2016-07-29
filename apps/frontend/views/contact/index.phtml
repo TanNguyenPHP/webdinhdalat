@@ -42,17 +42,17 @@
             <div class="contact-info col-md-4 col-centered">
                 <h4>Contact Info</h4>
                 <address>
-                    <p><i class="icon-home2"></i><strong>Main Office :</strong> <span>127/97 Ni Su Huynh Lien, F12, Q.Tan Binh</span>
+                    <p><i class="icon-home2"></i><strong>Văn phòng:</strong><span><?php echo $datamain['data']->address ?></span>
                     </p>
-                    <p><i class="icon-phone"></i><strong>Tel :</strong> +(08) 39747047 </p>
-                    <p><i class="icon-printer"></i><strong>Fax :</strong> +(08) 39747052 </p>
-                    <p><i class="icon-envelop"></i><strong>Email :</strong> sale@gwall.vn </p>
+                    <p><i class="icon-phone"></i><strong>Tel :</strong><?php echo $datamain['data']->cellphone ?></p>
+                    <p><i class="icon-printer"></i><strong>Fax :</strong><?php echo $datamain['data']->fax ?></p>
+                    <p><i class="icon-envelop"></i><strong>Email :</strong><?php echo $datamain['data']->email ?></p>
                 </address>
                 <div class="social-networks">
                     <h4>Social Networking</h4>
                     <nav>
                         <ul>
-                            <li><a href="#"><i class="icon-facebook3"></i></a></li>
+                            <li><a href="<?php echo $datamain['data']->facebook; ?>"><i class="icon-facebook3"></i></a></li>
                             <li><a href="#"><i class="icon-twitter"></i></a></li>
                             <li><a href="#"><i class="icon-pinterest"></i></a></li>
                             <li><a href="#"><i class="icon-google-plus3"></i></a></li>
@@ -71,7 +71,7 @@
 <script type="text/javascript">
     function initialize() {
         // set up coordinate
-        var latlng = new google.maps.LatLng(10.783464, 106.648305);
+        var latlng = new google.maps.LatLng(11.9443829, 108.4676117,17);
         var latlngbachai = new google.maps.LatLng(10.780098, 106.65813);
         // call the map into ui
         var map = new google.maps.Map(
@@ -81,11 +81,14 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
         // cotent infowindow
+        var addr= '<?php echo $datamain['data']->address ?>';
+        var phone ='<?php echo $datamain['data']->cellphone ?>';
+        var companyname ='<?php echo $datamain['data']->companyname ?>';
         var contentString = '<div>' +
-            '<h4>Cong Ty TNHH GreenWall</h4>' +
+            '<h4>'+ companyname +'</h4>' +
             '<div>' +
-            '<p><strong>Address : </strong> 127/97 Ni Su Huynh Lien</p>' +
-            '<p><strong>Phone : </strong> 0909109786</p>' +
+            '<p><strong>Address : </strong>'+ addr +'</p>' +
+            '<p><strong>Phone : </strong>'+phone+'</p>' +
             '<img alt="cong ty" src="images">' +
             '</div>' +
             '</div>';

@@ -2,38 +2,14 @@
 namespace Webdinhdalat\Frontend\Controllers;
 
 use Webdinhdalat\Modeldb\Models\Album;
+use Webdinhdalat\Modeldb\Models\Picture;
 
 class GalleryController extends ControllerBase
 {
     public function indexAction()
     {
         $data = Album::findAlbumOfPicPagingShowWeb('1', '4');// load page 1
-        /*$this->assets
-            ->addCss('/js/unitegallery/css/unite-gallery.css')
-            ->addCss('/js/unitegallery/themes/default/ug-theme-default.css');
-        $this->assets
-            ->addJs('/js/unitegallery/js/unitegallery.min.js')
-            ->addJs('/js/unitegallery/js/ug-api.js')
-            ->addJs('/js/unitegallery/js/ug-avia.js')
-            ->addJs('/js/unitegallery/js/ug-carousel.js')
-            ->addJs('/js/unitegallery/js/ug-common-libraries.js')
-            ->addJs('/js/unitegallery/js/ug-functions.js')
-            ->addJs('/js/unitegallery/js/ug-gallery.js')
-            ->addJs('/js/unitegallery/js/ug-gridpanel.js')
-            ->addJs('/js/unitegallery/js/ug-lightbox.js')
-            ->addJs('/js/unitegallery/js/ug-panelsbase.js')
-            ->addJs('/js/unitegallery/js/ug-strippanel.js')
-            ->addJs('/js/unitegallery/js/ug-tabs.js')
-            ->addJs('/js/unitegallery/js/ug-thumbsgeneral.js')
-            ->addJs('/js/unitegallery/js/ug-thumbsstrip.js')
-            ->addJs('/js/unitegallery/js/ug-tiledesign.js')
-            ->addJs('/js/unitegallery/js/ug-tiles.js')
-            ->addJs('/js/unitegallery/js/ug-touchslider.js')
-            ->addJs('/js/unitegallery/js/ug-touchthumbs.js')
-            ->addJs('/js/unitegallery/js/ug-video.js')
-            ->addJs('/js/unitegallery/js/ug-theme-slider.js')
-            ->addJs('/js/unitegallery/js/ug-zoomslider.js')
-            ->addJs('/js/unitegallery/themes/default/ug-theme-default.js');*/
+
         $this->assets
             ->addCss('/css/backend/fancybox/jquery.fancybox.css')
             ->addCss('/css/backend/fancybox/jquery.fancybox-buttons.css')
@@ -88,7 +64,17 @@ class GalleryController extends ControllerBase
     }
     public function detailalbumAction()
     {
-        return $this::sendJson(array('test'=>'test'));
+        $id = '';
+        if (isset($_POST['id']))
+            $id = $_POST['id'];
+        $data = Picture::findPicOfAlbum($id);
+        $piclist = array();
+        foreach ($data as $item)
+        {
+            $pic = array('href' => '\\'. $item->dir);
+            array_push($piclist, $pic);
+        }
+        return $this::sendJson($piclist);
     }
 }
 
