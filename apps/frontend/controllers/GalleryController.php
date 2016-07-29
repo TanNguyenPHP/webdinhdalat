@@ -8,7 +8,7 @@ class GalleryController extends ControllerBase
     public function indexAction()
     {
         $data = Album::findAlbumOfPicPagingShowWeb('1', '4');// load page 1
-        $this->assets
+        /*$this->assets
             ->addCss('/js/unitegallery/css/unite-gallery.css')
             ->addCss('/js/unitegallery/themes/default/ug-theme-default.css');
         $this->assets
@@ -33,7 +33,16 @@ class GalleryController extends ControllerBase
             ->addJs('/js/unitegallery/js/ug-video.js')
             ->addJs('/js/unitegallery/js/ug-theme-slider.js')
             ->addJs('/js/unitegallery/js/ug-zoomslider.js')
-            ->addJs('/js/unitegallery/themes/default/ug-theme-default.js');
+            ->addJs('/js/unitegallery/themes/default/ug-theme-default.js');*/
+        $this->assets
+            ->addCss('/css/backend/fancybox/jquery.fancybox.css')
+            ->addCss('/css/backend/fancybox/jquery.fancybox-buttons.css')
+            ->addCss('/css/backend/fancybox/jquery.fancybox-thumbs.css');
+        $this->assets
+            ->addJs('/js/jquery.mousewheel-3.0.6.pack.js')
+            ->addJs('/js/jquery.fancybox.js')
+            ->addJs('/js/jquery.fancybox-buttons.js')
+            ->addJs('/js/jquery.fancybox-thumbs.js');
         return $this->view->data = $data;
     }
 
@@ -76,6 +85,10 @@ class GalleryController extends ControllerBase
             "endpage" => $endpage
         );
         return $this::sendJson($data);
+    }
+    public function detailalbumAction()
+    {
+        return $this::sendJson(array('test'=>'test'));
     }
 }
 
