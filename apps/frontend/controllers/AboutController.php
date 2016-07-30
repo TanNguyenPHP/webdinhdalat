@@ -21,7 +21,8 @@ class AboutController extends ControllerBase
         {
             return $this->response->redirect('/index');
         }
-        $this->tag->prependTitle("Giới thiệu | ");
+        $this->tag->prependTitle("$data->seo_title | ");
+        self::setMetaDescription($data->seo_desc);
         return $this->view->data = $data;
     }
 }

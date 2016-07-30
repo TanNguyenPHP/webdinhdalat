@@ -74,7 +74,7 @@ class MenuController extends ControllerBase
             $menu->slug_category = $this->request->getPost("cat");
         if (isset($_POST["pagetype"]))
             $menu->url = $this->request->getPost("pagetype");
-        $menu->meta_description = $this->request->getPost("meta_desc");
+        $menu->meta_description = $this->request->getPost("meta_description");
         $menu->title = $this->request->getPost("title");
         $menu->is_static = '0';
 
@@ -115,7 +115,7 @@ class MenuController extends ControllerBase
         $menu->is_active = '1';
         $menu->slug_category = $this->request->getPost("cat");
         $menu->url = $this->request->getPost("pagetype");
-        $menu->meta_description = $this->request->getPost("meta_desc");
+        $menu->meta_description = $this->request->getPost("meta_description");
         $menu->title = $this->request->getPost("title");
         $menu->is_static = '0';
         if (!$menu->save()) {

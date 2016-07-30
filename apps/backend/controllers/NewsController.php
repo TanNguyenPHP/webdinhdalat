@@ -89,7 +89,7 @@ class NewsController extends ControllerBase
         $news->content = $this->request->getPost('content');
         $news->position = $this->request->getPost('position');
         $news->id_category = $this->request->getPost('cat');
-        $news->id_lang = '0';
+        $news->id_lang = $this->request->getPost('lang');
         $news->seo_title = $this->request->getPost('seo_title');
         $news->seo_desc = $this->request->getPost('seo_desc');
         $news->id_user = Di::getDefault()->getSession()->get('sessionUser');
@@ -149,6 +149,7 @@ class NewsController extends ControllerBase
         $news->is_del = '0';
         $news->is_status = '1';
         $news->slug = UtilsSEO::CreateSlug($news->title).'-'.date('dmYHi');
+        $news->id_lang = $this->request->getPost('lang');
 
         try {
             $this::saveImg($_FILES['avatar_image']);

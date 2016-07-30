@@ -130,7 +130,7 @@
                     <h3 class="header-content-title"><?php echo $data['news'][1]->title; ?></h3>
                     <p><?php echo $data['news'][1]->content_short ?></p>
                     <div>
-                        <button class="king-button">đọc thêm</button>
+                        <a class="king-button" href="/news/detail/<?php echo $data['news'][1]->slug?>">đọc thêm</a>
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
                     <h3 class="header-content-title"><?php echo $data['news'][0]->title; ?></h3>
                     <p><?php echo $data['news'][0]->content_short ?></p>
                     <div>
-                        <button class="king-button">đọc thêm</button>
+                        <a class="king-button" href="/news/detail/<?php echo $data['news'][0]->slug?>">đọc thêm</a>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                     <h3 class="header-content-title"><?php echo $data['news'][2]->title; ?></h3>
                     <p><?php echo $data['news'][2]->content_short ?></p>
                     <div>
-                        <button class="king-button">đọc thêm</button>
+                        <a class="king-button" href="/news/detail/<?php echo $data['news'][2]->slug?>">đọc thêm</a>
                     </div>
                 </div>
             </div>
@@ -166,54 +166,16 @@
     </div>
     <div class="container arrange">
         <div class="row">
+            <?php foreach($data['services'] as $item): ?>
             <div class="col-md-4 col-sm-4 col-centered">
                 <figure class="effect-blur">
-                    <div><img class="img-responsive" src="/images/service/thumb/1.png" alt="1"/></div>
+                    <div><img class="img-responsive" src="/<?php echo $item->avatar_image?>" alt="1"/></div>
                     <figcaption>
-                        <h4 class="service-title"><a href="#">tham quan dinh</a></h4>
+                        <h4 class="service-title"><a href="/news/detail/<?php echo $item->slug?>"><?php echo $item->title?></a></h4>
                     </figcaption>
                 </figure>
             </div>
-            <div class="col-md-4 col-sm-4 col-centered">
-                <figure class="effect-blur">
-                    <div><img class="img-responsive" src="/images/service/thumb/2.png" alt=""></div>
-                    <figcaption>
-                        <h4 class="service-title"><a href="#">chup hinh cưới</a></h4>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-md-4 col-sm-4 col-centered">
-                <figure class="effect-blur">
-                    <div><img class="img-responsive" src="/images/service/thumb/3.png" alt=""></div>
-                    <figcaption>
-                        <h4 class="service-title"><a href="#">cho thuê tiệt cưới</a></h4>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-md-4 col-sm-4 col-centered">
-                <figure class="effect-blur">
-                    <div><img class="img-responsive" src="/images/service/thumb/4.png" alt=""></div>
-                    <figcaption>
-                        <h4 class="service-title"><a href="#">tổ chức sự kiện Event</a></h4>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-md-4 col-sm-4 col-centered">
-                <figure class="effect-blur">
-                    <div><img class="img-responsive" src="/images/service/thumb/5.png" alt=""></div>
-                    <figcaption>
-                        <h4 class="service-title"><a href="#">hoá trang vua chúa</a></h4>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-md-4 col-sm-4 col-centered">
-                <figure class="effect-blur">
-                    <div><img class="img-responsive" src="/images/service/thumb/5.png" alt=""></div>
-                    <figcaption>
-                        <h4 class="service-title"><a href="#">cưởi ngựa đồi thông</a></h4>
-                    </figcaption>
-                </figure>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

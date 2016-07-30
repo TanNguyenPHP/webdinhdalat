@@ -177,7 +177,7 @@ class News extends Model
             'columns' => $cols,
             'conditions' => $conditions,
             // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
-            'order' => 'title, datecreate desc',
+            'order' => 'position,datecreate desc,title',
             'limit' =>  "$limit"
         );
     }

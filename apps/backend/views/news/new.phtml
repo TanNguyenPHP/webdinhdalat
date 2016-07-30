@@ -31,6 +31,16 @@ echo $this->tag->form(
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="cat">Chọn ngôn ngữ</label>
+            <div class="col-md-6">
+                <select class="form-control" id="lang" name="lang">
+                    <?php foreach ($data["langs"] as $items): ?>
+                        <?php echo "<option value=\"$items->id\">$items->lang</option>" ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="Name">Tiêu đề</label>
             <div class="col-md-6">
                 <?php echo $this->tag->textField(array("title", "size" => 30, "class" => "form-control", "id" => "fieldTitle", "minlength" => "4", "maxlength" => "64")) ?>
