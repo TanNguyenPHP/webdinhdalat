@@ -1,0 +1,23 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="company-info col-md-4 col-xs-12">
+                <h4>công ty cổ phần hoàn cầu đà lạt</h4>
+                <address>
+                    Địa chỉ: <?php echo $datamain['data']->address ?><br>
+                    Điện thoại: <?php echo $datamain['data']->cellphone ?> Fax: <?php echo $datamain['data']->fax ?><br>
+                    Email: <?php echo $datamain['data']->email ?>
+                </address>
+            </div>
+            <div class="company-logo col-md-4 col-xs-12">
+                <img src="/images/hoancau_logo.png" alt="">
+            </div>
+            <div class="social col-md-4 col-xs-12">
+                <h4>Social Network</h4>
+                <ul>
+                    <li><a href="<?php echo $datamain['data']->facebook; ?>"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -6,8 +6,11 @@
  * Time: 11:07 PM
  */
 namespace Webdinhdalat\Frontend\Controllers;
-
+use Phalcon\Mvc\View;
 class HotelController extends ControllerBase
 {
-
+    public function indexAction()
+    {
+        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+    }
 }

@@ -27,7 +27,7 @@ class PictureController extends ControllerBase
 
         $data = array(
             "pictures" => $pics,
-            "albums" => Album::find(),
+            "albums" => Album::findAll(),
             "album" => $album,
             "limit" => $limit,
             "page" => $page

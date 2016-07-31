@@ -23,54 +23,7 @@
         </div>
     </header>
     <div class="book-form">
-        <img class="book" width="250" src="/images/king.png" alt="">
-        <div id="book-wrapper" class="container">
-            <div class="row">
-                <div class="col-md-10 col-sm-12 col-centered">
-                    <h3>Đặt Vé</h3>
-                    <form action="/booking/create" method="post" id="bookform" class="contact-form row row-1">
-                        <div class="col-md-6 col-sm-12">
-                            <label for="yourname" class="field">
-                                <input type="text" id="namebook" name="namebook" placeholder="Họ Tên" maxlength="64">
-                                <span class="icon-user icon"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <label for="youremail" class="field">
-                                <input type="text" id="phonebook" name="phonebook" placeholder="Số Điện Thoại">
-                                <span class="icon-phone icon"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-12 col-sm-12">
-                            <label for="subject" class="field">
-                                <input type="text" id="contentbook" name="contentbook" placeholder="Nội dung"
-                                       maxlength="64">
-                                <span class="icon-book icon"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <label for="email" class="field">
-                                <input type="text" id="emailbook" name="emailbook" placeholder="Email">
-                                <span class="icon-mail2 icon"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <label for="youremail" class="field">
-                                <input type="text" id="datebook" name="datebook">
-                                <span class="icon-calendar icon"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <img class="img-responsive" src="/images/captcha.jpg" alt="">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <button name="submit" type="submit" id="contact-submit">Send Email</button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
+        <?php $this->partial("share/book_form"); ?>
     </div>
     <nav class="navigator" style="display:none">
         <ul>
@@ -130,7 +83,7 @@
                     <h3 class="header-content-title"><?php echo $data['news'][1]->title; ?></h3>
                     <p><?php echo $data['news'][1]->content_short ?></p>
                     <div>
-                        <a class="king-button" href="/news/detail/<?php echo $data['news'][1]->slug?>">đọc thêm</a>
+                        <a class="king-button" href="/news/detail/<?php echo $data['news'][1]->slug ?>">đọc thêm</a>
                     </div>
                 </div>
             </div>
@@ -140,7 +93,7 @@
                     <h3 class="header-content-title"><?php echo $data['news'][0]->title; ?></h3>
                     <p><?php echo $data['news'][0]->content_short ?></p>
                     <div>
-                        <a class="king-button" href="/news/detail/<?php echo $data['news'][0]->slug?>">đọc thêm</a>
+                        <a class="king-button" href="/news/detail/<?php echo $data['news'][0]->slug ?>">đọc thêm</a>
                     </div>
                 </div>
             </div>
@@ -150,7 +103,7 @@
                     <h3 class="header-content-title"><?php echo $data['news'][2]->title; ?></h3>
                     <p><?php echo $data['news'][2]->content_short ?></p>
                     <div>
-                        <a class="king-button" href="/news/detail/<?php echo $data['news'][2]->slug?>">đọc thêm</a>
+                        <a class="king-button" href="/news/detail/<?php echo $data['news'][2]->slug ?>">đọc thêm</a>
                     </div>
                 </div>
             </div>
@@ -166,15 +119,16 @@
     </div>
     <div class="container arrange">
         <div class="row">
-            <?php foreach($data['services'] as $item): ?>
-            <div class="col-md-4 col-sm-4 col-centered">
-                <figure class="effect-blur">
-                    <div><img class="img-responsive" src="/<?php echo $item->avatar_image?>" alt="1"/></div>
-                    <figcaption>
-                        <h4 class="service-title"><a href="/news/detail/<?php echo $item->slug?>"><?php echo $item->title?></a></h4>
-                    </figcaption>
-                </figure>
-            </div>
+            <?php foreach ($data['services'] as $item): ?>
+                <div class="col-md-4 col-sm-4 col-centered">
+                    <figure class="effect-blur">
+                        <div><img class="img-responsive" src="/<?php echo $item->avatar_image ?>" alt="1"/></div>
+                        <figcaption>
+                            <h4 class="service-title"><a
+                                    href="/news/detail/<?php echo $item->slug ?>"><?php echo $item->title ?></a></h4>
+                        </figcaption>
+                    </figure>
+                </div>
             <?php endforeach; ?>
         </div>
     </div>
@@ -189,34 +143,11 @@
                 <input type="text" id="emailletter" name="emailletter" value="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
             </label>
-            <button name="letter-submit" type="submit" id="letter-submit" >Đăng Ký</button>
+            <button name="letter-submit" type="submit" id="letter-submit">Đăng Ký</button>
         </div>
     </form>
 </section>
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="company-info col-md-4 col-xs-12">
-                <h4>công ty cổ phần hoàn cầu đà lạt</h4>
-                <address>
-                    Địa chỉ: <?php echo $data['data']->address ?><br>
-                    Điện thoại: <?php echo $data['data']->cellphone ?> Fax: <?php echo $data['data']->fax ?><br>
-                    Email: <?php echo $data['data']->email ?>
-                </address>
-            </div>
-            <div class="company-logo col-md-4 col-xs-12">
-                <img src="/images/hoancau_logo.png" alt="">
-            </div>
-            <div class="social col-md-4 col-xs-12">
-                <h4>Social Network</h4>
-                <ul>
-                    <li><a href="<?php echo $data['data']->facebook; ?>"><i class="fa fa-facebook-square"
-                                                                            aria-hidden="true"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
+<?php $this->partial("share/footer"); ?>
 <script>
     $('#datebook').datetimepicker({
         value: '', step: 1

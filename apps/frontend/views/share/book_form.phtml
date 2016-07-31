@@ -1,0 +1,46 @@
+<img class="book" width="250" src="/images/king.png" alt="">
+<div id="book-wrapper" class="container">
+    <div class="row">
+        <div class="col-md-10 col-sm-12 col-centered">
+            <h3>Đặt Vé</h3>
+            <form action="/booking/create" method="post" id="bookform" class="contact-form row row-1">
+                <div class="col-md-6 col-sm-12">
+                    <label for="namebook" class="field">
+                        <input type="text" id="namebook" name="namebook" placeholder="Họ Tên">
+                        <span class="icon-user icon"></span>
+                    </label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <label for="cellphbook" class="field">
+                        <input type="text" id="phonebook" name="phonebook" placeholder="Số Điện Thoại">
+                        <span class="icon-phone icon"></span>
+                    </label>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <label for="subject" class="field">
+                        <input type="text" id="contentbook" name="contentbook" placeholder="Nội dung" maxlength="64">
+                        <span class="icon-book icon"></span>
+                    </label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <label for="email" class="field">
+                        <input type="text" id="emailbook" name="emailbook" placeholder="Email">
+                        <span class="icon-mail2 icon"></span>
+                    </label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <label for="youremail" class="field">
+                        <input type="text" id="datebook" name="datebook">
+                        <span class="icon-calendar icon"></span>
+                    </label>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <img class="img-responsive" src="/images/captcha.jpg" alt="">
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <button name="submit" type="submit" id="contact-submit">Send Email</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

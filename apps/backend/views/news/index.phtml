@@ -93,7 +93,7 @@ echo $this->tag->form(
             <?php for ($i = 0; $i < count($data['listnews']->items); $i++) { ?>
                 <tr>
                     <th scope="row" style="text-align:left">
-                        <a href="testhethong/<?php echo $data['listnews']->items[$i]->id ?>"><?php echo $data['listnews']->items[$i]->title ?></a>
+                        <a href="edit/<?php echo $data['listnews']->items[$i]->id ?>"><?php echo $data['listnews']->items[$i]->title ?></a>
                     </th>
                     <td style="text-align:left">
                         <?php for ($j = 0; $j < count($data['cats']); $j++) { ?>

@@ -128,7 +128,7 @@ class NewsController extends ControllerBase
 
         $data = array(
             "langs" => Lang::findAll(),
-            "cats" => Category::findAll(),"news"=> News::findFirstByid('11')
+            "cats" => Category::findAll()
         );
         $this->view->data = $data;
     }
