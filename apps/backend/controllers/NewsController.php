@@ -74,7 +74,6 @@ class NewsController extends ControllerBase
 
         return $this->view->data = $data;
     }
-
     public function saveAction()
     {
 
@@ -129,7 +128,7 @@ class NewsController extends ControllerBase
 
         $data = array(
             "langs" => Lang::findAll(),
-            "cats" => Category::findAll()
+            "cats" => Category::findAll(),"news"=> News::findFirstByid('11')
         );
         $this->view->data = $data;
     }
@@ -177,7 +176,8 @@ class NewsController extends ControllerBase
 
     private function saveImg($file)
     {
-        $uploadfile = Params::pathfolderavatarimage . basename($file['name']);
-        $this::saveFile($file['tmp_name'], $uploadfile);
+        //$uploadfile = Params::pathfolderavatarimage . basename($file['name']);
+        $target = join(DIRECTORY_SEPARATOR, array(Params::folderimg,Params::folderimgavatar, basename($file['name'])));
+        $this::saveFile($file['tmp_name'], $target);
     }
 }

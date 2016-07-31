@@ -81,12 +81,13 @@ class AlbumController extends ControllerBase
 
         $album->name = $this->request->getPost("name");
         $folder = RemoveUnicode::stripUnicode($album->name);
-        $dir = params::pathfolderpicture . $folder;
-        $result = parent::createFolder($dir);
+        $target = join(DIRECTORY_SEPARATOR, array(Params::folderimg,$folder));
+        //$dir = params::pathfolderpicture . $folder;
+        $result = parent::createFolder($target);
         $is_website = isset($_POST["website"]) ? '1' : '0';
         if ($result == 1) {
             $album->folder = $folder;
-            $album->dir = $dir;
+            $album->dir = $target;
             $album->desc = $this->request->getPost("desc");
             $album->datecreate = date('YmdHis');
             $album->is_del = '0';

@@ -16,7 +16,7 @@ class ControllerBase extends Controller
     {
         try {
             if (!is_dir($path)) {
-                if (mkdir($path, '0777', true))
+                if (mkdir($path))
                     return 1;//run on server linux add params 0777, true
                 else
                     return 0;//not create folder
@@ -34,7 +34,7 @@ class ControllerBase extends Controller
             move_uploaded_file($path, $destination);
             return true;
         } catch (Exception $e) {
-            return false;
+
         }
     }
 

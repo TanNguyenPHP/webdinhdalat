@@ -20,7 +20,7 @@ echo $this->tag->form(
         Danh sách bài viết
     </h2>
     <div class="arrange-button">
-        <a href="new" class="btn btn-info" id="modaltrigger" rel="leanModal">Thêm mới</a>
+        <a href="/backend/news/new/" class="btn btn-info" id="modaltrigger" rel="leanModal">Thêm mới</a>
     </div>
 </section>
 <section class="content">
@@ -93,7 +93,7 @@ echo $this->tag->form(
             <?php for ($i = 0; $i < count($data['listnews']->items); $i++) { ?>
                 <tr>
                     <th scope="row" style="text-align:left">
-                        <a href="edit/<?php echo $data['listnews']->items[$i]->id ?>"><?php echo $data['listnews']->items[$i]->title ?></a>
+                        <a href="testhethong/<?php echo $data['listnews']->items[$i]->id ?>"><?php echo $data['listnews']->items[$i]->title ?></a>
                     </th>
                     <td style="text-align:left">
                         <?php for ($j = 0; $j < count($data['cats']); $j++) { ?>

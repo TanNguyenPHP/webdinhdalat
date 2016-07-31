@@ -116,11 +116,11 @@ class PictureController extends ControllerBase
 
                 }
 
-                return json_encode($result);
+                return $this::sendJson($result);
             } // for delete file requests
             else if ($method == "DELETE") {
                 $result = $uploader->handleDelete("files");
-                return json_encode($result);
+                return $this::sendJson($result);
             } else {
                 header("HTTP/1.0 405 Method Not Allowed");
             }

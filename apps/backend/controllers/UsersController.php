@@ -199,8 +199,8 @@ class UsersController extends ControllerBase
     {
         $id = Di::getDefault()->getSession()->get('sessionUser');
         $user = Users::findFirstByid($id['id']);
-        $passold = SecuritySystem::HashPassword($_POST['OldPassword'], $user->username);
-        if ($passold == $user->password) {
+        //$passold = SecuritySystem::HashPassword($_POST['OldPassword'], $user->username);
+        if (SecuritySystem::CheckHashPassword($_POST['OldPassword'],$user->password)) {
             $user->password = SecuritySystem::HashPassword($_POST['NewPassword'], $user->username);
             $user->save();
             $this->flash->success("Mật khẩu được thay đổi");

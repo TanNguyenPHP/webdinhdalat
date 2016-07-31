@@ -2,10 +2,11 @@
 <?php
 echo $this->tag->form(
     array(
-        "create",
+        "/backend/news/create",
         "autocomplete" => "off",
         "class" => "form-horizontal",
         "id" => "createNews",
+        "method" => "post",
         "enctype" => "multipart/form-data"
     )
 );
@@ -57,7 +58,7 @@ echo $this->tag->form(
             <label class="text-label col-md-2" for="content">Nội dung bài viết</label>
             <div class="col-md-6">
                     <textarea class="form-control" cols="20" id="content" minlength="6" name="content"
-                              rows="20"></textarea>
+                              rows="20"><?php echo $data['news']->content ?></textarea>
                 <span id="messageContent" class="field-validation-valid" data-valmsg-for="Name"
                       data-valmsg-replace="true"></span>
             </div>
@@ -99,10 +100,11 @@ echo $this->tag->form(
 <script>
     tinymce.init({
         selector: '#content',
+        toolbar: "image",
         plugins: "image imagetools",
         toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
     });
-    $('input[type="submit"]').prop("disabled", true);
+    //$('input[type="submit"]').prop("disabled", true);
     var a = 0;
     var b = 0;
     $('#avatar_image').bind('change', function () {

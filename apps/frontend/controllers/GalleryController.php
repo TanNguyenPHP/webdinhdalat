@@ -3,6 +3,7 @@ namespace Webdinhdalat\Frontend\Controllers;
 
 use Webdinhdalat\Modeldb\Models\Album;
 use Webdinhdalat\Modeldb\Models\Picture;
+Use Webdinhdalat\Modeldb\Models\Menu;
 
 class GalleryController extends ControllerBase
 {
@@ -19,6 +20,9 @@ class GalleryController extends ControllerBase
             ->addJs('/js/jquery.fancybox.js')
             ->addJs('/js/jquery.fancybox-buttons.js')
             ->addJs('/js/jquery.fancybox-thumbs.js');
+        $menu = Menu::findFirstByid('3');
+        $this->tag->prependTitle($menu->title . " | ");
+        self::setMetaDescription($menu->meta_description);
         return $this->view->data = $data;
     }
 

@@ -20,10 +20,10 @@ class NewsController extends ControllerBase
             $cat = Category::findConditionAll('', $id, $is_status);
             $cats = Category::findConditionAll($cat[0]->id, '', $is_status);
             $data = News::findAllNewsOfCategory($cat[0]->id, '', $page, $limit);//$cat = '', $id_lang = '',$page='',$limit=''//Thay đổi tham số thành dynamic;
-            if ($data == null) {
+            if ($data->count() == 0) {
                 $data = News::findAllNewsOfCategory($cats[0]->id, '', $page, $limit);
                 $cat = $cats;
-                if ($data != null) {
+                if ($data->count() != 0) {
                     $this->tag->prependTitle($cats[0]->title . " | ");
                     self::setMetaDescription($cats[0]->meta_description);
                 }
