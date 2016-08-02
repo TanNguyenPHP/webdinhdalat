@@ -50,6 +50,11 @@
             <a href="#"><span></span></a>
         </div>
     </div>
+    <div id="dd" class="wrapper-dropdown-2" tabindex="1">English
+                <ul class="dropdown">
+                    <li><a href="#">Vietnamese</a></li>
+                </ul>
+            </div>
 </section>
 <section id="organization">
     <div class="header-title">
@@ -149,6 +154,32 @@
 </section>
 <?php $this->partial("share/footer"); ?>
 <script>
+    function DropDown(el) {
+                this.dd = el;
+                this.initEvents();
+            }
+            DropDown.prototype = {
+                initEvents : function() {
+                    var obj = this;
+
+                    obj.dd.on('click', function(event){
+                        $(this).toggleClass('active');
+                        event.stopPropagation();
+                    }); 
+                }
+            }
+
+            $(function() {
+
+                var dd = new DropDown( $('#dd') );
+
+                $(document).click(function() {
+                    // all dropdowns
+                    $('.wrapper-dropdown-2').removeClass('active');
+                });
+
+            });
+
     $('#datebook').datetimepicker({
         value: '', step: 1
     });
