@@ -93,7 +93,7 @@ class NewsController extends ControllerBase
         $news->seo_desc = $this->request->getPost('seo_desc');
         $news->id_user = Di::getDefault()->getSession()->get('sessionUser');
         $news->is_status = isset($_POST["is_status"]) ? '1' : '0';
-        $news->slug = UtilsSEO::CreateSlug($news->title). '-'. date('dmYHi');
+        //$news->slug = UtilsSEO::CreateSlug($news->title). '-'. date('dmYHi'); giu~ link ko dc thay doi
         try {
             if (isset($_FILES['avatar_image'])) {
                 if ($_FILES['avatar_image']['size'] != 0) {

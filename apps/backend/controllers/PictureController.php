@@ -32,7 +32,8 @@ class PictureController extends ControllerBase
             "limit" => $limit,
             "page" => $page
         );
-
+        $this->assets
+            ->addJs('/js/clipboard.min.js');
         return $this->view->data = $data;
     }
 

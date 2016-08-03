@@ -83,8 +83,9 @@ echo $this->tag->form(
                         <?php } ?>
                     </td>
                     <td style="text-align:center"  >
-                        <input  type="text" style="width:400px" id="fielddir" name="dir" readonly="true"
+                        <input  type="text" style="width:400px" id="fielddir-<?php echo $data['pictures']->items[$i]->id ?>" name="dir" readonly="true"
                                value="<?php echo "http://" . str_replace("\\", "/", $_SERVER['SERVER_NAME'] . "\\" . $data['pictures']->items[$i]->dir); ?>">
+                        <a class="clipboard" id="modaltrigger" data-clipboard-action="copy" data-clipboard-target="#fielddir-<?php echo $data['pictures']->items[$i]->id ?>">CopyLink</a>
                     </td>
                     <td align="center">
                         <?php if ($data['pictures']->items[$i]->is_show == '1')
@@ -114,6 +115,7 @@ echo $this->tag->form(
 </section><!-- /.content -->
 <?php echo $this->tag->endForm(); ?>
 <script>
+    var clipboard = new Clipboard('.clipboard');
     var is_loading = false;
     function FunctionDel(id) {
         var a = alertify.confirm('Xóa ảnh này?', function (e) {

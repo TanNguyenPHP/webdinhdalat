@@ -21,8 +21,6 @@ class IndexController extends ControllerBase
         $datanews = News::findAllNewsOfCategory('1');
         $newsservices = News::findAllNewsOfCategory('8');
         return $this->view->data = array('data' => $data, 'menu' => $menu, 'news' => $datanews,'services'=>$newsservices);
-        //$json= json_encode(Maps::findAll('1'),JSON_UNESCAPED_UNICODE);
-        //return $this->view->data = Maps::findAll('1');
-        //return $this->view->data = json_encode(Maps::findAll('1'),JSON_UNESCAPED_UNICODE);
+
     }
 }
