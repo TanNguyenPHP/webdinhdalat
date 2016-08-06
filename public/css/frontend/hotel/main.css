@@ -221,6 +221,8 @@ h6 {
 .main-header {
     background: #f4f4f4;
     height: auto;
+    position: relative;
+    background-color: transparent;
 }
 
 .main-header .logo {
@@ -352,7 +354,7 @@ h6 {
 .nav ul li a {
     font-size: 11px;
     letter-spacing: 0.1525em;
-    color: #000;
+    color: #b3b3b3;
     padding: 47px 24px;
     display: inline-block;
 }
@@ -360,7 +362,12 @@ h6 {
 .nav ul li.parent-menu a {
     padding-right: 32px;
 }
-
+.bottom-img img {
+    max-width: 450px;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 /* Alternative Menu */
 #home .pre-header{
     background: url(../../../images/white-pattern.png) rgba(255,255,255,0.2);
@@ -1150,11 +1157,6 @@ label {
 }
 
 
-.breadcrumb-1 {
-    background: url(../temp/breadcrumb-1.jpg) no-repeat fixed;
-    background-size: cover;
-  
-}
 
 .breadcrumb h1 {
     font-family: Varela Round;
@@ -1397,7 +1399,7 @@ table tr.table-products-list {
 /*-----------------------------------------------------------------------------------*/
 
 .quick-reservation-container {
-    background: url(../temp/quick-reservation.jpg);
+    background: url(/images/quick-reservation.jpg);
     padding: 7px;
     margin-bottom: 60px;
 }
@@ -1939,6 +1941,72 @@ ul.tabbed-area li.active a {
     -o-transition-duration: 0s;
     transition-duration: 0s;
 }
+
+.breadcrumb {
+    padding: 0.2rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    position: relative;
+    background-color: transparent; 
+}
+
+.breadcrumb::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.breadcrumb > li {
+    display: inline;
+}
+.breadcrumb > li a{
+    color: #b3b3b3;
+    text-decoration: none;
+}
+
+.breadcrumb > li + li::before {
+    padding-right: .2rem;
+    padding-left: .2rem;
+    color: #818a91;
+    content: "/";
+}
+
+.breadcrumb > .active {
+    color: #818a91;
+}
+
+.room-detail {
+    padding-bottom: 50px;
+    background: url(../../../../public/images/bg-5.png) no-repeat center center fixed;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+}
+
+.room-detail:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(3, 2, 2, 0.78);
+}
+
+.room-detail h1 {
+    font-family: UTMEssendineCapsBold;
+    font-size: 30px;
+    color: #c1a050;
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
 footer {
     background-image: linear-gradient(to bottom, #4e1717, rgba(54, 1, 1, 0.92));
     color: #b3b3b3;
@@ -1948,6 +2016,8 @@ footer {
 footer h4 {
     text-transform: uppercase;
     font-size: 14px;
+    color: #b3b3b3;
+    font-weight: bold;
 }
 
 footer address {
