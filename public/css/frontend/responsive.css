@@ -1,0 +1,68 @@
+
+@media screen and (max-width: 767px) {
+    #organization .h-line {
+        border-right: none;
+    }
+
+    #palace .wrapper-content-special {
+        margin-top: 0px;
+    }
+
+    .header-title h2 {
+        font-size: 25px;
+    }
+
+    .right-news {
+        padding-top: 20px;
+    }
+
+    .arrange-column {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .news-content .special .button {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        bottom: 0px;
+    }
+
+    .contact-info {
+        padding-top: 20px;
+    }
+
+
+}
+
+@media (max-width: 543px) {
+    .header-title h2 {
+        font-size: 20px;
+    }
+
+    .main-header {
+        padding: 30px;
+    }
+
+    .content-header .content h1 {
+        font-family: UTMEssendineCapsBold;
+        font-size: 40px;
+    }
+
+    .content-header .content p {
+        font-family: 'cochinbold';
+        font-size: 15px;
+    }
+
+    .book-form {
+        width: 320px;
+        height: 500px;
+        right: -305px;
+    }
+
+    form.row-1 {
+        margin-left: -0.9375rem;
+        margin-right: -0.9375rem;
+        display: block;
+    }
+}
