@@ -273,48 +273,9 @@ h6 {
     position: relative;
 }
 
-.sf-menu .parent-menu:after{
-    content: "\f078";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    color: #000 !important;
-    font-size: 9px;
-    padding-right: 0.5em;
-    position: absolute;
-    top: 47px;
-    right: 16px;
-}
-
-.sf-menu .parent-menu:hover:after{
-    content: "\f078";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    color: #fff !important;
-    font-size: 9px;
-    padding-right: 0.5em;
-    position: absolute;
-    top: 47px;
-    right: 16px;
-}
 /* SF Menu */
 
-.sf-menu .parent-menu.active:after{
-    content: "\f078";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    color: #fff !important;
-    font-size: 9px;
-    padding-right: 0.5em;
-    position: absolute;
-    top: 47px;
-    right: 16px;
-}
+
 
 .nav ul li {
     float: left;
@@ -329,12 +290,12 @@ h6 {
 }
 
 .nav ul li.active {
-    background: #0c242e;
+    background: #c1a050;
     position: relative;
 }
 
 .nav ul li:hover {
-    background: #0c242e;
+    background: #c1a050;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
@@ -398,35 +359,6 @@ h6 {
 
 .nav ul li.parent-menu a {
     padding-right: 32px;
-}
-
-.nav ul li ul li{
-    background: #0c242e;
-    line-height: 20px;
-    border-bottom: 1px solid rgba(240,240,240, 0.05);
-}
-
-.nav ul li ul li:last-child{
-    border-bottom: 0;
-}
-
-.nav ul li ul li a{
-    display: inline-block;
-    font-family: Varela Round !important;
-    width: 100%;
-    height: 100%;
-    font-size: 11px;
-    padding: 12px 20px;
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-}
-
-.nav ul li ul li a:hover{
-    background: #e4b248;
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
 }
 
 /* Alternative Menu */
