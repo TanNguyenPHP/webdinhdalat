@@ -13,4 +13,9 @@ class HotelController extends ControllerBase
     {
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
     }
+
+    public function detailAction()
+    {
+        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+    }
 }
