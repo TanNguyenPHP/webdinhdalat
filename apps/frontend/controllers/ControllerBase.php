@@ -13,7 +13,10 @@ class ControllerBase extends Controller
     {
         // Add some local CSS resources
         $this->assets
+            ->addCss('/css/frontend/Vendor/awesome-font/font-awesome.css')
+            ->addCss('/css/frontend/iconmoon.css')
             ->addCss('/css/frontend/main.css')
+            ->addCss('/css/frontend/responsive.css')
             ->addCss('/css/backend/jquery.datetimepicker.css');
         $this->assets
             ->addJs('/js/jquery-1.12.4.min.js')
