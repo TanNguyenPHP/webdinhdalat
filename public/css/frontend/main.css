@@ -1548,7 +1548,7 @@ article img {
 }
 
 .contact .contact-header {
-    padding: 50px 0px;
+    padding-bottom: 50px;
     background: url(../../images/bg-5.png) no-repeat center center fixed;
     width: 100%;
     height: 100%;
@@ -1575,6 +1575,7 @@ article img {
     font-size: 30px;
     color: #c1a050;
     position: relative;
+    padding-top: 30px;
 }
 
 .contact .contact-header span {
