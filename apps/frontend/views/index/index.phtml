@@ -13,8 +13,9 @@
     <script src="/js/jquery.datetimepicker.full.min.js"></script>
 </head>
 <body>
-<section id="header">
-    <header class="main-header">
+<div id="wrapper">
+<div id="header">
+    <header class="main-header-index">
         <a href="#"><img id="logo" src="/images/logo.svg" alt="King Palace"></a>
         <div id="nav-icon" class="clearfix">
             <span></span>
@@ -55,8 +56,8 @@
                     <li><a href="#">Vietnamese</a></li>
                 </ul>
             </div>
-</section>
-<section id="organization">
+</div>
+<div id="organization">
     <div class="header-title">
         <h2 class="red">hoàn cầu đà lạt</h2>
         <div class="bottom-img">
@@ -72,8 +73,8 @@
                                                               alt="Organization"></div>
         </div>
     </div>
-</section>
-<section id="palace">
+</div>
+<div id="palace">
     <div class="header-title">
         <h2 class="yellow">các dinh thự vua bảo đại</h2>
         <div class="bottom-img">
@@ -114,8 +115,8 @@
             </div>
         </div>
     </div>
-</section>
-<section id="service">
+</div>
+<div id="service">
     <div class="header-title">
         <h2 class="red">các loại hình dịch vụ</h2>
         <div class="bottom-img">
@@ -137,8 +138,8 @@
             <?php endforeach; ?>
         </div>
     </div>
-</section>
-<section id="email-receive">
+</div>
+<div id="email-receive">
     <div class="header-title">
         <h2 class="yellow">nhận bài viết mới</h2>
     </div>
@@ -151,7 +152,8 @@
             <button name="letter-submit" type="submit" id="letter-submit">Đăng Ký</button>
         </div>
     </form>
-</section>
+</div>
+</div>
 <?php $this->partial("share/footer"); ?>
 <script>
     function DropDown(el) {

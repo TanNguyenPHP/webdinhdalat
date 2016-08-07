@@ -15,6 +15,7 @@ class ControllerBase extends Controller
         $this->assets
             ->addCss('/css/frontend/Vendor/awesome-font/font-awesome.css')
             ->addCss('/css/frontend/iconmoon.css')
+            ->addCss('/css/frontend/hotel/bootstrap.min.css')
             ->addCss('/css/frontend/main.css')
             ->addCss('/css/frontend/responsive.css')
             ->addCss('/css/backend/jquery.datetimepicker.css');
