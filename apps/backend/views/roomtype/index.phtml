@@ -1,10 +1,5 @@
 <?php echo $this->getContent() ?>
 <?php
-/**
- * @var \Phalcon\Mvc\View\Engine\Php $this
- */
-?>
-<?php
 echo $this->tag->form(
     array(
         "index",
@@ -17,7 +12,7 @@ echo $this->tag->form(
 ?>
 <section class="content-header">
     <h2>
-        Danh sách bài viết
+        Danh sách phòng
     </h2>
     <div class="arrange-button">
         <a href="/backend/roomtype/new/" class="btn btn-info" id="modaltrigger" rel="leanModal">Thêm mới</a>
@@ -58,7 +53,7 @@ echo $this->tag->form(
             <thead>
             <tr style="background-color: #3c8dbc; color:#fff">
                 <th>Phòng</th>
-                <th>Vị trí</th>
+                <th>Thứ tự</th>
                 <th>Hiển thị</th>
             </tr>
             </thead>
@@ -66,44 +61,45 @@ echo $this->tag->form(
             <?php foreach ($data['rooms'] as $item) { ?>
                 <tr>
                     <th scope="row" style="text-align:left">
-                        <a href="edit/<?php echo $data['rooms']->items[$i]->id ?>"><?php echo $data['listnews']->items[$i]->title ?></a>
+                        <a href="/backend/roomtype/edit/<?php echo $item->id ?>"><?php echo $item->name ?></a>
                     </th>
                     <td>
-                        <?php
-                        if ($data['listnews']->items[$i]->datecreate != '')
-                            echo DateTime::createFromFormat('YmdHis', $data['listnews']->items[$i]->datecreate)->format('d/m/Y');
-                        ?>
+                        <?php echo $item->position ?>
                     </td>
-                    <td align="center">
-                        <?php if ($data['listnews']->items[$i]->is_status == '1')
-                            echo '<input class="check-box" disabled="disabled" type="checkbox" checked>';
-                        else
-                            echo '<input class="check-box" disabled="disabled" type="checkbox">';
-                        ?>
-                    </td>
-                    <td>
-                        <?php echo $data['listnews']->items[$i]->position ?>
+                    <td align="center" class="isshow" data-id="<?php echo $item->id ?>">
+                        <?php if ($item->is_show == '1') : ?>
+                            <a class="delete-btn add-button-disable" href="#" disabled="disabled"><i
+                                    class="fa fa-check-circle" id="idshow-<?php echo $item->id ?>"></i></a>
+                        <?php else: ?>
+                            <a class="delete-btn add-button-disable" href="#" disabled="disabled"><i
+                                    class="fa fa-times" id="idshow-<?php echo $item->id ?>"></i></a>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php } ?>
             </tbody>
         </table>
-        <nav style="text-align:right">
-            <ul class="pagination">
-                <li><?php echo $this->tag->linkTo("/backend/news/index", "First") ?></li>
-                <li><?php echo $this->tag->linkTo("/backend/news/index?page=" . $data['listnews']->before, "Previous") ?></li>
-                <li><?php echo $this->tag->linkTo("/backend/news/index?page=" . $data['listnews']->next, "Next") ?></li>
-                <li><?php echo $this->tag->linkTo("/backend/news/index?page=" . $data['listnews']->last, "Last") ?></li>
-            </ul>
-        </nav>
     </div>
 </section><!-- /.content -->
 <?php echo $this->tag->endForm(); ?>
 <script type="text/javascript">
-    $('#DateFrom').datetimepicker({
-        value: '<?php echo $data['dateFrom'] ?>', step: 1
-    });
-    $('#DateTo').datetimepicker({
-        value: '<?php echo $data['dateTo'] ?>', step: 1
+    var is_loading = false;
+    $(document).ready(function () {
+        $('.isshow').off('click').on('click', function (e) {
+            e.preventDefault();
+            var link = $(this);
+            var id = link.data('id');
+            $.ajax({
+                url: '/backend/roomtype/changeshow',
+                type: 'POST',
+                data: {id: id},
+                dataType: 'text',
+                success: function (result) {
+                    var show = '#idshow-' + id;
+                    $(show).attr("class", result);
+                    is_loading = false;
+                }
+            });
+        });
     });
 </script>

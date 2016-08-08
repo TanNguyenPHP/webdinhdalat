@@ -1,0 +1,157 @@
+<?php echo $this->getContent() ?>
+<?php
+echo $this->tag->form(
+    array(
+        "/backend/roomtype/create",
+        "autocomplete" => "off",
+        "class" => "form-horizontal",
+        "id" => "createRoomtype",
+        "method" => "post",
+        "enctype" => "multipart/form-data"
+    )
+);
+?>
+<style>
+    span.select2-selection.select2-selection--single {
+        height: 34px;
+    }
+</style>
+<section class="content-header">
+    <h2>Loại phòng</h2>
+    <div class="validation-summary-valid" data-valmsg-summary="true">
+        <ul>
+            <li style="display:none"></li>
+        </ul>
+    </div>
+</section>
+<section class="content">
+    <div class="arrage-popup">
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="cat">Chọn ngôn ngữ</label>
+            <div class="col-md-6">
+                <select class="form-control" id="lang" name="lang">
+                    <?php foreach ($data["langs"] as $items): ?>
+                        <?php echo "<option value=\"$items->id\">$items->lang</option>" ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="Name">Tên phòng</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->textField(array("name", "size" => 30, "class" => "form-control", "id" => "name", "minlength" => "4", "maxlength" => "64")) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="content_short">Mô tả</label>
+            <div class="col-md-6">
+                    <textarea class="form-control" cols="20" id="content" maxlength="512" name="content"
+                              rows="5"></textarea>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="content_short">Ảnh đại diện</label>
+            <div class="col-md-6">
+                <input type="file" id="avatar_image" name="avatar_image" accept="image/*" required>
+                <p id="pic_error2" style="display:none; color:#FF0000;">Kích thước ảnh không quá 2 MB.</p>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="cat">Chọn album phòng</label>
+            <div class="col-md-6">
+                <select class="form-control" id="album" name="album">
+                    <?php foreach ($data["albums"] as $items): ?>
+                        <?php echo "<option value=\"$items->id\">$items->name</option>" ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="position">Thứ tự hiển thị</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->textField(array("position", "size" => 30, "class" => "form-control", "id" => "fieldposition", "maxlength" => "3", "value" => "0")) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="seo_title">Keyword Title</label>
+            <div class="col-md-6">
+                <?php echo $this->tag->textField(array("seo_title", "size" => 30, "class" => "form-control", "id" => "fieldSeo_title", "maxlength" => "48")) ?>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="seo_desc">Meta Description</label>
+            <div class="col-md-6">
+                <textarea class="form-control" cols="20" id="seo_desc" maxlength="128" name="seo_desc"
+                          rows="2"></textarea>
+            </div>
+        </div>
+        <div style="text-align:center" class="col-md-12">
+            <input type="submit" value="Lưu" id="submit" class="btn btn-info"/>
+            <a href="/backend/roomtype/index" class="btn btn-info">Về danh sách</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>
+<?php echo $this->tag->endForm(); ?>
+<script>
+    $('input[type="submit"]').prop("disabled", true);
+    var a = 0;
+    var b = 0;
+    $('#avatar_image').bind('change', function () {
+        if ($('input:submit').attr('disabled', false)) {
+            $('input:submit').attr('disabled', true);
+        }
+        var ext = $('#avatar_image').val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+            $('#pic_error2').slideUp("slow");
+            a = 0;
+        } else {
+            var picsize = (this.files[0].size);
+            if (picsize > 2048000) {
+                $('#pic_error2').slideDown("slow");
+                a = 0;
+            } else {
+                a = 1;
+                $('#pic_error2').slideUp("slow");
+            }
+            if (a == 1 || b == 2) {
+                $('input:submit').attr('disabled', false);
+            }
+        }
+    });
+    $("form").submit(function () {
+        var editorContent = tinyMCE.get('content').getContent();
+        if (editorContent == '') {
+            $('#messageContent').html('Nhập nội dung');
+            return false;
+        }
+        return true;
+    });
+    $().ready(function () {
+        $("#album").select2();
+        // validate signup form on keyup and submit
+        $("#createRoomtype").validate({
+            rules: {
+                title: {
+                    required: true,
+                    minlength: 4
+                },
+                position: {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                title: {
+                    required: "Nhập tên",
+                    minlength: "Lớn hơn 4 ký tự"
+                },
+                position: {
+                    required: "Nhập thứ tự hiển thị",
+                    number: "Nhập số"
+                }
+            }
+        });
+    });
+
+</script>

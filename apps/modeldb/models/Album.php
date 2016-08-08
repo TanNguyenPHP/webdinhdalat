@@ -69,7 +69,10 @@ class Album extends Model
     {
         return parent::find(array("name like '%$name%' and is_del = '0'", 'order' => 'datecreate desc'));
     }
-
+    public static function findAllOrderName()
+    {
+        return parent::find(array("is_del = '0'", 'order' => 'name'));
+    }
     /**
      * Allows to query the first record that match the specified conditions
      *

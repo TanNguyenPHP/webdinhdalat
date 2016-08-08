@@ -105,7 +105,12 @@ class Roomtype extends Model
     {
         return parent::findFirst($parameters);
     }
+    public static function findAll($name = '', $id_lang = '')
+    {
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($name = '', $id_lang = ''));
 
+        return $queryBuilder->getQuery()->execute();
+    }
     private static function buildparams($name = '', $id_lang = '')
     {
         $conditions = "1=1 ";
@@ -114,12 +119,10 @@ class Roomtype extends Model
         if ($name != '')
             $conditions = $conditions . " and name = '$name' ";
         return $params = array(
-            'models' => array('Webdinhdalat\Modeldb\Models\Menu'),
-            'columns' => array('id', 'name', 'id_lang', 'url', 'position', 'is_active', 'slug_category'),
+            'models' => array('Webdinhdalat\Modeldb\Models\Roomtype'),
+            'columns' => array('id', 'name', 'id_lang', 'position', 'is_show'),
             'conditions' => $conditions,
-            // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
             'order' => 'position'
-            // or 'limit' => array(20, 20),
         );
     }
 }
