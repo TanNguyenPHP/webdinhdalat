@@ -37,7 +37,7 @@
                         <?php if ($data['data']->count() > 0): ?>
                             <?php foreach ($data['data'] as $items): ?>
                                 <div class="col-md-6">
-                                    <img class="img-responsive" src="<?php echo '\\' . $items->avatar_image ?>"
+                                    <img class="img-responsive" src="/<?php echo  $items->avatar_image ?>"
                                          alt="hinh to nhat">
                                     <div class="content">
                                         <span>23/12/1988</span>
@@ -82,7 +82,7 @@
                             var html = '<div id="pagenews" class="row right-news" data-page="' + pages + '">';
                             $.each(result.listnews, function (key, item) {
                                 html += '<div class="news-frame col-md-3">';
-                                html += '<img class="img-responsive" src="\\' + item.avatar_image + '" alt="hinh to nhat">';
+                                html += '<img class="img-responsive" src="/' + item.avatar_image + '" alt="hinh to nhat">';
                                 html += '<div class="special-content">';
                                 html += '<h3>' + item.title + '</h3>';
                                 html += '<p>' + item.content_short + '</p>';

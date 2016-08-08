@@ -9,7 +9,6 @@ use Phalcon\Di;
 
 class NewsController extends ControllerBase
 {
-
     public function indexAction($id = "")
     {
         $is_status = "1";
