@@ -20,4 +20,13 @@ $(document).ready(function(){
 	$(window).resize(function() {
 		setHeight();
 	});
+
+	//stick footer
+
+	$(function(){
+	  var footerHeight = $("#footer").height();
+	  $("#wrapper").css("padding-bottom", footerHeight);
+	  $("#footer").css("margin-top", -footerHeight);
+	});
+
 });
