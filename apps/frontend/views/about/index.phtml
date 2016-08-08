@@ -5,13 +5,13 @@
         <div class="col-md-12">
             <article>
                 <header>
-                    <h3><?php echo $data->title; ?></h3>
+                    <h3><?php echo $data['data']->title; ?></h3>
                     <div class="meta">
-                        <span><?php echo DateTime::createFromFormat('YmdHis', $data->datecreate)->format('d/m/Y');?></span>
+                        <span><?php echo DateTime::createFromFormat('YmdHis', $data['data']->datecreate)->format('d/m/Y');?></span>
                     </div>
                 </header>
                 <div>
-                    <?php echo $data->content; ?>
+                    <?php echo $data['data']->content; ?>
                 </div>
             </article>
         </div>

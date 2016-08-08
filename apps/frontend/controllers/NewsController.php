@@ -5,6 +5,7 @@ use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Webdinhdalat\Modeldb\Models\News;
 use Webdinhdalat\Modeldb\Models\Category;
+use Webdinhdalat\Modeldb\Models\Menu;
 use Phalcon\Di;
 
 class NewsController extends ControllerBase
@@ -14,7 +15,12 @@ class NewsController extends ControllerBase
         $is_status = "1";
         $page = "1";
         $limit = "4";
-
+        $menutitle = "";
+        $menu = Menu::findFirst("slug_category = '$id'");
+        $menutitle = $menu->name;
+        if (!$menu) {
+            $menutitle = $_GET['menutitle'];
+        }
         try {
             $cat = Category::findConditionAll('', $id, $is_status);
             $cats = Category::findConditionAll($cat[0]->id, '', $is_status);
@@ -30,7 +36,7 @@ class NewsController extends ControllerBase
                 $this->tag->prependTitle($cat[0]->title . " | ");
                 self::setMetaDescription($cat[0]->meta_description);
             }
-            return $this->view->data = array('data' => $data, 'cat' => $cat, 'catid' => $cat[0]->id);
+            return $this->view->data = array('data' => $data, 'cat' => $cat, 'catid' => $cat[0]->id, 'menutitle' => $menutitle);
         } catch (\Exception $e) {
             return $this->response->redirect('/index');
         }
@@ -93,5 +99,30 @@ class NewsController extends ControllerBase
             "endpage" => $endpage
         );
         return $this::sendJson($data);
+    }
+
+    private function SetCookie($title)
+    {
+        if ($this->cookies->has('menutitle')) {
+
+            // Get the cookie
+            $title = $this->cookies->get('menutitle');
+
+            // Get the cookie's value
+            return $title->getValue();
+        }
+        $this->cookies->set('menutitle', $title, 60 * 60 * 24);
+    }
+
+    private function GetCookie()
+    {
+        if ($this->cookies->has('menutitle')) {
+
+            // Get the cookie
+            $title = $this->cookies->get('menutitle');
+
+            // Get the cookie's value
+            return $title->getValue();
+        }
     }
 }

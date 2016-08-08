@@ -15,14 +15,13 @@ class AboutController extends ControllerBase
 {
     public function indexAction()
     {
-        $data = News::findFirstNewsOfCategory('4','1');
+        $data = News::findFirstNewsOfCategory('4', '1');
 
-        if($data == null)
-        {
+        if ($data == null) {
             return $this->response->redirect('/index');
         }
         $this->tag->prependTitle("$data->seo_title | ");
         self::setMetaDescription($data->seo_desc);
-        return $this->view->data = $data;
+        return $this->view->data = array('data' => $data, 'menutitle' => 'Giới thiệu');
     }
 }

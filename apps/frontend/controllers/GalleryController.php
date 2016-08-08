@@ -23,7 +23,7 @@ class GalleryController extends ControllerBase
         $menu = Menu::findFirstByid('3');
         $this->tag->prependTitle($menu->title . " | ");
         self::setMetaDescription($menu->meta_description);
-        return $this->view->data = $data;
+        return $this->view->data = array('data'=>$data,'menutitle'=>'Thư viện ảnh');
     }
 
     public function morealbumAction()

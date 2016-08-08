@@ -6,6 +6,7 @@
  * Time: 12:26 AM
  */
 namespace Webdinhdalat\Frontend\Controllers;
+
 use Webdinhdalat\Modeldb\Models\Menu;
 
 class MapController extends ControllerBase
@@ -20,7 +21,7 @@ class MapController extends ControllerBase
             }
             $this->tag->prependTitle($data->title . " | ");
             self::setMetaDescription($data->meta_description);
-            return $this->view->data = $data;
+            return $this->view->data = array('menutitle' => 'Bản đồ');
         }
     }
 }

@@ -4,7 +4,7 @@
     <div class="menu-common">
         <div class="decor"></div>
         <ul>
-            <?php foreach ($data->items as $item): ?>
+            <?php foreach ($data['data']->items as $item): ?>
                 <?php echo "<li><a href=\"#\">$item->name</a></li>" ?>
             <?php endforeach; ?>
         </ul>
@@ -13,7 +13,7 @@
     <div class="gallery-content" id="gallery-content">
         <div class="gallery-content container">
             <div class="row" id="row-content">
-                <?php foreach ($data->items as $item): ?>
+                <?php foreach ($data['data']->items as $item): ?>
                     <div class="text-content col-md-3">
                         <div class="overlay background-ov">
                             <img class="img-responsive" src="<?php echo '\\' . $item->dir ?>" alt="nha">

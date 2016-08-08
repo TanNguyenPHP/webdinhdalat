@@ -1,13 +1,18 @@
 <?php
 namespace Webdinhdalat\Frontend\Controllers;
 use Webdinhdalat\Modeldb\Models\Contact;
+use Webdinhdalat\Modeldb\Models\Menu;
 
 class ContactController extends ControllerBase
 {
 
     public function indexAction()
     {
+        $data = Menu::findFirst("id = '2'");
 
+        $this->tag->prependTitle($data->title . " | ");
+        self::setMetaDescription($data->meta_description);
+        return $this->view->data = array('menutitle' => 'Bản đồ');
     }
     public function createAction()
     {
@@ -24,14 +29,11 @@ class ContactController extends ControllerBase
                 $this->flash->error($message);
             }
 
-            $this->dispatcher->forward(array(
+            return $this->dispatcher->forward(array(
                 'controller' => "contact",
                 'action' => 'index'
             ));
-
-            return;
         }
-
         return $this->response->redirect('/contact/index');
     }
 }
