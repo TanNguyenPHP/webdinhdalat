@@ -19,6 +19,10 @@
 
 }
 @media only screen and (max-width: 991px) {
+
+.news-content .special .special-content p {
+    padding-bottom: 150px;
+}
 .js .navigate{display:none;}
 .js .slicknav_menu{display:block;}
 .header .button-style-1{display: none;}
