@@ -373,6 +373,7 @@ section {
     letter-spacing: 0.1px;
     color: #b3b3b3;
     padding: 0 5px;
+    text-transform: lowercase;
 }
 
 #palace .wrapper-content .content-special {
