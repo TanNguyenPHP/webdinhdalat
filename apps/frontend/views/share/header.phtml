@@ -6,7 +6,7 @@
                     <div class="pull-left">
                         <div class="logo">
                             <a href="/index"><img alt="Logo" src="/images/logo.svg" class="img-responsive"
-                                                      width="70" height="33"/></a>
+                                                  width="70" height="33"/></a>
                         </div>
                     </div>
                     <div class="pull-right">
@@ -23,11 +23,13 @@
                 </div>
             </div>
         </div>
-        <h1><?php echo $data['menutitle']?></h1>
-        <ul class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">news</a></li>
-            <li><a href="#">tin-moi</a></li>
-        </ul>
+        <h1><?php echo $data['menutitle'] ?></h1>
+        <?php if (isset($data['menusub'])): ?>
+            <ul class="breadcrumb">
+                <?php foreach($data['menusub'] as $item):?>
+                    <li><a href="/news/<?php echo $item->slug ?>"><?php echo $item->name ?></a></li>
+                <?php endforeach;?>
+            </ul>
+        <?php endif; ?>
     </div>
 </div>

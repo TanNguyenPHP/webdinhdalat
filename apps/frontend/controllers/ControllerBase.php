@@ -6,6 +6,7 @@ use Phalcon\Mvc\Controller;
 use Webdinhdalat\Commons\ParamsSEO;
 use Webdinhdalat\Modeldb\Models\Menu as menu;
 use Webdinhdalat\Modeldb\Models\Webconfig as config;
+use Webdinhdalat\commons\ParamsCookie;
 
 class ControllerBase extends Controller
 {
@@ -25,7 +26,7 @@ class ControllerBase extends Controller
             ->addJs('/js/jquery.validate.min.js')
             ->addJs('/js/jquery.datetimepicker.full.min.js');
         $data = config::findFirst("id_lang = '1'");//Language
-        $menu = menu::findall('1','1');//Language
+        $menu = menu::findall('1', '1');//Language
         $this->tag->setTitle($data->title);
         self::setMetaDescription($data->meta);
         return $this->view->datamain = array('data' => $data, 'menu' => $menu);
@@ -34,6 +35,11 @@ class ControllerBase extends Controller
     protected function setMetaDescription($content)
     {
         ParamsSEO::$meta_description = "$content";
+    }
+
+    protected function getParamCookie()
+    {
+        return ParamsCookie::$menutitle;
     }
 
     protected function sendJson($data)
@@ -51,4 +57,14 @@ class ControllerBase extends Controller
         $this->response->setContent($data);
         return $this->response;
     }
+
+    protected function SetCookie($name = null, $value = null)
+    {
+        if (isset($_COOKIE[$name])) {
+            $_COOKIE[$name] = $value;
+        } else {
+            setcookie($name, $value, time() + (60 * 60 * 24));
+        }
+    }
+
 }
