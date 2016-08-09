@@ -43,7 +43,7 @@
                                     <div class="content">
                                         <span>23/12/1988</span>
                                         <h3><?php echo $items->title ?></h3>
-                                        <p><?php echo $items->content_short ?></p>
+                                        <p><?php echo substr($items->content_short,0,10)  ?></p>
                                         <a class="new-button" href="<?php echo '\\news\\detail\\' . $items->slug ?>">đọc
                                             thêm</a>
                                     </div>
@@ -51,23 +51,7 @@
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
-                    <div class="row">
-                        <?php if ($data['data']->count() > 0): ?>
-                            <?php foreach ($data['data'] as $items): ?>
-                                <div class="col-md-6">
-                                    <img class="img-responsive" src="/<?php echo  $items->avatar_image ?>"
-                                         alt="hinh to nhat">
-                                    <div class="content">
-                                        <span>23/12/1988</span>
-                                        <h3><?php echo $items->title ?></h3>
-                                        <p><?php echo $items->content_short ?></p>
-                                        <a class="new-button" href="<?php echo '\\news\\detail\\' . $items->slug ?>">đọc
-                                            thêm</a>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
+
                 </div>
             </div>
             <div class="latest-new">
