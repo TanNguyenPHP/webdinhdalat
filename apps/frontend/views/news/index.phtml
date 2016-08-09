@@ -1,68 +1,92 @@
 <?php echo $this->getContent(); ?>
+<?php $count= 0;?>
 <input type="hidden" name="menutitle" value="<?php echo $data['menutitle'] ?>">
 <div id="wrapper">
-<div class="news">
-    <div class="menu-common">
-        <div class="decor"></div>
-        <ul>
-            <?php foreach ($data['cat'] as $items): ?>
-                <li><a href="/news/<?php echo $items->slug ?>"><?php echo $items->name ?></a></li>
-            <?php endforeach; ?>
-        </ul>
-        <div class="decor"></div>
-    </div>
-    <div class="news-content">
-        <div class="container">
-            <div class="row">
-                <div class="special col-md-6">
-                    <?php if ($data['data']->count() == 0): ?>
+    <div class="news">
+        <div class="menu-common">
+            <div class="decor"></div>
+            <ul>
+                <?php foreach ($data['cat'] as $items): ?>
+                    <li><a href="/news/<?php echo $items->slug ?>"><?php echo $items->name ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+            <div class="decor"></div>
+        </div>
+        <div class="news-content">
+            <div class="container">
+                <div class="row">
+                    <div class="special col-md-6">
+                        <?php if ($data['data']->count() == 0): ?>
 
-                    <?php else: ?>
-                        <?php foreach ($data['data'] as $items): ?>
-                            <img class="img-responsive" src="<?php echo '\\' . $items->avatar_image ?>"
-                                 alt="hinh">
-                            <div class="special-content">
-                                <h3><?php echo $items->title ?></h3>
-                                <p><?php echo $items->content_short ?></p>
-                                <div class="button">
-                                    <a class="special-button" href="<?php echo '\\news\\detail\\' . $items->slug ?>">đọc
-                                        thêm</a>
-                                </div>
-                            </div>
-                            <?php break; ?>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-                <div class="right-news col-md-6">
-                    <div class="row">
-                        <?php if ($data['data']->count() > 0): ?>
+                        <?php else: ?>
                             <?php foreach ($data['data'] as $items): ?>
-                                <div class="col-md-6">
-                                    <img class="img-responsive" src="/<?php echo  $items->avatar_image ?>"
-                                         alt="hinh to nhat">
-                                    <div class="content">
-                                        <span>23/12/1988</span>
-                                        <h3><?php echo $items->title ?></h3>
-                                        <p><?php echo substr($items->content_short,0,10)  ?></p>
-                                        <a class="new-button" href="<?php echo '\\news\\detail\\' . $items->slug ?>">đọc
+                                <img class="img-responsive" src="<?php echo '\\' . $items->avatar_image ?>"
+                                     alt="hinh">
+                                <div class="special-content">
+                                    <h3><?php echo $items->title ?></h3>
+                                    <p><?php echo $items->content_short ?></p>
+                                    <div class="button">
+                                        <a class="special-button"
+                                           href="<?php echo '\\news\\detail\\' . $items->slug ?>">đọc
                                             thêm</a>
                                     </div>
                                 </div>
+                                <?php break; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
+                    <div class="right-news col-md-6">
+                        <div class="row">
+
+                            <?php if ($data['data']->count() > 0): ?>
+                                <?php if ($data['data']->count() < 2): ?>
+                                    <?php $count = $data['data']->count() ?>
+                                <?php else: ?>
+                                    <?php $count = 2 ?>
+                                <?php endif; ?>
+                                <?php for ($i = 0; $i < $count; $i++): ?>
+                                    <div class="col-md-6">
+                                        <img class="img-responsive" src="/<?php echo $data['data'][$i]->avatar_image ?>"
+                                             alt="hinh to nhat">
+                                        <div class="content">
+                                            <h3><?php echo $data['data'][$i]->title ?></h3>
+                                            <p><?php echo $data['data'][$i]->content_short ?></p>
+                                            <a class="new-button"
+                                               href="<?php echo '\\news\\detail\\' . $data['data'][$i]->slug ?>">đọc
+                                                thêm</a>
+                                        </div>
+                                    </div>
+                                <?php endfor; ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row">
+                            <?php if ($data['data']->count() > 2): ?>
+                                <?php for ($i = 2; $i < $data['data']->count(); $i++): ?>
+                                    <div class="col-md-6">
+                                        <img class="img-responsive" src="/<?php echo $data['data'][$i]->avatar_image ?>"
+                                             alt="hinh to nhat">
+                                        <div class="content">
+                                            <h3><?php echo $data['data'][$i]->title ?></h3>
+                                            <p><?php echo $data['data'][$i]->content_short ?></p>
+                                            <a class="new-button"
+                                               href="<?php echo '\\news\\detail\\' . $data['data'][$i]->slug ?>">đọc
+                                                thêm</a>
+                                        </div>
+                                    </div>
+                                <?php endfor; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="latest-new">
+                    <p>Tin tức</p>
+                </div>
+                <div id="pagenews" class=“row”>
 
                 </div>
             </div>
-            <div class="latest-new">
-                <p>Tin tức</p>
-            </div>
-            <div id="pagenews" class=“row”>
-
-            </div>
         </div>
     </div>
-</div>
 </div>
 <script defer type="text/javascript">
     var is_loading = false; // initialize is_loading by false to accept new loading
