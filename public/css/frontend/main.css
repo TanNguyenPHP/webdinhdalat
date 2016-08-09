@@ -132,7 +132,9 @@ h6 {
 
 #nav-icon:after {
     content: ' ';
-    width:150px;
+    width:40px;
+    height: 18px;
+    display: block;
 }
 /* Icon */
 #nav-icon {
@@ -362,8 +364,7 @@ section {
     font-size: 18px;
     text-align: center;
     color: #c1a050;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 15px;
 }
 
 #palace .wrapper-content p {
@@ -428,6 +429,7 @@ section {
     color: #b3b3b3;
     background-color: transparent;
     display: block;
+    line-height: 25px;
 }
 
 #palace .wrapper-content-special {
@@ -1067,32 +1069,32 @@ article img {
     height: auto;
 }
 
-.main-header-index {
+.main-header {
     padding: 50px;
     position: relative;
 }
 
-.main-header-index #nav-icon {
+.main-header #nav-icon {
     display: inline-block;
     float: right;
 }
-.main-header-index #logo,
-.main-header #logo {
+.main-header #logo,
+.main-header-index #logo {
     width: 70px;
     height: 33px;
 }
-.main-header {
+.main-header-index {
     background: #f4f4f4;
     height: auto;
     position: relative;
     background-color: transparent;
 }
 
-.main-header .logo {
+.main-header-index .logo {
     padding: 25px 0;
 }
 
-.main-header a {
+.main-header-index a {
     font-family: Varela Round;
 }
 
@@ -1227,7 +1229,7 @@ article img {
     font-size: 11px;
     letter-spacing: 0.1525em;
     color: #b3b3b3;
-    padding: 47px 24px;
+    padding: 38px 24px;
     display: inline-block;
 }
 
