@@ -1107,13 +1107,16 @@ article img {
     font-family: Varela Round;
 }
 
-.main-header .close-menu,
-.main-header-index .close-menu {
+.main-header .close-menu {
     position: absolute !important;
     z-index: 1001;
     right: 50px;
 }
-
+.main-header-index .close-menu {
+    position: absolute !important;
+    z-index: 1001;
+    right: 135px;
+}
 .nav{
     position: relative;
 }
