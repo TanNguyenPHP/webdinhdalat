@@ -32,8 +32,11 @@ class NewsController extends ControllerBase
             $menusub = $cats;
             if ($cat[0]->pid != 0)
                 $menusub = Category::findConditionAll($cat[0]->pid, '', $is_status);
-            if (!isset($_COOKIE[ParamsCookie::menusub]))
-                $this::SetCookie(ParamsCookie::menusub, '2');
+            if (!isset($_COOKIE[ParamsCookie::menusub])) {
+                $this::SetCookie(ParamsCookie::menusub, json_encode($menusub, JSON_UNESCAPED_UNICODE));
+            } else {
+                $this::SetCookie(ParamsCookie::menusub, json_encode($menusub, JSON_UNESCAPED_UNICODE));
+            }
             if ($data->count() == 0) {
                 $data = News::findAllNewsOfCategory($cats[0]->id, '', $page, $limit);
                 $cat = $cats;
@@ -69,7 +72,7 @@ class NewsController extends ControllerBase
                 self::setMetaDescription($data->seo_desc);
                 return $this->view->data = array('data' => $data,
                     'menutitle' => $menutitle,
-                    'menusub' => $_COOKIE[ParamsCookie::menusub]);
+                    'menusub' => json_decode($_COOKIE[ParamsCookie::menusub], true));
             } catch (\Exception $e) {
                 return $this->response->redirect('/index');
             }

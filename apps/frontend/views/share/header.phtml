@@ -26,9 +26,13 @@
         <h1><?php echo $data['menutitle'] ?></h1>
         <?php if (isset($data['menusub'])): ?>
             <ul class="breadcrumb">
-                <?php foreach($data['menusub'] as $item):?>
-                    <li><a href="/news/<?php echo $item->slug ?>"><?php echo $item->name ?></a></li>
-                <?php endforeach;?>
+                <?php foreach ($data['menusub'] as $itemsub): ?>
+                    <?php if (isset($itemsub->slug)): ?>
+                        <li><a href="/news/<?php echo $itemsub->slug ?>"><?php echo $itemsub->name ?></a></li>
+                    <?php else: ?>
+                        <li><a href="/news/<?php echo $itemsub['slug'] ?>"><?php echo $itemsub['name'] ?></a></li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </ul>
         <?php endif; ?>
     </div>

@@ -61,7 +61,7 @@ class ControllerBase extends Controller
     protected function SetCookie($name = null, $value = null)
     {
         if (isset($_COOKIE[$name])) {
-            $_COOKIE[$name] = $value;
+            setcookie($name, $value, time() + (60 * 60 * 24));
         } else {
             setcookie($name, $value, time() + (60 * 60 * 24));
         }
