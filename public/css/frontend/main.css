@@ -98,17 +98,17 @@ h2 {
 h3 {
     font-family: Varela Round;
     font-size: 21px;
-    line-height: 36px;
+    /*line-height: 36px;*/
     color: #000;
-    letter-spacing: 0.0825em;
+    /*letter-spacing: 0.0825em;*/
 }
 
 h4 {
     font-family: Varela Round;
     font-size: 18px;
-    line-height: 32px;
+    /*line-height: 32px;*/
     color: #000;
-    letter-spacing: 0.0825em;
+    /*letter-spacing: 0.0825em;*/
 }
 
 h5 {
@@ -130,6 +130,10 @@ h6 {
 /*  Home page
 /*-----------------------------------------------------------------------------------*/  
 
+#nav-icon:after {
+    content: ' ';
+    width:150px;
+}
 /* Icon */
 #nav-icon {
     width: 40px;
