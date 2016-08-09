@@ -7,6 +7,7 @@ use Webdinhdalat\Modeldb\Models\News;
 use Webdinhdalat\Modeldb\Models\Category;
 use Webdinhdalat\Modeldb\Models\Menu;
 use Phalcon\Di;
+use Webdinhdalat\Commons\ParamsCookie;
 
 class NewsController extends ControllerBase
 {
@@ -16,15 +17,23 @@ class NewsController extends ControllerBase
         $page = "1";
         $limit = "4";
         $menutitle = "";
-        $menu = Menu::findFirst("slug_category = '$id'");
-        $menutitle = $menu->name;
-        if (!$menu) {
-            $menutitle = $_GET['menutitle'];
-        }
+
         try {
+            $menu = Menu::findFirst("slug_category = '$id'");
+            if (!$menu) {
+                $menutitle = $_COOKIE[ParamsCookie::menutitle];
+            } else {
+                $this::SetCookie(ParamsCookie::menutitle, $menu->name);
+                $menutitle = $menu->name;
+            }
             $cat = Category::findConditionAll('', $id, $is_status);
             $cats = Category::findConditionAll($cat[0]->id, '', $is_status);
             $data = News::findAllNewsOfCategory($cat[0]->id, '', $page, $limit);//$cat = '', $id_lang = '',$page='',$limit=''//Thay đổi tham số thành dynamic;
+            $menusub = $cats;
+            if ($cat[0]->pid != 0)
+                $menusub = Category::findConditionAll($cat[0]->pid, '', $is_status);
+            if (!isset($_COOKIE[ParamsCookie::menusub]))
+                $this::SetCookie(ParamsCookie::menusub, '2');
             if ($data->count() == 0) {
                 $data = News::findAllNewsOfCategory($cats[0]->id, '', $page, $limit);
                 $cat = $cats;
@@ -36,7 +45,11 @@ class NewsController extends ControllerBase
                 $this->tag->prependTitle($cat[0]->title . " | ");
                 self::setMetaDescription($cat[0]->meta_description);
             }
-            return $this->view->data = array('data' => $data, 'cat' => $cat, 'catid' => $cat[0]->id, 'menutitle' => $menutitle);
+            return $this->view->data = array('data' => $data,
+                'cat' => $cat,
+                'catid' => $cat[0]->id,
+                'menutitle' => $menutitle,
+                'menusub' => $menusub);
         } catch (\Exception $e) {
             return $this->response->redirect('/index');
         }
@@ -45,14 +58,22 @@ class NewsController extends ControllerBase
     public function detailAction($id)
     {
         if (!$this->request->isPost()) {
-            $data = News::findFirstByslug("$id");
-            if (!$data) {
-                $this->flash->error("Bài viết không tồn tại");
+            try {
+                $menutitle = $_COOKIE[ParamsCookie::menutitle];
+                $data = News::findFirstByslug("$id");
+                if (!$data) {
+                    $this->flash->error("Bài viết không tồn tại");
+                    return $this->response->redirect('/index');
+                }
+                $this->tag->prependTitle($data->seo_title . " | ");
+                self::setMetaDescription($data->seo_desc);
+                return $this->view->data = array('data' => $data,
+                    'menutitle' => $menutitle,
+                    'menusub' => $_COOKIE[ParamsCookie::menusub]);
+            } catch (\Exception $e) {
                 return $this->response->redirect('/index');
             }
-            $this->tag->prependTitle($data->seo_title . " | ");
-            self::setMetaDescription($data->seo_desc);
-            return $this->view->data = $data;
+
         }
     }
 
@@ -101,28 +122,5 @@ class NewsController extends ControllerBase
         return $this::sendJson($data);
     }
 
-    private function SetCookie($title)
-    {
-        if ($this->cookies->has('menutitle')) {
 
-            // Get the cookie
-            $title = $this->cookies->get('menutitle');
-
-            // Get the cookie's value
-            return $title->getValue();
-        }
-        $this->cookies->set('menutitle', $title, 60 * 60 * 24);
-    }
-
-    private function GetCookie()
-    {
-        if ($this->cookies->has('menutitle')) {
-
-            // Get the cookie
-            $title = $this->cookies->get('menutitle');
-
-            // Get the cookie's value
-            return $title->getValue();
-        }
-    }
 }
