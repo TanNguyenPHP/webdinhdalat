@@ -11,8 +11,8 @@
 .book-slider ul li{margin-right: 30px;}
 .main-footer {padding: 0px;}
 .book-slider input, .book-slider ul li.li-input{width: 165px;}
-.breadcrumb h1{ font-size: 26px; line-height: 32px !important; }
-.breadcrumb{ padding: 40px 0; }
+/*.breadcrumb h1{ font-size: 26px; line-height: 32px !important; }*/
+/*.breadcrumb{ padding: 40px 0; }*/
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -25,7 +25,6 @@
 .slider-home .flex-viewport {max-height: 560px;}
 .book-slider{height: auto;padding:0 20px !important;}
 .free-book .book-slider{height: auto; padding: 30px 60px !important; }
-
 
 
 .reserve-form-area li:last-child{margin-left: -20px;}
