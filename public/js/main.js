@@ -8,6 +8,16 @@ $(document).ready(function(){
 		}
 	});
 
+	//second menu 
+	$('#nav-icon1').click(function(){
+		$(this).toggleClass('close-menu open');
+		if($(this).hasClass('open')){
+			$('.pre-menu').css('display','block');
+		} else {
+			$('.pre-menu').css('display','none');
+		}
+	});
+
 	
 
 	//fix height with viewport

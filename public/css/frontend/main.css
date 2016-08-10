@@ -222,6 +222,15 @@ h6 {
     left: 8px;
 }
 
+.invisible-menu {
+    display: block;
+}
+.nav1 {
+    display: none;
+}
+.invisible-premenu {
+    display: none;
+}
 section {
     padding-bottom: 100px;
     padding-top: 50px;
@@ -1103,7 +1112,11 @@ article img {
     z-index: 1001;
     right: 50px;
 }
-
+.main-header-index .close-menu {
+    position: absolute !important;
+    z-index: 1001;
+    right: 135px;
+}
 .nav{
     position: relative;
 }

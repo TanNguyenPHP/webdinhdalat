@@ -1,4 +1,13 @@
 <div class="header">
+    <nav class="pre-menu invisible-premenu" style="display:none">
+        <ul>
+            <?php foreach ($datamain['menu'] as $item) : ?>
+                <li>
+                    <a href="/<?php echo $item->url . '/' . $item->slug_category ?>"><?php echo $item->name ?></a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
     <div class="news-header">
         <div class="main-header-index"><!-- Main-header -->
             <div class="container">
@@ -10,7 +19,7 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <nav class="nav clearfix">
+                        <nav class="nav clearfix invisible-menu">
                             <ul id="navigate" class="sf-menu navigate">
                                 <?php foreach ($datamain['menu'] as $item) : ?>
                                     <li class="parent-menu">
@@ -19,6 +28,13 @@
                                 <?php endforeach; ?>
                             </ul>
                         </nav>
+                        <div class="nav1">
+                            <div id="nav-icon1" class="clearfix">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
