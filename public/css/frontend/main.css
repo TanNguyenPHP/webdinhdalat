@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url("awesome-font/font-awesome.css");
 
 @font-face {
     font-family: 'utm_essendine_capsregular';
@@ -2482,8 +2483,8 @@ button#contact-submit, #email-receive .email-box input#contact-submit {
 }
 
 .flex-direction-nav a:before {
-    content: "\f104";
-    font-family: FontAwesome;
+    content: "\f104" !important;
+    font-family: FontAwesome !important;
     font-style: normal;
     font-weight: normal;
     text-decoration: inherit;
@@ -2497,7 +2498,7 @@ button#contact-submit, #email-receive .email-box input#contact-submit {
 }
 
 .flex-direction-nav a.flex-next:before {
-    content: "\f105";
+    content: "\f105" !important;
 }
 
 .flex-direction-nav a:before:hover {
