@@ -65,6 +65,7 @@ class RoomtypeController extends ControllerBase
             $this->flash->error("Không tồn tại");
             return $this->response->redirect('/backend/roomtype/index');
         }
+
         $room->name = $this->request->getPost('name');
         $room->position = $this->request->getPost('position');
         $room->id_album = $this->request->getPost('album');
@@ -72,6 +73,8 @@ class RoomtypeController extends ControllerBase
         $room->seo_desc = $this->request->getPost('seo_desc');
         $room->seo_title = $this->request->getPost('seo_title');
         $room->desc = $this->request->getPost('content');
+        $room->content_short = $this->request->getPost('content_short');
+        $room->price = $this->request->getPost('price');
 
         try {
             if (isset($_FILES['avatar_image'])) {
@@ -112,6 +115,9 @@ class RoomtypeController extends ControllerBase
         $room->seo_title = $this->request->getPost('seo_title');
         $room->slug = UtilsSEO::CreateSlug($room->name) . '-' . date('YmdHis');
         $room->desc = $this->request->getPost('content');
+        $room->content_short = $this->request->getPost('content_short');
+        $room->price = $this->request->getPost('price');
+
         try {
             $this::saveImg($_FILES['avatar_image']);
             $room->avatar_image = Params::pathfolderavatarimage . $_FILES['avatar_image']['name'];

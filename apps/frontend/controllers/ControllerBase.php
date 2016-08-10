@@ -79,12 +79,14 @@ class ControllerBase extends Controller
             ->addJs('/js/hotel/selectordie.min.js')
             ->addJs('/js/hotel/jquery.slicknav.min.js')
             ->addJs('/js/hotel/jquery.parallax-1.1.3.js')
+            ->addJs('/js/hotel/jquery.simpleWeather.min.js')
             ->addJs('/js/hotel/main.js');
     }
     protected function AddCSSHotel()
     {
         $this->assets
             ->addCss('/css/frontend/reset.css')
+            ->addCss('/css/frontend/hotel/datepicker.css')
             ->addCss('/css/frontend/flexslider.css');
     }
 }
