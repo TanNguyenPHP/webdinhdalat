@@ -87,6 +87,7 @@ class ControllerBase extends Controller
         $this->assets
             ->addCss('/css/frontend/reset.css')
             ->addCss('/css/frontend/hotel/datepicker.css')
+            ->addCss('/css/frontend/hotel/selectordie.css')
             ->addCss('/css/frontend/flexslider.css');
     }
 }
