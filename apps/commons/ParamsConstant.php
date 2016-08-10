@@ -8,10 +8,11 @@ namespace Webdinhdalat\commons;
  */
 class ParamsConstant
 {
-    const pathfolderpicture = "img/";
-    const pathfolderavatarimage = "img/imgavatar/";
-    const pathfoldermapimage = "img/map/";
+    const pathfolderpicture = "img\\";
+    const pathfolderavatarimage = "img\\imgavatar\\";
+    const pathfoldermapimage = "img\\map\\";
     const folderimg = "img";
     const folderimgavatar = "imgavatar";
+    const pathfoldersliderhotel = "img\\sliderhotel";
 
 }

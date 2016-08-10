@@ -1,0 +1,108 @@
+<?php echo $this->getContent() ?>
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+<?php
+echo $this->tag->form(
+    array(
+        "index",
+        "autocomplete" => "off",
+        "class" => "form-horizontal",
+        "name" => "sliderForm",
+        "method" => "get"
+    )
+);
+?>
+<section class="content-header">
+    <h2>
+        Khung hình hotel
+    </h2>
+    <div class="arrange-button">
+        <a href="/backend/sliderpichotel/new" class="btn btn-info" id="modaltrigger" rel="leanModal">Thêm mới</a>
+    </div>
+</section>
+<section class="content">
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr style="background-color: #3c8dbc; color:#fff">
+                <th>Hình</th>
+                <th>Hiển thị</th>
+                <th>Xóa</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php for ($i = 0; $i < count($data); $i++) : ?>
+                <tr>
+                    <th scope="row" style="text-align:left">
+                        <img src="<?php echo '/' . $data[$i]->dir; ?>" class="img-rounded"
+                             alt="Cinque Terre" width="200" height="200">
+                    </th>
+                    <td align="center" class="isshow" data-id="<?php echo $data[$i]->id ?>">
+                        <?php if ($data[$i]->is_show == '1') : ?>
+                            <a class="delete-btn add-button-disable" href="#" disabled="disabled"><i
+                                    class="fa fa-check-circle" id="idshow-<?php echo $data[$i]->id ?>"></i></a>
+                        <?php else: ?>
+                            <a class="delete-btn add-button-disable" href="#" disabled="disabled"><i
+                                    class="fa fa-times" id="idshow-<?php echo $data[$i]->id ?>"></i></a>
+                        <?php endif; ?>
+                    </td>
+                    <td align="center" class="isdel" data-id="<?php echo $data[$i]->id ?>">
+                        <a class="delete-btn add-button-disable" href="#" disabled="disabled"><i
+                                class="fa fa-times" id="icondel-<?php echo $data[$i]->id ?>"></i></a>
+                    </td>
+                </tr>
+            <?php endfor; ?>
+            </tbody>
+        </table>
+    </div>
+</section><!-- /.content -->
+<?php echo $this->tag->endForm(); ?>
+<script>
+    var is_loading = false;// Why is working???
+    $(document).ready(function () {
+        $('.isshow').off('click').on('click', function (e) {
+            e.preventDefault();
+            var link = $(this);
+            var id = link.data('id');
+            $.ajax({
+                url: '/backend/sliderpichotel/editshow',
+                type: 'POST',
+                data: {id: id},
+                dataType: 'text',
+                success: function (result) {
+                    var show = '#idshow-' + id;
+                    $(show).attr("class", result);
+                }
+            });
+        });
+        $('.isdel').off('click').on('click', function (e) {
+            var link = $(this);
+            var id = link.data('id');
+            var a = alertify.confirm('Xóa ảnh này?', function (b) {
+                if (b) {
+                    if (is_loading == false) {
+                        is_loading = true;
+                        e.preventDefault();
+
+                        $.ajax({
+                            url: '/backend/sliderpichotel/del',
+                            type: 'POST',
+                            data: {id: id},
+                            dataType: 'text',
+                            success: function (result) {
+                                var show = '#icondel-' + id;
+                                $(show).attr("class", result);
+                                is_loading = false;
+                            }
+                        });
+                    }
+                }
+            }).set('title', 'Thông Báo').show();
+        });
+
+    });
+</script>
