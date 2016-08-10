@@ -67,4 +67,24 @@ class ControllerBase extends Controller
         }
     }
 
+    protected function AddJsHotel()
+    {
+        $this->assets
+            ->addJs('/js/hotel/vendor/bootstrap.min.js')
+            ->addJs('/js/hotel/retina-1.1.0.min.js')
+            ->addJs('/js/hotel/jquery.flexslider-min.js')
+            ->addJs('/js/hotel/superfish.pack.1.4.1.js')
+            ->addJs('/js/hotel/jquery.prettyPhoto.js')
+            ->addJs('/js/hotel/bootstrap-datepicker.js')
+            ->addJs('/js/hotel/selectordie.min.js')
+            ->addJs('/js/hotel/jquery.slicknav.min.js')
+            ->addJs('/js/hotel/jquery.parallax-1.1.3.js')
+            ->addJs('/js/hotel/main.js');
+    }
+    protected function AddCSSHotel()
+    {
+        $this->assets
+            ->addCss('/css/frontend/reset.css')
+            ->addCss('/css/frontend/flexslider.css');
+    }
 }
