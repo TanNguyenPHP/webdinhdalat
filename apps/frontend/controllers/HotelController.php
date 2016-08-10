@@ -6,23 +6,27 @@
  * Time: 11:07 PM
  */
 namespace Webdinhdalat\Frontend\Controllers;
+
 use Webdinhdalat\Modeldb\Models\Sliderpichotel;
+use Webdinhdalat\Modeldb\Models\Roomtype;
 use Phalcon\Mvc\View;
+
 class HotelController extends ControllerBase
 {
     public function indexAction()
     {
         $this::AddCSSHotel();
         $this::AddJsHotel();
-
-        return $this->view->data = array('menutitle'=>'Khách Sạn','sliderpic'=>Sliderpichotel::findAll());
+        $hotels = Roomtype::findAll('', self::language_id, self::is_show);
+        return $this->view->data = array('menutitle' => 'Khách Sạn',
+            'sliderpic' => Sliderpichotel::findAllShow(),
+            'hotels' => $hotels);
     }
 
     public function detailAction()
     {
-        //$this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
         $this::AddCSSHotel();
         $this::AddJsHotel();
-        return $this->view->data = array('menutitle'=>'Khách Sạn');
+        return $this->view->data = array('menutitle' => 'Khách Sạn');
     }
 }
