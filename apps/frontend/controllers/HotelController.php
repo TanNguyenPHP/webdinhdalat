@@ -6,6 +6,7 @@
  * Time: 11:07 PM
  */
 namespace Webdinhdalat\Frontend\Controllers;
+use Webdinhdalat\Modeldb\Models\Sliderpichotel;
 use Phalcon\Mvc\View;
 class HotelController extends ControllerBase
 {
@@ -13,8 +14,8 @@ class HotelController extends ControllerBase
     {
         $this::AddCSSHotel();
         $this::AddJsHotel();
-        //$this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-        return $this->view->data = array('menutitle'=>'Khách Sạn');
+
+        return $this->view->data = array('menutitle'=>'Khách Sạn','sliderpic'=>Sliderpichotel::findAll());
     }
 
     public function detailAction()

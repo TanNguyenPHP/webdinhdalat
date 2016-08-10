@@ -2,12 +2,11 @@
 	<div class="slider slider-home"><!-- Slider Section -->
 		<div class="flexslider slider-loading falsenav">
 			<ul class="slides">
+				<?php foreach($data['sliderpic'] as $itempic):?>
 				<li>
-					<img alt="Slider 1" class="img-responsive" src="/images/hinh1.jpg" />
+					<img alt="<?php echo $itempic->name?>" class="img-responsive" src="/<?php echo $itempic->dir?>" />
 				</li>
-				<li>
-					<img alt="Slider 1" class="img-responsive" src="/images/hinh1.jpg" />
-				</li>
+				<?php endforeach;?>
 			</ul>
 		</div>
 	</div>
