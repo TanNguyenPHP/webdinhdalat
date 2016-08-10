@@ -73,6 +73,8 @@ class Roomtype extends Model
      */
     public $id_lang;
     public $position;
+    public $price;
+    public $content_short;
 
     /**
      * Returns table name mapped in the model.
@@ -105,12 +107,14 @@ class Roomtype extends Model
     {
         return parent::findFirst($parameters);
     }
+
     public static function findAll($name = '', $id_lang = '')
     {
         $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($name = '', $id_lang = ''));
 
         return $queryBuilder->getQuery()->execute();
     }
+
     private static function buildparams($name = '', $id_lang = '')
     {
         $conditions = "1=1 ";

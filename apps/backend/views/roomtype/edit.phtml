@@ -48,16 +48,29 @@ echo $this->tag->form(
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
-            <label class="text-label col-md-2" for="content_short">Mô tả</label>
+            <label class="text-label col-md-2" for="content_short">Tóm tắt nội dung</label>
+            <div class="col-md-6">
+                    <textarea class="form-control" cols="20" id="content_short" maxlength="128" name="content_short"
+                              rows="2"><?php echo $data['room']->content_short ?></textarea>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="content_short">Bài viết</label>
             <div class="col-md-6">
                     <textarea class="form-control" cols="20" id="content" maxlength="512" name="content"
                               rows="5"><?php echo $data['room']->desc ?></textarea>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="title">Giá</label>
+            <div class="col-md-6">
+                <input class="form-control valid" id="price" maxlength="16" name="price" type="text" value="<?php echo $data['room']->price ?>">
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="avatar_image">Ảnh đại diện</label>
             <div class="col-md-6">
-                <input type="file" id="avatar_image" name="avatar_image" accept="image/*" required>
+                <input type="file" id="avatar_image" name="avatar_image" accept="image/*" >
                 <p id="pic_error2" style="display:none; color:#FF0000;">Kích thước ảnh không quá 2 MB.</p>
             </div>
         </div>
@@ -103,6 +116,12 @@ echo $this->tag->form(
 </section>
 <?php echo $this->tag->endForm(); ?>
 <script>
+    tinymce.init({
+        selector: '#content',
+        toolbar: "image",
+        plugins: "image imagetools",
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
+    });
     var a = 0;
     var b = 0;
     $('#avatar_image').bind('change', function () {
@@ -137,7 +156,6 @@ echo $this->tag->form(
     });
     $().ready(function () {
         $("#album").select2();
-        // validate signup form on keyup and submit
         $("#createRoomtype").validate({
             rules: {
                 title: {
@@ -145,6 +163,10 @@ echo $this->tag->form(
                     minlength: 4
                 },
                 position: {
+                    required: true,
+                    number: true
+                },
+                price:{
                     required: true,
                     number: true
                 }
@@ -157,9 +179,12 @@ echo $this->tag->form(
                 position: {
                     required: "Nhập thứ tự hiển thị",
                     number: "Nhập số"
+                },
+                price:{
+                    required: "Nhập giá phòng",
+                    number: "Nhập số"
                 }
             }
         });
     });
-
 </script>

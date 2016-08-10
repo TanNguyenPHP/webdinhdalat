@@ -11,11 +11,17 @@ class HotelController extends ControllerBase
 {
     public function indexAction()
     {
-        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+        $this::AddCSSHotel();
+        $this::AddJsHotel();
+        //$this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+        return $this->view->data = array('menutitle'=>'Khách Sạn');
     }
 
     public function detailAction()
     {
-        $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+        //$this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+        $this::AddCSSHotel();
+        $this::AddJsHotel();
+        return $this->view->data = array('menutitle'=>'Khách Sạn');
     }
 }

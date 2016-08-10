@@ -1,0 +1,28 @@
+<div class="header"><!-- Header Section -->
+    <div class="news-header">
+        <div class="main-header-index"><!-- Main-header -->
+            <div class="container">
+                <div class="row1 clearfix">
+                    <div class="pull-left">
+                        <div class="logo">
+                            <a href="/index"><img alt="Logo" src="/images/logo.svg" class="img-responsive"
+                                                  width="70" height="33"/></a>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <nav class="nav clearfix">
+                            <ul id="navigate" class="sf-menu navigate">
+                                <?php foreach ($datamain['menu'] as $item) : ?>
+                                    <li class="parent-menu">
+                                        <a href="/<?php echo $item->url . '/' . $item->slug_category ?>"><?php echo $item->name ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

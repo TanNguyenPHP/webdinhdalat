@@ -43,10 +43,23 @@ echo $this->tag->form(
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
-            <label class="text-label col-md-2" for="content_short">Mô tả</label>
+            <label class="text-label col-md-2" for="content_short">Tóm tắt nội dung</label>
             <div class="col-md-6">
-                    <textarea class="form-control" cols="20" id="content" maxlength="512" name="content"
-                              rows="5"></textarea>
+                    <textarea class="form-control" cols="20" id="content_short" maxlength="128" name="content_short"
+                              rows="2"></textarea>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="content_short">Bài viết</label>
+            <div class="col-md-6">
+                    <textarea class="form-control" cols="20" id="content"  name="content"
+                              rows="10"></textarea>
+            </div>
+        </div>
+        <div class="arrange-div form-group col-md-12">
+            <label class="text-label col-md-2" for="title">Giá</label>
+            <div class="col-md-6">
+                <input class="form-control valid" id="price" maxlength="16" name="price" type="text">
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
@@ -94,6 +107,12 @@ echo $this->tag->form(
 </section>
 <?php echo $this->tag->endForm(); ?>
 <script>
+    tinymce.init({
+        selector: '#content',
+        toolbar: "image",
+        plugins: "image imagetools",
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
+    });
     $('input[type="submit"]').prop("disabled", true);
     var a = 0;
     var b = 0;
@@ -139,6 +158,10 @@ echo $this->tag->form(
                 position: {
                     required: true,
                     number: true
+                },
+                price:{
+                    required: true,
+                    number: true
                 }
             },
             messages: {
@@ -148,6 +171,10 @@ echo $this->tag->form(
                 },
                 position: {
                     required: "Nhập thứ tự hiển thị",
+                    number: "Nhập số"
+                },
+                price: {
+                    required: "Nhập giá phòng",
                     number: "Nhập số"
                 }
             }
