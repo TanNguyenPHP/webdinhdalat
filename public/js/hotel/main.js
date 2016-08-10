@@ -228,26 +228,26 @@ $(window).load(function(){
   });
 
 /* Isotope */
-var $container = $('.portfolio-box');
-var $filter = $('.portfolio-filters');
-$container.isotope({
-    filter : '*',
-    layoutMode : 'sloppyMasonry',
-    animationOptions : {duration: 400}
-});
-$filter.find('a').click(function() {
-    var selector = $(this).attr('data-filter');
-    $filter.find('a').removeClass('active');
-    $(this).addClass('active');
-    $container.isotope({ 
-        filter: selector,
-        animationOptions:{
-          animationDuration: 400,
-          queue: false
-        }
-    });
-    return false;
-});
+// var $container = $('.portfolio-box');
+// var $filter = $('.portfolio-filters');
+// $container.isotope({
+//     filter : '*',
+//     layoutMode : 'sloppyMasonry',
+//     animationOptions : {duration: 400}
+// });
+// $filter.find('a').click(function() {
+//     var selector = $(this).attr('data-filter');
+//     $filter.find('a').removeClass('active');
+//     $(this).addClass('active');
+//     $container.isotope({ 
+//         filter: selector,
+//         animationOptions:{
+//           animationDuration: 400,
+//           queue: false
+//         }
+//     });
+//     return false;
+// });
 /* Isotope */
   
 });
