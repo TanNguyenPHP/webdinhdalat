@@ -2795,7 +2795,7 @@ button#contact-submit, #email-receive .email-box input#contact-submit {
     position: relative;
     overflow: hidden;
 }
-
+/*
 .home-room-box:hover .home-room-details{
     height: 70px;
     -webkit-transition: all .4s;
@@ -2803,7 +2803,7 @@ button#contact-submit, #email-receive .email-box input#contact-submit {
     -ms-transition: all .4s;
     -o-transition: all .4s;
     transition: all .4s;
-}
+}*/
 
 .home-room-details {
     position: absolute;
