@@ -108,23 +108,25 @@ class Roomtype extends Model
         return parent::findFirst($parameters);
     }
 
-    public static function findAll($name = '', $id_lang = '')
+    public static function findAll($name = '', $id_lang = '',$is_show='')
     {
-        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($name = '', $id_lang = ''));
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($name, $id_lang,$is_show));
 
         return $queryBuilder->getQuery()->execute();
     }
 
-    private static function buildparams($name = '', $id_lang = '')
+    private static function buildparams($name = '', $id_lang = '',$is_show='')
     {
         $conditions = "1=1 ";
         if ($id_lang != '')
             $conditions = $conditions . " and id_lang = '$id_lang' ";
         if ($name != '')
             $conditions = $conditions . " and name = '$name' ";
+        if ($is_show != '')
+            $conditions = $conditions . " and is_show = '$is_show' ";
         return $params = array(
             'models' => array('Webdinhdalat\Modeldb\Models\Roomtype'),
-            'columns' => array('id', 'name', 'id_lang', 'position', 'is_show'),
+            'columns' => array('id', 'name', 'id_lang', 'position', 'is_show','content_short','slug','price'),
             'conditions' => $conditions,
             'order' => 'position'
         );

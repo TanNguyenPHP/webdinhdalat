@@ -10,13 +10,17 @@ use Webdinhdalat\commons\ParamsCookie;
 
 class ControllerBase extends Controller
 {
+    const language_id = "1";
+    const is_show = "1";
+
     public function initialize()
     {
         // Add some local CSS resources
         $this->assets
-            ->addCss('/css/frontend/Vendor/awesome-font/font-awesome.css')
+            ->addCss('/css/frontend/font-awesome.css')
             ->addCss('/css/frontend/iconmoon.css')
             ->addCss('/css/frontend/bootstrap.min.css')
+            ->addCss('/css/frontend/selectordie.css')
             ->addCss('/css/frontend/main.css')
             ->addCss('/css/frontend/responsive.css')
             ->addCss('/css/backend/jquery.datetimepicker.css');
@@ -82,12 +86,12 @@ class ControllerBase extends Controller
             ->addJs('/js/hotel/jquery.simpleWeather.min.js')
             ->addJs('/js/hotel/main.js');
     }
+
     protected function AddCSSHotel()
     {
         $this->assets
             ->addCss('/css/frontend/reset.css')
-            ->addCss('/css/frontend/hotel/datepicker.css')
-            ->addCss('/css/frontend/hotel/selectordie.css')
+            ->addCss('/css/frontend/datepicker.css')
             ->addCss('/css/frontend/flexslider.css');
     }
 }

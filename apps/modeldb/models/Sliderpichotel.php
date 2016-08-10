@@ -82,4 +82,8 @@ class Sliderpichotel extends Model
     {
         return parent::find("is_del = '0' ");
     }
+    public static function findAllShow()
+    {
+        return parent::find("is_del = '0' and is_show='1'");
+    }
 }

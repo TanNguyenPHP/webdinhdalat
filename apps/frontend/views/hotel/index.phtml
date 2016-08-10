@@ -15,112 +15,36 @@
 			<div class="container">
 				<div class="row">	
 					<div class="title-style-2 marginb40 pos-center">
-						<h3>EXPLORE ROOMS</h3>
+						<h3>LOẠI PHÒNG</h3>
 						<div class="bottom-img">
 				            <img src="/images/line.png" alt="">
 				        </div>
 					</div>
+					<?php foreach($data['hotels'] as $hotel):?>
 					<div class="col-lg-4 col-sm-6">
 						<div class="home-room-box">
 							<div class="room-image">
 								<img alt="Room Images" class="img-responsive" src="temp/room-image-1.jpg">
 								<div class="home-room-details">
-									<h5><a href="#">The luxury room in Istanbul</a></h5>
+									<h5><a href="#"><?php echo $hotel->name?></a></h5>
 								</div>
 							</div>
 							<div class="room-details">
-								<p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tibulum at ero[...]</p>
+								<p><?php echo $hotel->content_short?></p>
 							</div>
 							<div class="room-bottom">
-								<div class="pull-left"><h4>89$<span class="room-bottom-time">/ Day</span></h4></div>
+								<div class="pull-left"><h4><?php echo number_format("$hotel->price") ?> đ<span class="room-bottom-time">/Đêm</span></h4></div>
 								<div class="pull-right">
 									<div class="button-style-1">
-										<a href="#">BOOK NOW</a>
+										<a href="/hotel/detail/<?php echo $hotel->slug ?>">XEM</a>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6">
-						<div class="home-room-box">
-							<div class="room-image">
-								<img alt="Room Images" class="img-responsive" src="temp/room-image-6.jpg">
-								<div class="home-room-details">
-									<h5><a href="#">The King Room</a></h5>
-									<div class="pull-left">
-										<ul>
-											<li><i class="fa fa-calendar"></i></li>
-											<li><i class="fa fa-flask"></i></li>
-											<li><i class="fa fa-umbrella"></i></li>
-											<li><i class="fa fa-laptop"></i></li>
-										</ul>
-									</div>
-									<div class="pull-right room-rating">
-										<ul>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star inactive"></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="room-details">
-								<p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tibulum at ero[...]</p>
-							</div>
-							<div class="room-bottom">
-								<div class="pull-left"><h4>89$<span class="room-bottom-time">/ Day</span></h4></div>
-								<div class="pull-right">
-									<div class="button-style-1">
-										<a href="#">BOOK NOW</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-sm-6">
-						<div class="home-room-box">
-							<div class="room-image">
-								<div class="room-features">FEATURED</div>
-								<img alt="Room Images" class="img-responsive" src="temp/room-image-3.jpg">
-								<div class="home-room-details">
-									<h5><a href="#">Awesome Suits</a></h5>
-									<div class="pull-left">
-										<ul>
-											<li><i class="fa fa-calendar"></i></li>
-											<li><i class="fa fa-flask"></i></li>
-											<li><i class="fa fa-umbrella"></i></li>
-											<li><i class="fa fa-laptop"></i></li>
-										</ul>
-									</div>
-									<div class="pull-right room-rating">
-										<ul>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star inactive"></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="room-details">
-								<p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tibulum at ero[...]</p>
-							</div>
-							<div class="room-bottom">
-								<div class="pull-left"><h4>89$<span class="room-bottom-time">/ Day</span></h4></div>
-								<div class="pull-right">
-									<div class="button-style-1">
-										<a href="#">BOOK NOW</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<?php endforeach;?>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>

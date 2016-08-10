@@ -23,7 +23,7 @@ class SliderpichotelController extends ControllerBase
     {
 
     }
-    public function editstatusAction()
+    public function editshowAction()
     {
         $id = $this->request->getPost("id");
         $pic = Sliderpichotel::findFirstByid($id);
