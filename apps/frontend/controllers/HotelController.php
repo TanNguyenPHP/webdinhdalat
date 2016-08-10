@@ -23,10 +23,11 @@ class HotelController extends ControllerBase
             'hotels' => $hotels);
     }
 
-    public function detailAction()
+    public function detailAction($id)
     {
         $this::AddCSSHotel();
         $this::AddJsHotel();
+
         return $this->view->data = array('menutitle' => 'Khách Sạn');
     }
 }

@@ -33,7 +33,7 @@
 								<p><?php echo $hotel->content_short?></p>
 							</div>
 							<div class="room-bottom">
-								<div class="pull-left"><h4><?php echo number_format("$hotel->price") ?> đ<span class="room-bottom-time">/Đêm</span></h4></div>
+								<div class="pull-left"><h4><?php echo number_format("$hotel->price") ?>đ<span class="room-bottom-time">/Đêm</span></h4></div>
 								<div class="pull-right">
 									<div class="button-style-1">
 										<a href="/hotel/detail/<?php echo $hotel->slug ?>">XEM</a>
@@ -43,6 +43,7 @@
 						</div>
 					</div>
 					<?php endforeach;?>
+
 				</div>
 			</div>
 		</div>
