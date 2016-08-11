@@ -12,6 +12,7 @@ class ControllerBase extends Controller
 {
     const language_id = "1";
     const is_show = "1";
+    const page_about = "4";
 
     public function initialize()
     {
@@ -29,7 +30,7 @@ class ControllerBase extends Controller
             ->addJs('/js/main.js')
             ->addJs('/js/jquery.validate.min.js')
             ->addJs('/js/jquery.datetimepicker.full.min.js');
-        $data = config::findFirst("id_lang = '1'");//Language
+        $data = config::findFirst("id_lang = '" . self::language_id . "'");//Language
         $menu = menu::findall('1', '1');//Language
         $this->tag->setTitle($data->title);
         self::setMetaDescription($data->meta);

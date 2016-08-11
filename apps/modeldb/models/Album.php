@@ -43,6 +43,7 @@ class Album extends Model
     public $datecreate;
     public $desc;
     public $is_website;
+    public $name_en;
 
     /**
      * Returns table name mapped in the model.
@@ -69,10 +70,12 @@ class Album extends Model
     {
         return parent::find(array("name like '%$name%' and is_del = '0'", 'order' => 'datecreate desc'));
     }
+
     public static function findAllOrderName()
     {
         return parent::find(array("is_del = '0'", 'order' => 'name'));
     }
+
     /**
      * Allows to query the first record that match the specified conditions
      *
@@ -88,7 +91,7 @@ class Album extends Model
     {
         $query = new \Phalcon\Mvc\Model\Query\Builder();// lay nhung album co anh kem theo
         $query->addFrom('Webdinhdalat\Modeldb\Models\Album', 'a')
-            ->columns('a.id,a.name,p.dir')
+            ->columns('a.id,a.name,p.dir,a.name_en')
             ->innerJoin('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p')
             ->where("p.is_del = '0' and a.is_del = '0' and a.is_website='1'")
             ->groupBy(array('a.id'))
@@ -105,7 +108,7 @@ class Album extends Model
     {
         $query = new \Phalcon\Mvc\Model\Query\Builder();
         $query->addFrom('Webdinhdalat\Modeldb\Models\Album', 'a')
-            ->columns('a.name,a.id')
+            ->columns('a.name,a.id,a.name_en')
             ->innerJoin('Webdinhdalat\Modeldb\Models\Picture', 'p.id_album = a.id', 'p')
             ->where("p.is_del = '0' and a.is_del = '0'")
             ->groupBy(array('a.name,a.id'))
@@ -130,7 +133,6 @@ class Album extends Model
 
         return array('albums' => $albums, 'pic' => $tets);
     }
-
 
 
 }

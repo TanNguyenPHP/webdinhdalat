@@ -16,7 +16,7 @@ class MapController extends ControllerBase
         if (!$this->request->isPost()) {
             $data = Menu::findFirst("id = '4'");
             if (!$data) {
-                $this->flash->error("Bài viết không tồn tại");
+                $this->flash->error("Không tồn tại");
                 return $this->response->redirect('/index');
             }
             $this->tag->prependTitle($data->title . " | ");

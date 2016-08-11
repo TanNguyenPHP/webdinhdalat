@@ -16,7 +16,8 @@ class IndexController extends ControllerBase
         //    ->addCss('/css/frontend/main.css')
         //    ->addCss('/css/backend/jquery.datetimepicker.css');
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);//Render đến View tham khảo tại https://docs.phalconphp.com/en/latest/reference/views.html#control-rendering-levels
-        $data = config::findFirst("id_lang = '1'");
+        $id_lang= self::language_id;
+        $data = config::findFirst("id_lang = '$id_lang'");
         $menu = menu::findall('1','1');
         $datanews = News::findAllNewsOfCategory('1');
         $newsservices = News::findAllNewsOfCategory('8');

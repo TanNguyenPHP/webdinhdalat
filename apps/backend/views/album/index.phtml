@@ -47,7 +47,7 @@ echo $this->tag->form(
             <?php foreach ($data['albums'] as $item): ?>
                 <tr>
                     <th scope="row" style="text-align:left">
-                        <a href="#"><?php echo $item->name ?></a>
+                        <a href="/backend/album/edit/<?php echo $item->id ?>"><?php echo $item->name ?></a>
                     </th>
                     <td style="text-align:left">
                         <?php echo DateTime::createFromFormat('YmdHis', $item->datecreate)->format('d/m/Y'); ?>

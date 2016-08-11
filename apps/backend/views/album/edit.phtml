@@ -2,10 +2,10 @@
 <?php
 echo $this->tag->form(
     array(
-        "create",
+        "/backend/album/save",
         "autocomplete" => "off",
         "class" => "form-horizontal",
-        "id" => "createCat"
+        "id" => "albumform"
     )
 );
 ?>
@@ -22,19 +22,14 @@ echo $this->tag->form(
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="Name">Tên album</label>
             <div class="col-md-6">
-                <?php echo $this->tag->textField(array("name", "size" => 30, "class" => "form-control", "id" => "fieldName", "minlength" => "4", "maxlength" => "36")) ?>
+                <?php echo $this->tag->textField(array("name", "size" => 30, "class" => "form-control", "id" => "fieldName", "minlength" => "4", "maxlength" => "36","value"=> $data->name)) ?>
+                <input type="hidden" id="id" name="id" value="<?php echo $data->id ?>>"/>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
             <label class="text-label col-md-2" for="Name">Tên Tiếng Anh</label>
             <div class="col-md-6">
-                <?php echo $this->tag->textField(array("name_en", "size" => 30, "class" => "form-control", "id" => "fieldNameEn", "minlength" => "4", "maxlength" => "36")) ?>
-            </div>
-        </div>
-        <div class="arrange-div form-group col-md-12">
-            <label class="text-label col-md-2" for="Price">Hiển thị ngoài website</label>
-            <div class="col-md-6">
-              <?php echo $this->tag->checkField(array("website", "class" => "check-box"));?>
+                <?php echo $this->tag->textField(array("name_en", "size" => 30, "class" => "form-control", "id" => "fieldNameEn", "minlength" => "4", "maxlength" => "36","value"=>$data->name_en)) ?>
             </div>
         </div>
         <div class="arrange-div form-group col-md-12">
@@ -56,7 +51,7 @@ echo $this->tag->form(
 <script>
     $().ready(function () {
         // validate signup form on keyup and submit
-        $("#createCat").validate({
+        $("#albumform").validate({
             rules: {
                 name: {
                     required: true,

@@ -76,10 +76,10 @@ echo $this->tag->form(
         </table>
         <nav style="text-align:right">
             <ul class="pagination">
-                <li><?php echo $this->tag->linkTo("backend/users/index", "First") ?></li>
-                <li><?php echo $this->tag->linkTo("backend/users/index?page=" . $dataUsers->before, "Previous") ?></li>
-                <li><?php echo $this->tag->linkTo("backend/users/index?page=" . $dataUsers->next, "Next") ?></li>
-                <li><?php echo $this->tag->linkTo("backend/users/index?page=" . $dataUsers->last, "Last") ?></li>
+                <li><?php echo $this->tag->linkTo("/backend/users/index", "First") ?></li>
+                <li><?php echo $this->tag->linkTo("/backend/users/index?page=" . $dataUsers->before, "Previous") ?></li>
+                <li><?php echo $this->tag->linkTo("/backend/users/index?page=" . $dataUsers->next, "Next") ?></li>
+                <li><?php echo $this->tag->linkTo("/backend/users/index?page=" . $dataUsers->last, "Last") ?></li>
             </ul>
         </nav>
     </div>

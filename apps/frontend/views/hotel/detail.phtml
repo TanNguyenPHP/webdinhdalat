@@ -4,85 +4,35 @@
 			<div class="row">
 				<div class="col-lg-12"><!-- Room Gallery Slider -->
 					<div class="room-gallery">
-						<div class="margint40 marginb20"><h4>PHOTO GALLERY</h4></div>
+
 						<div class="flexslider-thumb falsenav">
 							<ul class="slides">
-								<li data-thumb="/images/room-gallery-image-1.jpg"><img alt="Slider 1" class="img-responsive" src="/images/room-gallery-image-1.jpg"/></li>
-								<li data-thumb="/images/room-gallery-image-2.jpg"><img alt="Slider 1" class="img-responsive" src="/images/room-gallery-image-2.jpg"/></li>
-								<li data-thumb="/images/room-gallery-image-3.jpg"><img alt="Slider 1" class="img-responsive" src="/images/room-gallery-image-3.jpg"/></li>
-								<li data-thumb="/images/room-gallery-image-4.jpg"><img alt="Slider 1" class="img-responsive" src="/images/room-gallery-image-4.jpg"/></li>
-								<li data-thumb="/images/room-gallery-image-5.jpg"><img alt="Slider 1" class="img-responsive" src="/images/room-gallery-image-5.jpg"/></li>
-								<li data-thumb="/images/room-gallery-image-6.jpg"><img alt="Slider 1" class="img-responsive" src="/images/room-gallery-image-6.jpg"/></li>
-								<li data-thumb="/images/room-gallery-image-7.jpg"><img alt="Slider 1" class="img-responsive" src="/images/room-gallery-image-7.jpg"/></li>
-								<li data-thumb="/images/room-gallery-image-8.jpg"><img alt="Slider 1" class="img-responsive" src="/images/room-gallery-image-8.jpg"/></li>
+								<?php foreach($data['album'] as $album ):?>
+									<li data-thumb="/<?php echo $album->dir?>"><img alt="Slider 1" class="img-responsive" src="/<?php echo $album->dir?>"/></li>
+								<?php endforeach;?>
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-9 clearfix"><!-- Room Information -->
 					<div class="col-lg-12 clearfix col-sm-12">
-						<h4>ROOM DESCRIPTION</h4>
-						<p class="margint30">Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus nibh Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac blandit Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac blandit tempus.</p>
+						<h4>GIỚI THIỆU PHÒNG</h4>
+						<?php echo $data['hotel']->desc?>
+					</div>
 
-						<p>Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus nibh Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amr. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac blandit tempus.</p>
-					</div>
-					<div class="col-lg-12 clearfix margint40 room-single-tab"><!-- Room Tab -->
-						<div class="tab-style-2 ">
-							<ul class="tabbed-area tab-style-nav clearfix">
-								<li class="active"><h6><a href="#tab1s">EXAMPLE TAB</a></h6></li>
-								<li class=""><h6><a href="#tab2s">OTHER TABS EXAMPLE</a></h6></li>
-								<li class=""><h6><a href="#tab3s">SUIT IT NOW</a></h6></li>
-							</ul>
-							<div class="tab-content tab-style-content">
-								<div class="tab-pane fade active in" id="tab1s">
-									<div class="col-lg-3 margint30">
-										<img alt="Tab Image" class="img-responsive" src="/images/tab-image.jpg">
-									</div>
-									<div class="col-lg-9 margint30">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nesciunt ad architecto enim dignissimos incidunt recusandae officia odit sapiente laudantium obcaecati maiores aspernatur fuga neque eum? Reiciendis sit est cum magnam quos tempore tempora esse quibusdam culpa quisquam debitis eveniet necessitatibus excepturi sed ab cumque laudantium. Fugit culpa expedita odio id temporibus laudantium sunt non nemo sapiente dolorum? Soluta incidunt debitis molestiae consectetur accusantium nulla aperiam ad repellendus quas assumenda eum fugiat commodi iusto corporis adipisci autem dolor rerum! Nulla blanditiis aut vel aperiam soluta placeat quia quae libero architecto officiis eius dolorem asperiores est illo praesentium. Sunt reprehenderit alias!
-										</p>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="tab2s">
-									<div class="col-lg-3 margint30">
-										<img alt="Tab Image" class="img-responsive" src="/images/tab-image.jpg">
-									</div>
-									<div class="col-lg-9 margint30">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nesciunt ad architecto enim dignissimos incidunt recusandae officia odit sapiente laudantium obcaecati maiores aspernatur fuga neque eum? Reiciendis sit est cum magnam quos tempore tempora esse quibusdam culpa quisquam debitis eveniet necessitatibus excepturi sed ab cumque laudantium. Fugit culpa expedita odio id temporibus laudantium sunt non nemo sapiente dolorum? Soluta incidunt debitis molestiae consectetur accusantium nulla aperiam ad repellendus quas assumenda eum fugiat commodi iusto corporis adipisci autem dolor rerum! Nulla blanditiis aut vel aperiam soluta placeat quia quae libero architecto officiis eius dolorem asperiores est illo praesentium. Sunt reprehenderit alias!
-										</p>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="tab3s">
-									<div class="col-lg-3 margint30">
-										<img alt="Tab Image" class="img-responsive" src="/images/tab-image.jpg">
-									</div>
-									<div class="col-lg-9 margint30">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nesciunt ad architecto enim dignissimos incidunt recusandae officia odit sapiente laudantium obcaecati maiores aspernatur fuga neque eum? Reiciendis sit est cum magnam quos tempore tempora esse quibusdam culpa quisquam debitis eveniet necessitatibus excepturi sed ab cumque laudantium. Fugit culpa expedita odio id temporibus laudantium sunt non nemo sapiente dolorum? Soluta incidunt debitis molestiae consectetur accusantium nulla aperiam ad repellendus quas assumenda eum fugiat commodi iusto corporis adipisci autem dolor rerum! Nulla blanditiis aut vel aperiam soluta placeat quia quae libero architecto officiis eius dolorem asperiores est illo praesentium. Sunt reprehenderit alias!
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 				<div class="col-lg-3 clearfix"><!-- Sidebar -->
 					<div class="quick-reservation-container">
 						<?php $this->partial("share/quick_reservations"); ?>
 					</div>
 					<div class="luxen-widget news-widget">
-						<div class="title-quick marginb20">
-							<h5>HOTEL INFORMATION</h5>
-						</div>
-						<p>Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsumero, a pharetra augue. Lorem ipsum dolor sit amet, consectedui.</p>
-					</div>
-					<div class="luxen-widget news-widget">
 						<div class="title">
-							<h5>CONTACT</h5>
+							<h5>LIÊN HỆ</h5>
 						</div>
 						<ul class="footer-links">
-							<li><p><i class="fa fa-map-marker"></i> Lorem ipsum dolor sit amet lorem Victoria 8011 Australia </p></li>
-							<li><p><i class="fa fa-phone"></i> +61 3 8376 6284 </p></li>
-							<li><p><i class="fa fa-envelope"></i> info@2035themes.com</p></li>
+							<li><p><i class="fa fa-map-marker"></i> Địa chỉ: <?php echo $datamain['data']->address ?></p></li>
+							<li><p><i class="fa fa-phone"></i> Điện thoại: <?php echo $datamain['data']->cellphone ?> Fax: <?php echo $datamain['data']->fax ?></p></li>
+							<li><p><i class="fa fa-envelope"></i> Email: <?php echo $datamain['data']->email ?></p></li>
 						</ul>
 					</div>
 				</div>

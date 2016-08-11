@@ -98,7 +98,7 @@ class Picture extends Model
         $query = new \Phalcon\Mvc\Model\Query\Builder();
         $query->addFrom('Webdinhdalat\Modeldb\Models\Picture', 'a')
             ->columns('a.id,a.dir')
-            ->where("a.is_del = '0'")
+            ->where("a.is_del = '0' and a.is_show='1'")
             ->inWhere('a.id_album', ["$id"]);
         return $query->getQuery()->execute();
     }

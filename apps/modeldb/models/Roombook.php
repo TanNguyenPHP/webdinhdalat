@@ -2,6 +2,7 @@
 namespace Webdinhdalat\Modeldb\Models;
 
 use Phalcon\Mvc\Model;
+
 class Roombook extends Model
 {
 
@@ -64,6 +65,8 @@ class Roombook extends Model
      * @var string
      */
     public $id_roomtype;
+    public $children;
+    public $roomnumber;
 
     /**
      * Returns table name mapped in the model.
@@ -96,5 +99,25 @@ class Roombook extends Model
     {
         return parent::findFirst($parameters);
     }
+    public static function findRoomBookPaging($page,$limit,$filter='')
+    {
+        $queryBuilder = new \Phalcon\Mvc\Model\Query\Builder(self::buildparams($filter));
 
+        $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
+            "builder" => $queryBuilder,
+            "limit" => (int)$limit,
+            "page" => (int)$page
+        ));
+        return $paginator->getPaginate();
+    }
+    private static function buildparams($filter='')
+    {
+        $conditions = "1=1 ";
+        if ($filter != '')
+            $conditions = $conditions . " and ( name like '%$filter%' or cellphone like '%$filter%' )";
+        return $params = array(
+            'models' => array('Webdinhdalat\Modeldb\Models\Roombook'),
+            'conditions' => $conditions
+        );
+    }
 }

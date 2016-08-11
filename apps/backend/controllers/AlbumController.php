@@ -46,6 +46,7 @@ class AlbumController extends ControllerBase
 
         return $this::sendText($data);
     }
+
     public function delAction()
     {
         $id = $this->request->getPost("id");
@@ -75,13 +76,14 @@ class AlbumController extends ControllerBase
 
         return $this::sendText('fa fa-check-circle');
     }
+
     public function createAction()
     {
         $album = new Album();
-
         $album->name = $this->request->getPost("name");
+        $album->name_en = $this->request->getPost("name_en");
         $folder = RemoveUnicode::stripUnicode($album->name);
-        $target = join(DIRECTORY_SEPARATOR, array(Params::folderimg,$folder));
+        $target = join(DIRECTORY_SEPARATOR, array(Params::folderimg, $folder));
         //$dir = params::pathfolderpicture . $folder;
         $result = parent::createFolder($target);
         $is_website = isset($_POST["website"]) ? '1' : '0';
@@ -92,6 +94,7 @@ class AlbumController extends ControllerBase
             $album->datecreate = date('YmdHis');
             $album->is_del = '0';
             $album->is_website = $is_website;
+
             if ($album->save())
                 return $this->response->redirect('/backend/album/new');
         } else if ($result == 0 || $result == 3) {
@@ -102,6 +105,48 @@ class AlbumController extends ControllerBase
             return $this->response->redirect('/backend/album/index');
         }
 
+    }
+
+    public function editAction($id)
+    {
+        $album = Album::findFirstByid($id);
+        if (!$album) {
+            $this->flash->error("Album không tồn tại");
+            return $this->dispatcher->forward(array(
+                'controller' => "album",
+                'action' => 'index'
+            ));
+        }
+        return $this->view->data = $album;
+    }
+
+    public function saveAction()
+    {
+        $album = Album::findFirstByid($this->request->getPost("id"));
+        if (!$album) {
+            $this->flash->error("Album không tồn tại");
+            return $this->dispatcher->forward(array(
+                'controller' => "album",
+                'action' => 'index'
+            ));
+        }
+        $album->name = $this->request->getPost("name");
+        $album->name_en = $this->request->getPost("name_en");
+        $album->desc = $this->request->getPost("desc");
+        if (!$album->save()) {
+
+            foreach ($album->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            return $this->dispatcher->forward(array(
+                'controller' => "language",
+                'action' => 'edit',
+                'params' => array($album->id)
+            ));
+        }
+
+        return $this->response->redirect('/backend/album/index');
     }
 
     public function newAction()

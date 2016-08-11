@@ -1,38 +1,28 @@
 <div class="quick-reservation clearfix">
     <div class="title-quick pos-center margint30">
-        <h5>QUICK RESERVATIONS</h5>
+        <h5>ĐẶT PHÒNG</h5>
         <div class="line"></div>
     </div>
     <div class="reserve-form-area">
-        <form action="#" method="post" name="reserveform" id="ajax-reservation-form">
+        <form action="/hotel/createbook" method="post" name="reserveform" id="reserveform">
             <label>NGÀY NHẬN PHÒNG</label>
-            <input type="text" id="dpd1" name="dpd1" class="date-selector" placeholder="&#xf073;" />
+            <input type="text" id="dpd1" name="dpd1" class="date-selector" placeholder="&#xf073;" required/>
             <label>NGÀY TRẢ PHÒNG</label>
-            <input type="text" id="dpd2" name="dpd2" class="date-selector" placeholder="&#xf073;" />
+            <input type="text" id="dpd2" name="dpd2" class="date-selector" placeholder="&#xf073;" required/>
             <label>TÊN</label>
-            <input type="text" id="dpd3" name="dpd3" class="date-selector" placeholder="&#xf073;" />
+            <input type="text" id="bookname" name="bookname" class="date-selector" placeholder="&#xf073;" maxlength="20"/>
             <label>SỐ ĐIỆN THOẠI</label>
-            <input type="text" id="dpd3" name="dpd3" class="date-selector" placeholder="&#xf073;" />
-            <label>lOAI PHÒNG</label>
-            <select name="rooms" class="date-selector">
-                <option selected="selected" value="1" >1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+            <input type="text" id="bookphone" name="bookphone" class="date-selector" placeholder="&#xf073;" maxlength="64"/>
             <div class="pull-left children clearfix">
-                <label>ROOMS</label>
+                <label>PHÒNG</label>
                 <select name="rooms" class="pretty-select">
                     <option selected="selected" value="1" >1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
                 </select>
             </div>
             <div class="pull-left type clearfix">
-                <label>ADULT</label>
+                <label>NGƯỜI LỚN</label>
                 <select name="adult" class="pretty-select">
                     <option selected="selected" value="1" >1</option>
                     <option value="2">2</option>
@@ -42,7 +32,7 @@
                 </select>
             </div>
             <div class="pull-left rooms clearfix">
-                <label>CHILDREN</label>
+                <label>TRẺ EM</label>
                 <select name="children" class="pretty-select">
                     <option selected="selected" value="0" >0</option>
                     <option value="1">1</option>
@@ -54,9 +44,36 @@
             </div>
             <div class="pull-left search-button clearfix">
                 <div class="button-style-1">
-                    <a id="res-submit" href="#">SEARCH</a>
+                    <button type="submit" id="res-submit" name="submit" >BOOK</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<script>
+    $().ready(function () {
+        // validate signup form on keyup and submit
+        $("#reserveform").validate({
+            rules: {
+                bookname: {
+                    required: true,
+                    minlength: 4
+                },
+                bookphone: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                bookname: {
+                    required: "Nhập tên",
+                    minlength: "Lớn hơn 4 ký tự"
+                },
+                bookphone: {
+                    required: "Nhập điện thoại",
+                    minlength: "Lớn hơn 4 ký tự"
+                }
+            }
+        });
+    });
+</script>

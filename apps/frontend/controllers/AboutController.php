@@ -15,7 +15,7 @@ class AboutController extends ControllerBase
 {
     public function indexAction()
     {
-        $data = News::findFirstNewsOfCategory('4', '1');
+        $data = News::findFirstNewsOfCategory(self::page_about, self::language_id);
 
         if ($data == null) {
             return $this->response->redirect('/index');
